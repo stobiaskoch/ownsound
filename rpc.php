@@ -8,8 +8,8 @@
 	{
 		echo '
 ';
-	//	echo preg_replace('/(' . $_GET['search'] . ')/Usi', '<span class="result">\\1</span>', $row->name);
-		?> <a href='#<?php echo $alpha; ?>' onclick="getdata('<?php echo $row->id; ?>', '<?php echo $row->name; ?>')"><?php echo $row->name; ?></a><br> <?php
+		$alpha = $row->name;
+		?> <a href='#dhfig' onclick="getdata('<?php echo $row->id; ?>', '<?php echo $row->name; ?>')"><?php echo $row->name; ?></a><br> <?php
 	//	echo "<a style='font-size:0.7em;' href='artist.php?order=newcover&coverid=".$row->id."&covername=".$row->name."'>".$row->name."</a><br>";
 		echo '
 ';

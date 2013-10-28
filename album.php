@@ -8,6 +8,7 @@
             $("#playalbum").html(data);
     }
     });
+	document.getElementById("title").innerHTML="<title>"+albname+"</title>";
 	}
 			function getdatanoalbum(artid, albname){
 		$.ajax({ url: "./noalbum.php?artid="+artid+"&albname="+albname , success: function(data){
@@ -23,7 +24,8 @@
 $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
-echo "<title>".$artname."</title>";
+echo "<div id='title'><title>".$artname."</title></div>";
+echo "<LINK REL='SHORTCUT ICON' HREF='favicon.ico'>";
 $db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
 
 
@@ -62,10 +64,10 @@ if ($count2==4) {
 } else {
 
 }
-$rest = $artname{0};
+
   ?>
-	<td width="70px"><a href='#<?php echo $rest; ?>' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><img src='get.php?picid=<?php echo $zeile['id'] ?>&size=small' width='70' height='70'></a></td>
-	<td width="140px"><a href='#<?php echo $rest; ?>' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><img src='get.php?picid=<?php echo $zeile['id'] ?>&size=small' width='70' height='70'></a></td>
+	<td width="140px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
   <?php
 if ($count2==3) {
 	$count2 = 0;
