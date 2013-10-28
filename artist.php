@@ -76,7 +76,7 @@ foreach($alphabet as $alpha) {
 
  echo "<a name='kapitel1' href='#".$alpha."'> $alpha </a>";
 } 
-echo "</div><br><br><br>";
+echo "</div><br><br><br><br>";
 $db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
 
 foreach($alphabet as $alpha) {
