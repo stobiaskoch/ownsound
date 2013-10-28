@@ -1,1 +1,0 @@
-//<meta http-equiv="refresh" content="0; URL=artist.php?order=newcover&coverid=<?php echo $artistID; ?>&covername=<?php echo $artist; ?>">

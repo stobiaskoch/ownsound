@@ -1,6 +1,0 @@
-AddDefaultCharset iso-8859-1
-AuthName "Restricted Area" 
-AuthType Basic 
-AuthUserFile /home/cltizixw/12-01.de/schichtplan/.htpasswd 
-AuthGroupFile /dev/null 
-require valid-user
