@@ -39,28 +39,17 @@ function scan($folder){
 
         $out .= "$folder/$file,";   
            scan("$folder/$file");  
- 
-  
       } 
-
     }  
     closedir($content);  
-  
   }  
- 
 }  
 // function end  
-
 
 echo scan($DirectoryToScan);
 $dirs = (explode(',', $out));
 
-
-
 echo count($dirs)." Ordner gefunden. Starte Suche...<br>";
-
-
-
 
 echo "<br>";
 //print_r($dirs);

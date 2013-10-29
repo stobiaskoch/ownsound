@@ -26,7 +26,7 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 //echo $Daten['id'];
 
 
-while (($file = readdir($dir)) !== false) {
+while (false !== ($file = readdir($dir)) ) {
 	$FullFileName = realpath($DirectoryToScan.'/'.$file);
 	if ((substr($FullFileName, 0, 1) != '.') && is_file($FullFileName)) {
 		set_time_limit(30);
@@ -101,10 +101,12 @@ echo mysql_error();
 }
 	$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
 	
-	file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+	if($getID3->info['id3v2']['APIC'][0]['data']!="") {
+		file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+	}
 	
 	
-    $info = getimagesize($artworktmp);
+    //$info = getimagesize($artworktmp);
     $type = mime_content_type($artworktmp) . "\n";
 	$type = "Content-Type: ".$type;
 	
