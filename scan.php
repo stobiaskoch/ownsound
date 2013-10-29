@@ -4,7 +4,7 @@ echo '<title>getID3() - /demo/demo.simple.php (sample script)</title>';
 echo '<style type="text/css">BODY,TD,TH { font-family: sans-serif; font-size: 9pt; }</style>';
 echo '</head><body>';
 $titlecount = "0";
-//Dummfug von Koch
+//Dummfug vom KRAUSE
 // include getID3() library (can be in a different directory if full path is specified)
 require_once('./getid3/getid3.php');
 require_once('config.inc.php');
@@ -149,10 +149,6 @@ mysql_query("UPDATE scanner_log SET error = '$error' WHERE id='0'");
 echo mysql_error();
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 
-goto ende2;
-ende:
-echo "ENDE";
-ende2:
 
 
 

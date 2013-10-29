@@ -55,7 +55,7 @@ function scan($folder){
 echo scan($DirectoryToScan);
 $dirs = (explode(',', $out));
 
-$dirs[] = "ende";
+
 
 
 
