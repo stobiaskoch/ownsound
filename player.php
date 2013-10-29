@@ -32,12 +32,12 @@ $(document).ready(function(){
     var options = {
         swfPath: "./jplayer", 
         supplied: "mp3",
-		autoPlay: true 
+		autoPlay: false 
     };
     var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
-    $.getJSON("./tmp/playlist.php",function(data){  // get the JSON array produced by my PHP
+    $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
         $.each(data,function(index,value){
-            myPlaylist.add(value); // add each element in data in myPlaylist 
+            myPlaylist.add(value); // add each element in data in myPlaylist
         })
     }); 
 	
