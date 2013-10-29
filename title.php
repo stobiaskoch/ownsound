@@ -128,11 +128,20 @@ if($count<="9") {$count="0$count";}
 }
 ?></tr><td></td><td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufügen</a></td><tr><?php
 echo "</table>";
+/*
+//<span class="crest" style="background: url('./get.php?picid=<?php echo $albumid; ?>&size=big') no-repeat 0 0;"></span> 
+*/
+?>
+<div id="covertest">
+<a style="position: absolute; top: 36px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo $albname; ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big'></a>
+</div>
 
 
-?><div id="covertest">
-<span class="crest" style="background: url('./get.php?picid=<?php echo $albumid; ?>&size=big') no-repeat 0 0;"></span> 
-</div></div>
+
+
+
+
+</div>
 <?php
 mysqli_free_result( $db_erg );
 

@@ -1,8 +1,4 @@
 <?php
-require_once('config.inc.php');
-mysql_connect(DBHOST, DBUSER,DBPASS);
-mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); $albumID = $_REQUEST['albumID'];
-
 $artistID = $_REQUEST['artistID'];
 $artist = $_REQUEST['artist'];
 $rest = $artist{0};
@@ -102,7 +98,9 @@ $artistID = $_REQUEST['artistID'];
     fclose($newf);
   }
   
- 
+  
+mysql_connect("localhost", "root","strese84");
+mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht."); 
 $tmpname = $newfname;
 $size = getimagesize($tmpname);  
   
@@ -113,8 +111,10 @@ imagejpeg($dst_img, './tmp/kleinesbild.jpg');
 imagedestroy($src_img);
 imagedestroy($dst_img);
 
+
+
 $src_img = imagecreatefromjpeg($tmpname);
-$dst_img = imagecreatetruecolor(200,200);
+$dst_img = imagecreatetruecolor(140,140);
 imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
 imagejpeg($dst_img, './tmp/grossesbild.jpg');
 imagedestroy($src_img);
@@ -124,6 +124,8 @@ $hndFile = fopen('./tmp/grossesbild.jpg', "r");
 $data = addslashes(fread($hndFile, filesize($tmpname)));
 $hndFilesmall = fopen('./tmp/kleinesbild.jpg', "r");
 $datasmall = addslashes(fread($hndFilesmall, filesize($tmpname)));
+
+//mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 
 mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 mysql_query("UPDATE album SET imgdata_small = '$datasmall', imgtype = '$type' WHERE id='$albumID'");
