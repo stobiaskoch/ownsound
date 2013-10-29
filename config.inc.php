@@ -1,9 +1,9 @@
 <?php
 //Database Settings
 define("DBHOST", "localhost");
-define("DBUSER", "root");
-define("DBPASS", "rockonckay");
-define("DBDATABASE", "ownsound");
+define("DBUSER", "");
+define("DBPASS", "");
+define("DBDATABASE", "");
 
 
 //Music Directory
