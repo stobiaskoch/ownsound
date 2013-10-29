@@ -13,8 +13,8 @@
     }
     });
 	}
-			function getdatanewcover(artid, artname, rest){
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#"+rest , success: function(data){
+			function getdatanewcover(artid, artname){
+		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#gshd" , success: function(data){
             $("#play").html(data);
 			
     }
@@ -124,10 +124,10 @@ mysqli_free_result( $db_erg );
 if($_REQUEST['order']=="newcover") { 
 $coverid = $_REQUEST['coverid'];
 $covername = $_REQUEST['covername'];
-$rest = $covername{0};
+
 ?>
 <script language="JavaScript">
-getdatanewcover('<?php echo $coverid; ?>', '<?php echo $covername ?>', '<?php echo $rest ?>');
+getdatanewcover('<?php echo $coverid; ?>', '<?php echo $covername ?>');
 playeroben();
 </script>
 <?php } ?>
