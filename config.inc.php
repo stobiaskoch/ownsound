@@ -1,11 +1,11 @@
 <?php
 //Database Settings
-define("DBHOST", "");
-define("DBUSER", "");
-define("DBPASS", "");
-define("DBDATABASE", "");
+define("DBHOST", "localhost");
+define("DBUSER", "root");
+define("DBPASS", "rockonckay");
+define("DBDATABASE", "ownsound");
 
 //Music Directory
-define("MUSICDIR", "");
+define("MUSICDIR", "/media/usb1/Musik/Adele/");
 
 ?>
