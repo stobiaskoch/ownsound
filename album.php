@@ -40,7 +40,7 @@ echo "<div id='playalbum'>";
   ?>
  <br><div style="
 padding-left: 40px;
-width: 45%;
+width: 52%;
 left: 320px;
 top: 262px;
 display:inline-block;
