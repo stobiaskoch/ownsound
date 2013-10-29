@@ -16,8 +16,10 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-unlink('playlist.php');
-$datei_handle=fopen("playlist.php",a);
+if(file_exists('./tmp/playlist.php')) {
+	unlink('./tmp/playlist.php');
+}
+$datei_handle=fopen("./tmp/playlist.php",a);
 fwrite($datei_handle,"<?php\n");
 fclose($datei_handle);
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -25,7 +27,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
 	$information = "\$playlist[]=array('artist'=>'".$_REQUEST['artistID']."','title'=>'". $title . "','mp3'=>'mp3.php?id=".$path."');\n";
-	$datei_handle=fopen("playlist.php",a);
+	$datei_handle=fopen("./tmp/playlist.php",a);
 	fwrite($datei_handle,$information);
 	fclose($datei_handle);
 
@@ -33,7 +35,7 @@ $path = str_replace("'", "\'", $zeile['path']);
 
 $information = "\$playlist=json_encode(\$playlist);\nprint_r(\$playlist);\n?>\n";
 
-$datei_handle=fopen("playlist.php",a);
+$datei_handle=fopen("./tmp/playlist.php",a);
 fwrite($datei_handle,$information);
 fclose($datei_handle);
 
@@ -48,8 +50,10 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-unlink('playlist.php');
-$datei_handle=fopen("playlist.php",a);
+if(file_exists('./tmp/playlist.php')) {
+	unlink('./tmp/playlist.php');
+}
+$datei_handle=fopen("./tmp/playlist.php",a);
 fwrite($datei_handle,"<?php\n");
 fclose($datei_handle);
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -58,7 +62,7 @@ $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
 
 	$information = "\$playlist[]=array('artist'=>'".$_REQUEST['artistID']."','title'=>'". $title . "','mp3'=>'mp3.php?id=".$path."');\n";
-	$datei_handle=fopen("playlist.php",a);
+	$datei_handle=fopen("./tmp/playlist.php",a);
 	fwrite($datei_handle,$information);
 	fclose($datei_handle);
 
@@ -66,7 +70,7 @@ $path = str_replace("'", "\'", $zeile['path']);
 
 $information = "\$playlist=json_encode(\$playlist);\nprint_r(\$playlist);\n?>\n";
 
-$datei_handle=fopen("playlist.php",a);
+$datei_handle=fopen("./tmp/playlist.php",a);
 fwrite($datei_handle,$information);
 fclose($datei_handle);
 
