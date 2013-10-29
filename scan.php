@@ -158,10 +158,6 @@ mysql_query("UPDATE scanner_log SET error = '$error' WHERE id='0'");
 echo mysql_error();
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 
-goto ende2;
-ende:
-echo "ENDE";
-ende2:
 
 
 
