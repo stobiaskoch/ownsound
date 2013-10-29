@@ -35,7 +35,7 @@ $(document).ready(function(){
 		autoPlay: true 
     };
     var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
-    $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
+    $.getJSON("./tmp/playlist.php",function(data){  // get the JSON array produced by my PHP
         $.each(data,function(index,value){
             myPlaylist.add(value); // add each element in data in myPlaylist
         })
