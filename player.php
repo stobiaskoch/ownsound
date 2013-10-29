@@ -32,7 +32,7 @@ $(document).ready(function(){
     var options = {
         swfPath: "./jplayer", 
         supplied: "mp3",
-		autoPlay: false 
+		autoPlay: true 
     };
     var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
     $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
