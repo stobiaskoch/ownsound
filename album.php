@@ -19,14 +19,13 @@
 	</script>
 </head>	
 <?php
-//mysql_connect("localhost", "root","strese84");
-//mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht.");
+require_once('config.inc.php');
 $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
 echo "<div id='title'><title>".$artname."</title></div>";
 echo "<LINK REL='SHORTCUT ICON' HREF='favicon.ico'>";
-$db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
 $sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";

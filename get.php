@@ -1,6 +1,7 @@
 <?php
-mysql_connect("localhost", "root","strese84");
-mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht.");
+require_once('config.inc.php');
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 
 $picid = $_REQUEST['picid'];
 $size = $_REQUEST['size'];
 $query = "select imgdata,imgtype,imgdata_small from album where id=$picid"; 

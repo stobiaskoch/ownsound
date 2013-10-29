@@ -1,5 +1,6 @@
 <?php
-$db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
+require_once('config.inc.php');
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
 if($_REQUEST['order']=="addalbum") {

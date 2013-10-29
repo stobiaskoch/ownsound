@@ -1,10 +1,9 @@
 <?php
 
 // img_up.php: Ein Bild hochladen
-
-mysql_connect("localhost", "root","strese84");
-mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht.");
-$albumID = $_REQUEST['albumID'];
+require_once('config.inc.php');
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); $albumID = $_REQUEST['albumID'];
 
 //if($albumID=="") {die('Keine ID');}
 

@@ -1,4 +1,6 @@
 <?php
+require_once('config.inc.php');
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $albumid = $_REQUEST['albid'];
 $albname = $_REQUEST['albname'];
 echo "<title>".$albname."</title>";
@@ -58,12 +60,6 @@ $(document).ready(function()
 $artistid = $_REQUEST['artid'];
 
 $artname = $_REQUEST['art'];
-
-
-
-$db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
-
-
 
 $sql = "SELECT * FROM title WHERE album='$albumid' ORDER BY path";
  
