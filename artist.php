@@ -85,7 +85,7 @@ $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 }
 
  ?>
@@ -121,7 +121,7 @@ echo "</table></div><br>";
 
 mysqli_free_result( $db_erg );
 ?>
-<div id="play" style="position:fixed; top:1px; left:480px; overflow : auto; "></div></div>
+<div id="play" style="position:fixed; bottom: 8px; left:480px; overflow : auto; "></div></div>
 
 <?php
 if($_REQUEST['order']=="newcover") { 
@@ -170,7 +170,7 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
-z-index:2;">Künstlersuche
+z-index:2;">KÃ¼nstlersuche
 	
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
@@ -178,7 +178,7 @@ z-index:2;">Künstlersuche
 	<div id="results" style="z-index:2;" ></div></div>
 	 <div style="
  right:10px;
- top:246px;
+ top:250px;
 padding-left: 40px;
 width: 14%;
 display:inline-block;
@@ -189,3 +189,19 @@ padding:20px;
 margin:0 0 20px 12px;
 position:fixed;">
 <div id="playeroben" style="font-size:0.6em;"></div></div></div>
+
+
+<div style="
+padding-left: 40px;
+width: 50%;
+left: 320px;
+min-height: 200px;
+top: 8px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:fixed;
+"><div id="information" style="font-size:0.6em;"><center><img src='http://api.discogs.com/image/A-18839-1376591828-3354.jpeg' width='auto'></center></div></div></div>
