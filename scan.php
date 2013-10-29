@@ -25,8 +25,8 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
 //echo $Daten['id'];
 
-
-while (false !== ($file = readdir($dir)) ) {
+if($dir!=FALSE) {
+	while (false !== ($file = readdir($dir)) ) {
 	$FullFileName = realpath($DirectoryToScan.'/'.$file);
 	if ((substr($FullFileName, 0, 1) != '.') && is_file($FullFileName)) {
 		set_time_limit(30);
@@ -38,16 +38,17 @@ while (false !== ($file = readdir($dir)) ) {
 		$artist = $ThisFileInfo['comments_html']['artist'][0];
 		
 	$sql    = "SELECT name FROM artist WHERE name  = '$artist'";
-$query = mysql_query($sql); 
-$Daten = mysql_fetch_assoc($query); 
-$checkartist = $Daten['name'];
+	$query = mysql_query($sql); 
+	$Daten = mysql_fetch_assoc($query); 
+	$checkartist = $Daten['name'];
 
-	if($checkartist!=$artist) {
-mysql_query("INSERT INTO artist (name) VALUES ('$artist')");
-//mysql_query("INSERT INTO `scanner_log` SET artist=artist+1 ON DUPLICATE KEY UPDATE artist=artist+1"); 
-mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
-echo mysql_error();
+		if($checkartist!=$artist) {
+	mysql_query("INSERT INTO artist (name) VALUES ('$artist')");
+	mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
+	echo mysql_error();
+	}
 }
+
 
 
 $sql    = "SELECT id FROM artist WHERE name  = '$artist'";
@@ -93,56 +94,53 @@ $Daten = mysql_fetch_assoc($query);
 $checkpath = $Daten['path'];
 
 if($checkpath!=$path) {
-mysql_query("INSERT INTO title (name, artist, path, album, duration) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime')");	
-$titlecount++;
-echo $titlecount." - ".$title."<br>";
-mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
-echo mysql_error();
+	mysql_query("INSERT INTO title (name, artist, path, album, duration) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime')");	
+	$titlecount++;
+	echo $titlecount." - ".$title."<br>";
+	mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
+	echo mysql_error();
 }
-	$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
-	
-	if($getID3->info['id3v2']['APIC'][0]['data']!="") {
-		file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
-	}
-	
-	
-    //$info = getimagesize($artworktmp);
-    $type = mime_content_type($artworktmp) . "\n";
+
+$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
+
+if($getID3->info['id3v2']['APIC'][0]['data']!="") {
+	file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+}
+
+if(file_exists($artworktmp)) {
+	$type = mime_content_type($artworktmp) . "\n";
 	$type = "Content-Type: ".$type;
-	
+	$size = getimagesize($artworktmp);
+	if ($size[0]>5 || $size[1]>5) {
+		$src_img = imagecreatefromjpeg($artworktmp);
+		$dst_img = imagecreatetruecolor(200,200);
+		imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 200, 200, $size[0], $size[1]);
+		imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'.jpeg');
+		imagedestroy($src_img);
+		imagedestroy($dst_img);
 
-$size = getimagesize($artworktmp);
+		$src_img = imagecreatefromjpeg($artworktmp);
+		$dst_img = imagecreatetruecolor(140,140);
+		imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
+		imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+		imagedestroy($src_img);
+		imagedestroy($dst_img);
 
-if ($size[0]>5 || $size[1]>5) {
+		$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
+		$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
+		$hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
+		$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
 
-$src_img = imagecreatefromjpeg($artworktmp);
-$dst_img = imagecreatetruecolor(200,200);
-imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 200, 200, $size[0], $size[1]);
-imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'.jpeg');
-imagedestroy($src_img);
-imagedestroy($dst_img);
-
-
-$src_img = imagecreatefromjpeg($artworktmp);
-$dst_img = imagecreatetruecolor(140,140);
-imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
-imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
-imagedestroy($src_img);
-imagedestroy($dst_img);
-
-
-
-
-	$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
-$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
-$hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
-$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
-
-mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
-unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
-unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+		mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
+		mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
+		unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
+		unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+	}
 }
+
+
+
+
 		}
 
 	}
