@@ -132,15 +132,15 @@ imagedestroy($dst_img);
 
 
 	$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
-$data = addslashes(fread($hndFile, filesize('./artwork/front_'.$artist.'_'.$album.'.jpeg')));
+$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
 $hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
-$data2 = addslashes(fread($hndFilesmal, filesize('./artwork/front_'.$artist.'_'.$album.'_small.jpeg')));
+$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
 
 mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
 unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
 unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
-		}
+		}a
 
 	}
 }
