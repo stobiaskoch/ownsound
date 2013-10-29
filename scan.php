@@ -4,7 +4,7 @@ echo '<title>getID3() - /demo/demo.simple.php (sample script)</title>';
 echo '<style type="text/css">BODY,TD,TH { font-family: sans-serif; font-size: 9pt; }</style>';
 echo '</head><body>';
 $titlecount = "0";
-//Dummfug vom KRAUSE
+//Dummfug von Koch
 // include getID3() library (can be in a different directory if full path is specified)
 require_once('./getid3/getid3.php');
 require_once('config.inc.php');
@@ -15,7 +15,7 @@ $now2 = date('H.m.s');
 $now3 = "$now $now2";
 // change to whatever directory you want to scan
 $DirectoryToScan = $_REQUEST['dirtoscan'];
-if($DirectoryToScan=="ende") { goto ende; }
+if($DirectoryToScan=="ende") { echo "ENDE"; exit; }
 echo "Durchsuche Verzeichniss: $DirectoryToScan<br>";
 //die();
 $dir = opendir($DirectoryToScan);
@@ -132,9 +132,9 @@ imagedestroy($dst_img);
 
 
 	$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
-$data = addslashes(fread($hndFile, filesize('./artwork/front_'.$artist.'_'.$album.'.jpeg')));
+$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
 $hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
-$data2 = addslashes(fread($hndFilesmal, filesize('./artwork/front_'.$artist.'_'.$album.'_small.jpeg')));
+$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
 
 mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
@@ -149,6 +149,10 @@ mysql_query("UPDATE scanner_log SET error = '$error' WHERE id='0'");
 echo mysql_error();
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 
+/*goto ende2;
+ende:
+echo "ENDE";
+ende2:*/
 
 
 
