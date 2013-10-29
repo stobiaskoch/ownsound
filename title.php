@@ -72,7 +72,7 @@ if ( ! $db_erg )
  <br>
 <div id="content" style="
 padding-left: 40px;
-width: 45%;
+width: 52%;
 min-height: 200px;
 left: 320px;
 top: 262px;
