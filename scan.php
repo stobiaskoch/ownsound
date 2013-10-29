@@ -7,21 +7,21 @@ $titlecount = "0";
 //Dummfug vom KRAUSE
 // include getID3() library (can be in a different directory if full path is specified)
 require_once('./getid3/getid3.php');
-
+require_once('config.inc.php');
 // Initialize getID3 engine
 $getID3 = new getID3;
 $now = date('Y-m-d');
 $now2 = date('H.m.s');
 $now3 = "$now $now2";
-//$DirectoryToScan = '/mnt/musik/Eisregen/2009 - Buehnenblut/CD1'; // change to whatever directory you want to scan
+// change to whatever directory you want to scan
 $DirectoryToScan = $_REQUEST['dirtoscan'];
 if($DirectoryToScan=="ende") { goto ende; }
 echo "Durchsuche Verzeichniss: $DirectoryToScan<br>";
 //die();
 $dir = opendir($DirectoryToScan);
 
-mysql_connect("localhost", "root","strese84");
-mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht.");
+mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
 //echo $Daten['id'];
 
@@ -99,15 +99,6 @@ echo $titlecount." - ".$title."<br>";
 mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
 echo mysql_error();
 }
-
-
-
-
-
-
-
-
-
 	$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
 	
 	file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
@@ -158,10 +149,6 @@ mysql_query("UPDATE scanner_log SET error = '$error' WHERE id='0'");
 echo mysql_error();
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 
-goto ende2;
-ende:
-echo "ENDE";
-ende2:
 
 
 

@@ -49,19 +49,16 @@ $(document).ready(function()
 		}
 	});
 });
-	
-
-	
-	</script>
-		<style type="text/css" title="currentStyle">
-			@import "./test.css";
-			</style>
+</script>
+<style type="text/css" title="currentStyle">
+	@import "./test.css";
+</style>
 </head>	
 <?php
-//mysql_connect("localhost", "root","strese84");
-//mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht.");
- $alphabet = range('A', 'Z');
- echo "<div id='navi' style='
+$count=0;
+require_once('config.inc.php');
+$alphabet = range('A', 'Z');
+echo "<div id='navi' style='
  top: 8px;
 padding-left: 40px;
 width: 250;
@@ -77,7 +74,7 @@ foreach($alphabet as $alpha) {
  echo "<a name='kapitel1' href='#".$alpha."'> $alpha </a>";
 } 
 echo "</div><br><br><br><br>";
-$db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 foreach($alphabet as $alpha) {
 $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";

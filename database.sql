@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS `album` (
   `imgdata` longblob NOT NULL,
   `imgdata_small` longblob NOT NULL,
   `imgtype` varchar(100) NOT NULL,
+  `genre` varchar(100) DEFAULT NULL,
+  `label` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=775 ;
@@ -79,6 +81,10 @@ CREATE TABLE IF NOT EXISTS `title` (
   `album` varchar(100) DEFAULT NULL,
   `duration` varchar(100) NOT NULL,
   `path` varchar(700) NOT NULL,
+  `linktobandpic` varchar(700) NOT NULL,
+  `bandurl` varchar(700) NOT NULL,
+  `imgdata` longblob NOT NULL,
+  `imgtype` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `path` (`path`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10454 ;
