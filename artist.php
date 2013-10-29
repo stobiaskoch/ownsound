@@ -1,6 +1,6 @@
 <html>
 <head>
-	<style type="text/css">BODY,TD,TH { font-family: sans-serif; font-size: 9pt; }</style>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 	<script type="text/javascript" src="jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
 
@@ -133,7 +133,7 @@ playeroben();
 <?php } ?>
 <script language="JavaScript">
 stats();
-
+playeroben();
 </script>
  <div style="
  right:10px;
@@ -175,9 +175,9 @@ z-index:2;">Künstlersuche
 	<div id="results" style="z-index:2;" ></div></div>
 	 <div style="
  right:10px;
- top:250px;
+ top:262px;
 padding-left: 40px;
-width: 14%;
+width: 24%;
 display:inline-block;
 -webkit-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -190,9 +190,9 @@ position:fixed;">
 
 <div style="
 padding-left: 40px;
-width: 50%;
+width: 55%;
 left: 320px;
-min-height: 200px;
+min-height: 194px;
 top: 8px;
 display:none;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
@@ -201,4 +201,4 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
-"><div id="information" style="font-size:0.6em;"><center><img src='http://api.discogs.com/image/A-18839-1376591828-3354.jpeg' width='auto'></center></div></div></div>
+"><div id="information" style="font-size:0.6em;"><center><img src='os_logo.jpg' width='70%'></center></div></div></div>
