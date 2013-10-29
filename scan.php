@@ -128,7 +128,7 @@ imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
 imagedestroy($src_img);
 imagedestroy($dst_img);
 
-}
+
 
 
 	$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
@@ -140,7 +140,8 @@ mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$al
 mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
 unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
 unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
-		}a
+}
+		}
 
 	}
 }
