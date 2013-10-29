@@ -34,7 +34,7 @@ function scan($folder){
   if($content = opendir($folder)){  
 
     while(false !== ($file = readdir($content))){  
-      if(is_dir("$folder/$file") && $file != "." && $file != ".." && !in_array($file, $hide)){ 
+      if(is_dir("$folder/$file") && $file != "." && $file != ".."){ 
 
         $out .= "$folder/$file,";   
            scan("$folder/$file");  
@@ -56,7 +56,7 @@ $dirs = (explode(',', $out));
 
 $dirs[] = "ende";
 
-
+echo count($dirs)." Ordner gefunden. Starte Suche...<br>";
 
 
 
