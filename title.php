@@ -72,10 +72,10 @@ if ( ! $db_erg )
  <br>
 <div id="content" style="
 padding-left: 40px;
-width: 50%;
+width: 45%;
 min-height: 200px;
 left: 320px;
-top: 8px;
+top: 262px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);

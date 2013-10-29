@@ -40,9 +40,9 @@ echo "<div id='playalbum'>";
   ?>
  <br><div style="
 padding-left: 40px;
-width: 50%;
+width: 45%;
 left: 320px;
-top: 410px;
+top: 262px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -52,7 +52,7 @@ margin:0 0 20px 12px;
 position:fixed;
 ">
 <?php
- echo "<div>$artname</div>";
+ echo "<div><h1>$artname</h1></div>";
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
