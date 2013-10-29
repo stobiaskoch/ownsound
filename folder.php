@@ -24,7 +24,7 @@ $dirs = array();
 // Initialize getID3 engine
 $getID3 = new getID3;
 
-$DirectoryToScan = '/mnt/musik/Eisregen/*'; // change to whatever directory you want to scan
+
 
 $out  = '';  
 function scan($folder){  
