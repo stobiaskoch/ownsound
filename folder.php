@@ -54,7 +54,7 @@ function scan($folder){
 echo scan('/mnt/musik/Eisregen');
 $dirs = (explode(',', $out));
 
-$dirs[] = "ende";
+
 
 
 
