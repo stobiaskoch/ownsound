@@ -33,7 +33,7 @@ $sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('Ungï¿½ltige Abfrage: ' . mysqli_error());
 }
 echo "<div id='playalbum'>";
 
@@ -42,7 +42,7 @@ echo "<div id='playalbum'>";
 padding-left: 40px;
 width: 50%;
 left: 320px;
-top: 8px;
+top: 410px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);

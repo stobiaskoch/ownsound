@@ -57,7 +57,7 @@ $dirs = (explode(',', $out));
 
 
 
-
+echo count($dirs)." Ordner gefunden. Starte Suche...<br>";
 
 
 
