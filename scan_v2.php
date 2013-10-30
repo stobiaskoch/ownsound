@@ -21,6 +21,9 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 //jeder ordner wird gezählt
 
 mysql_query("UPDATE scanner_log SET folderscanned=folderscanned+1 WHERE id='0'");
+
+if($DirectoryToScan=="") { exit; } 
+
 if($dir!=FALSE) {
 
 	while (false !== ($file = readdir($dir)) ) {
@@ -34,7 +37,7 @@ if($dir!=FALSE) {
 		
 //überspringe datei, wenn keine mp3 (hey, that rhymes...)
 
-		if($ThisFileInfo['fileformat']!="mp3") { exit; }
+		if($ThisFileInfo['fileformat']=="mp3") {  
 		
 //variablen ermitteln
 
@@ -65,7 +68,7 @@ if($dir!=FALSE) {
 		
 	//artistID ermitteln
 	
-		$artistID = $Daten['id'];
+		
 		
 		//wenn nicht, schreiben
 
@@ -75,7 +78,9 @@ if($dir!=FALSE) {
 
 				
 			}
-
+			//artistID ermitteln
+				$artistID = $Daten['id'];
+			
 //checke, ob album  von diesem artist vorhanden
 
 		$sql    = "SELECT name FROM album WHERE name = '$album' AND artist = '$artistID'";
@@ -94,7 +99,7 @@ if($dir!=FALSE) {
 			$sql    = "SELECT id FROM album WHERE name = '$album'";
 			$query = mysql_query($sql); 
 			$Daten = mysql_fetch_assoc($query); 
-			$albumID = $Daten['album'];
+			$albumID = $Daten['id'];
 		}
 		
 		//cover vorhanden? schreiben
@@ -142,7 +147,7 @@ if($dir!=FALSE) {
 	//wenn nicht, schreiben
 	
 		if($checkpath!=$path) {
-			mysql_query("INSERT INTO title (name, artist, path, album, duration) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime')");	
+			mysql_query("INSERT INTO title (name, artist, path, album, duration, track) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime', '$track') ON DUPLICATE KEY UPDATE name='$title', artist='$artistID', path='$path', album='$albumID', duration='$playtime';");	
 			$titlecount++;
 			echo $titlecount." - ".$title."<br>";
 			mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
@@ -153,5 +158,5 @@ if($dir!=FALSE) {
 }
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 echo '</body></html>';	 	 
-		
+	}	
 ?>		
