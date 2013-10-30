@@ -13,14 +13,20 @@ $getID3 = new getID3;
 
 //starten
 
-echo "Durchsuche Verzeichniss: $DirectoryToScan<br>";
 $dir = opendir($DirectoryToScan);
 mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
-//jeder ordner wird gezählt
-
+//statistik
 mysql_query("UPDATE scanner_log SET folderscanned=folderscanned+1 WHERE id='0'");
+$sql    = "SELECT * FROM scanner_log WHERE id = '0'";
+$query = mysql_query($sql); 
+$Daten = mysql_fetch_assoc($query); 
+$foldertoscan = $Daten['foldertoscan'];
+$foldertoscan = $foldertoscan - 2;
+$folderscanned = $Daten['folderscanned'];
+
+echo "Durchsuche Verzeichniss $folderscanned von $foldertoscan : $DirectoryToScan<br>";
 
 if($DirectoryToScan=="") { exit; } 
 
@@ -42,12 +48,16 @@ if($dir!=FALSE) {
 //variablen ermitteln
 
 		$artist = $ThisFileInfo['comments_html']['artist'][0];
+		$artist = addslashes($artist);
+
 		$album = $ThisFileInfo['comments_html']['album'][0];
+		$album = addslashes($album);
 		
 		$title = $ThisFileInfo['comments_html']['title'][0];
-		$track = $ThisFileInfo['comments_html']['track'][0];
 		$title = addslashes($title);
 		
+		$track = $ThisFileInfo['comments_html']['track'][0];
+				
 		$path = $ThisFileInfo['filenamepath'];
 		$path = addslashes($path);
 		
@@ -61,11 +71,12 @@ if($dir!=FALSE) {
 		
 //checke, ob artist vorhanden
 
-		$sql    = "SELECT * FROM artist WHERE name  = '$artist'";
+		$sql    = "SELECT * FROM artist WHERE name = '$artist'";
 		$query = mysql_query($sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		$checkartist = $Daten['name'];
-		
+		$checkartist = addslashes($checkartist);
+
 	//artistID ermitteln
 	
 		
@@ -79,29 +90,36 @@ if($dir!=FALSE) {
 				
 			}
 			//artistID ermitteln
+				$sql    = "SELECT id FROM artist WHERE name = '$artist'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
 				$artistID = $Daten['id'];
-			
+
 //checke, ob album  von diesem artist vorhanden
 
-		$sql    = "SELECT name FROM album WHERE name = '$album' AND artist = '$artistID'";
+		$sql    = "SELECT * FROM album WHERE name = '$album'";
 		$query = mysql_query($sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		$checkalbum = $Daten['name'];
-		
-	//wenn nicht, schreiben
-	
-		if($checkalbum!=$album) {
-			mysql_query("INSERT INTO album (name, artist) VALUES ('$album', '$artistID')");	
-			mysql_query("UPDATE scanner_log SET album=album+1 WHERE id='0'");
-			
-		//albumID ermitteln
+		$checkalbum = addslashes($checkalbum);
 
-			$sql    = "SELECT id FROM album WHERE name = '$album'";
-			$query = mysql_query($sql); 
-			$Daten = mysql_fetch_assoc($query); 
-			$albumID = $Daten['id'];
-		}
+	//wenn nicht, schreiben
+
+		if($Daten['artist']!=$artistID) {
 		
+			if($checkalbum!=$album) {
+			
+				mysql_query("INSERT INTO album (name, artist) VALUES ('$album', '$artistID')");	
+				mysql_query("UPDATE scanner_log SET album=album+1 WHERE id='0'");
+				
+			//albumID ermitteln
+
+				$sql    = "SELECT id FROM album WHERE name = '$album'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				$albumID = $Daten['id'];
+			}
+		}
 		//cover vorhanden? schreiben
 		if($coverthere=="yes") {
 			$type = mime_content_type($artworktmp) . "\n";
@@ -143,9 +161,10 @@ if($dir!=FALSE) {
 		$query = mysql_query($sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		$checkpath = $Daten['path'];
+		$checkpath = addslashes($checkpath);
 		
 	//wenn nicht, schreiben
-	
+		
 		if($checkpath!=$path) {
 			mysql_query("INSERT INTO title (name, artist, path, album, duration, track) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime', '$track') ON DUPLICATE KEY UPDATE name='$title', artist='$artistID', path='$path', album='$albumID', duration='$playtime';");	
 			$titlecount++;
@@ -159,4 +178,8 @@ if($dir!=FALSE) {
 echo '<br>'. $titlecount.' neue Tracks gefunden.';
 echo '</body></html>';	 	 
 	}	
+	if($folderscanned==$foldertoscan) {
+		echo "yeah!";
+		mysql_query("UPDATE scanner_log SET endtime=(NOW()) WHERE id='0'");
+	}
 ?>		
