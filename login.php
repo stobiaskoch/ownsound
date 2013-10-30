@@ -39,11 +39,18 @@ if($_REQUEST ['order']=="login") {
 <div id="login">
 	<center><img src='os_logo.jpg' width='70%'></center>
 </div>
-<div>Bitte enloggen<br>
-  <form action="login.php" method="post">
-   Username: <input type="text" name="name" /><br />
-   Passwort: <input type="password" name="password" /><br />
-   <input type="hidden" name="order" value="login"/><br />
-   <input type="submit" value="Anmelden" />
-  </form>
-</div>
+<fieldset style="width: 300px;">
+		<legend style="margin-right: 250px;">Login</legend>
+			<table>
+			<tr>
+				<form action="login.php" method="post">
+				<td>Username</td><td><input type="text" name="name" /></td>
+				</tr><td>Passwort</td><td><input type="password" name="password" /></td>
+			<tr>
+				<input type="hidden" name="order" value="login"/>
+
+				<td><input type="submit" value="Anmelden" /></td>
+				</form>
+			</tr>
+			</table>
+	</fieldset>
