@@ -34,7 +34,7 @@ if($dir!=FALSE) {
 		$ThisFileInfo = $getID3->analyze($FullFileName);
 
 		getid3_lib::CopyTagsToComments($ThisFileInfo);
-		if($ThisFileInfo['fileformat']=="mp3") {
+		if($ThisFileInfo['fileformat']!="mp3") { exit; }
 		$artist = $ThisFileInfo['comments_html']['artist'][0];
 		
 	$sql    = "SELECT name FROM artist WHERE name  = '$artist'";
@@ -47,7 +47,7 @@ if($dir!=FALSE) {
 	mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
 	echo mysql_error();
 	}
-}
+
 
 
 
