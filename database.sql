@@ -93,3 +93,18 @@ CREATE TABLE IF NOT EXISTS `title` (
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `user`
+--
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `fullname` varchar(200) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `group` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
