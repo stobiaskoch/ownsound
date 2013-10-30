@@ -3,7 +3,7 @@
 	Voller Name: <input type="text" name="fullname" /><br />
 	Email: <input type="text" name="email" /><br />
 	Passwort: <input type="password" name="passwort" /><br />
-	<input type="text" name="order" value="save"/><br />
+	<input type="hidden" name="order" value="save"/><br />
    <input type="submit" value="speichern" />
   </form>
 <?php
