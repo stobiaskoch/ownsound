@@ -7,11 +7,8 @@ echo "<title>".$albname."</title>";
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-
 <head>
-
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-
 	<script src="jquery.form.js"></script> 
 	
 	
@@ -66,13 +63,13 @@ $sql = "SELECT * FROM title WHERE album='$albumid' ORDER BY path";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 }
     ?>
  <br>
 <div id="content" style="
 padding-left: 40px;
-width: 52%;
+width: 580px;
 min-height: 200px;
 left: 320px;
 top: 262px;
@@ -86,7 +83,7 @@ position:fixed;
  overflow : auto; ">
 
  <?php
- $rest = $artname{0};
+
 $titlecheck = "$artname - $albname";
 $titlecheck2 = mb_strlen($titlecheck);
 
@@ -100,7 +97,6 @@ $titlecheck2 = mb_strlen($titlecheck);
  $titlecheck3 = "font-size:1em;";
  }
  ?>
-<a style="position: absolute; top: 176px; right: 18px; font-size:0.7em;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo $albname; ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')">Google-Coversuche</a>
 
 	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistid; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>')">[<?php echo $artname; ?>]</a>
   
@@ -116,24 +112,18 @@ $count++;
 if($count<="9") {$count="0$count";}
   echo "<tr>";
   	echo "<td>". $count . " - </td>";
-//  	echo "<td width='253px'>". $zeile['name'] . " [". $zeile['duration'] . "]</td>";
-//	echo "<td>". $zeile['duration'] . "</td>";
-//	echo "<td><audio controls preload='none'><source src='mp3.php?id=".$zeile['path']."' type='audio/mp3' /><p>Dieser Browser unterstützt HTML5 Video nicht</p></audio></td>";
-?> <td width='350px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
+?> <td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
 
 <?php
 	echo "</tr>";
 
 
 }
-?></tr><td></td><td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufügen</a></td><tr><?php
+?></tr><td></td><td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufÃ¼gen</a></td><tr><?php
 echo "</table>";
-/*
-//<span class="crest" style="background: url('./get.php?picid=<?php echo $albumid; ?>&size=big') no-repeat 0 0;"></span> 
-*/
 ?>
 <div id="covertest">
-<a style="position: absolute; top: 36px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo $albname; ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big'></a>
+<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo $albname; ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' title="Cover Ã¤ndern"></a>
 </div>
 
 
@@ -146,16 +136,4 @@ echo "</table>";
 mysqli_free_result( $db_erg );
 
 
-
-
-
-
-/*
-<br><br><br>
-<form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data">
-<input type="file" id="img" name="img" size="40" accept="image/jpeg">
-<input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumid; ?>">
-<input type="submit" value="Ändern">
-</form>
-*/
 ?>
