@@ -1,5 +1,5 @@
 <html>
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 
 	<script>
@@ -24,7 +24,7 @@ $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
 echo "<div id='title'><title>".$artname."</title></div>";
-echo "<LINK REL='SHORTCUT ICON' HREF='favicon.ico'>";
+
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
@@ -40,7 +40,7 @@ echo "<div id='playalbum'>";
   ?>
  <br><div style="
 padding-left: 40px;
-width: 52%;
+width: auto;
 left: 320px;
 top: 262px;
 display:inline-block;
@@ -65,8 +65,9 @@ if ($count2==4) {
 }
 
   ?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><img src='get.php?picid=<?php echo $zeile['id'] ?>&size=small' width='70' height='70'></a></td>
-	<td width="140px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
+  <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
   <?php
 if ($count2==3) {
 	$count2 = 0;
@@ -76,7 +77,7 @@ if ($count2==3) {
 }
 }
 echo "</table><div>";
-?> <link rel="icon" href="get.php?picid=<?php echo $zeile['id'] ?>&size=small" type="image/x-icon" /><?php
+
 
 
 mysqli_free_result( $db_erg );
