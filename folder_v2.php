@@ -3,7 +3,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
 	<script>
 		function getdata(dir){
-		$.ajax({ url: "./scan.php?dirtoscan="+dir, success: function(data){
+		$.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
             $("#statnr").html(data);
     }
     });
