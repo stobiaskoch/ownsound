@@ -35,9 +35,8 @@ CREATE TABLE IF NOT EXISTS `album` (
   `imgtype` varchar(100) NOT NULL,
   `genre` varchar(100) DEFAULT NULL,
   `label` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=775 ;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
