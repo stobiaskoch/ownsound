@@ -55,7 +55,7 @@ echo scan($DirectoryToScan);
 $dirs = (explode(';', $out));
 $dirstoscan = count($dirs);
 echo count($dirs)." Ordner gefunden. Starte Suche...<br>";
-*/
+/*
 for ($i = 0; $i <= $dirstoscan; $i++) {
     echo "# $i - $dirs[$i]";
 	echo "<br>";
