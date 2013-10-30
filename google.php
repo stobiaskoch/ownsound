@@ -54,9 +54,9 @@ for ($i = 0; $i <= 3; $i++) {
 $pic = $jset["responseData"]["results"][$i]["url"];
 $picwidth = $jset["responseData"]["results"][$i]["width"];
 $picheight = $jset["responseData"]["results"][$i]["height"];
- 
+ $pictitle = $jset["responseData"]["results"][$i]["contentNoFormatting"];
 //echo " <a href='./google.php?order=save&url=".$pic."&album=".$album."&albumID=".$albumID."&artist=".$artist."&artistID=".$artistID."'><img src='".$pic."' width='140' height='140' title='$picwidth x $picheight'></a> ";
-?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $album; ?>', '<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight"; ?>'></a>
+?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $album; ?>', '<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
 <?php
 
 
