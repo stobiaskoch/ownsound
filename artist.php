@@ -58,7 +58,10 @@ $(document).ready(function() {
 </style>
 </head>	
 <?php
-
+if(!$_COOKIE['loggedIn']) {
+echo "<meta http-equiv='refresh' content='0; URL=login.php'>";
+die();
+}
 require_once('config.inc.php');
 $alphabet = range('A', 'Z');
 ?><div id="navigation"><?php
