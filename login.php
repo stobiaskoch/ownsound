@@ -1,4 +1,8 @@
 <?php
+if($_COOKIE['loggedIn']) {
+	echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
+		exit;
+}
 if($_REQUEST ['order']=="login") {
 
 	require_once('config.inc.php');
@@ -20,7 +24,7 @@ if($_REQUEST ['order']=="login") {
 		{
 		$yearExpire = time() + 60*60*24*365; // 1 Year
 		setcookie('loggedIn', $name, $yearExpire);
-		echo "eingeloggt";
+		echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
 		}
 }	
 ?>
@@ -39,7 +43,7 @@ if($_REQUEST ['order']=="login") {
   <form action="login.php" method="post">
    Username: <input type="text" name="name" /><br />
    Passwort: <input type="password" name="password" /><br />
-   <input type="text" name="order" value="login"/><br />
+   <input type="hidden" name="order" value="login"/><br />
    <input type="submit" value="Anmelden" />
   </form>
 </div>
