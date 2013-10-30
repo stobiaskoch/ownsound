@@ -42,6 +42,7 @@ $albumsearch = str_replace(" ", "+", $albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch;
 $json = file_get_contents($jsrc);
+sleep(1);
 $jset = json_decode($json, true);
 
 for ($i = 0; $i <= 3; $i++) {
