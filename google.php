@@ -4,7 +4,8 @@ mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 $artistID = $_REQUEST['artistID'];
 $artist = $_REQUEST['artist'];
-$rest = $artist{0};
+$albumID = $_REQUEST['albumID'];
+$album = $_REQUEST['album'];
 ?>
 <html>
 <head>
@@ -35,13 +36,6 @@ $(document).ready(function()
 
 
 if($_REQUEST['order']=="search") {
-$album = $_REQUEST['album'];
-$artist = $_REQUEST['artist'];
-
-$albumID = $_REQUEST['albumID'];
-$artistID = $_REQUEST['artistID'];
-
-
 
 $albumsearch = "$artist $album";
 $albumsearch = str_replace(" ", "+", $albumsearch);
@@ -55,7 +49,6 @@ $pic = $jset["responseData"]["results"][$i]["url"];
 $picwidth = $jset["responseData"]["results"][$i]["width"];
 $picheight = $jset["responseData"]["results"][$i]["height"];
  $pictitle = $jset["responseData"]["results"][$i]["contentNoFormatting"];
-//echo " <a href='./google.php?order=save&url=".$pic."&album=".$album."&albumID=".$albumID."&artist=".$artist."&artistID=".$artistID."'><img src='".$pic."' width='140' height='140' title='$picwidth x $picheight'></a> ";
 ?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $album; ?>', '<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
 <?php
 
@@ -75,12 +68,6 @@ $picheight = $jset["responseData"]["results"][$i]["height"];
 
 if($_REQUEST['order']=="save") {
 $url = $_REQUEST['url'];
-$album = $_REQUEST['album'];
-$artist = $_REQUEST['artist'];
-$rest = $artist{0};
-
-$albumID = $_REQUEST['albumID'];
-$artistID = $_REQUEST['artistID'];
 
   $newfname = "./tmp/".$albumID."_original.jpg";
   $file = fopen ($url, "rb");
@@ -127,17 +114,12 @@ $data = addslashes(fread($hndFile, filesize($tmpname)));
 $hndFilesmall = fopen('./tmp/kleinesbild.jpg', "r");
 $datasmall = addslashes(fread($hndFilesmall, filesize($tmpname)));
 
-//mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-
 mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 mysql_query("UPDATE album SET imgdata_small = '$datasmall', imgtype = '$type' WHERE id='$albumID'");
 unlink($newfname);
 unlink('./tmp/grossesbild.jpg');
 unlink('./tmp/kleinesbild.jpg');
 
-?>
 
-<?php
-//echo "<meta http-equiv='refresh' content='0; URL=artist.php?order=newcover&coverid=".$artistID."&covername=".$artist."'>";
 }
 ?>
