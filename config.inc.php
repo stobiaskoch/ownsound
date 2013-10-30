@@ -1,6 +1,7 @@
 <?php
+require_once('../ownsound.config.php');
 //Database Settings
-define("DBHOST", "localhost");
+/*define("DBHOST", "localhost");
 define("DBUSER", "");
 define("DBPASS", "");
 define("DBDATABASE", "");
@@ -8,5 +9,5 @@ define("DBDATABASE", "");
 
 //Music Directory
 define("MUSICDIR", "/media/usb1/Musik/Adele/");
-
+*/
 ?>

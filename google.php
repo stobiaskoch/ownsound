@@ -1,4 +1,7 @@
 <?php
+require_once('config.inc.php');
+mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 $artistID = $_REQUEST['artistID'];
 $artist = $_REQUEST['artist'];
 $rest = $artist{0};
@@ -99,8 +102,7 @@ $artistID = $_REQUEST['artistID'];
   }
   
   
-mysql_connect("localhost", "root","strese84");
-mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht."); 
+
 $tmpname = $newfname;
 $size = getimagesize($tmpname);  
   
