@@ -4,21 +4,17 @@ if($_COOKIE['loggedIn']) {
 		exit;
 }
 if($_REQUEST ['order']=="login") {
-
 	require_once('config.inc.php');
 	mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-	
 	$name = $_POST["name"]; 
 	$password = $_POST["password"]; 
 	$password = md5($password);
-	$abfrage = mysql_query("SELECT id FROM login WHERE name LIKE '$name'");
-	$ergebnis = mysql_query($abfrage); 
+	$ergebnis = mysql_query("SELECT * FROM user WHERE name='$name'"); 
 	$row = mysql_fetch_object($ergebnis);
 	if($row->password == $password)
 		{ 
 		echo "Login fehlgeschlagen";
-		die();
 		}
 	else
 		{
@@ -26,6 +22,7 @@ if($_REQUEST ['order']=="login") {
 		setcookie('loggedIn', $name, $yearExpire);
 		echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
 		}
+
 }	
 ?>
 <html>
