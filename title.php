@@ -121,7 +121,7 @@ if($count<="9") {$count="0$count";}
 ?>
 		</tr>
 	<td></td>
-<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufügen</a></td><tr><?php
+<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufügen</a></td><tr>
 </table>
 
 
