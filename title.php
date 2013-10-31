@@ -100,7 +100,7 @@ $titlecheck2 = mb_strlen($titlecheck);
  }
  ?>
 
-	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistid; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>')">[<?php echo $artname; ?>]</a>
+	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>')">[<?php echo $artname; ?>]</a>
   
   <?php
 
@@ -115,7 +115,7 @@ if($count<="9") {$count="0$count";}
   echo "<tr>";
   	echo "<td>". $count . " - </td>";
 ?> 
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
 </tr>
 
 <?php
@@ -123,12 +123,12 @@ if($count<="9") {$count="0$count";}
 ?>
 		</tr>
 	<td></td>
-<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo $artname; ?>')">Album hinzufügen</a></td><tr>
+<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo urlencode($artname); ?>')">Album hinzufügen</a></td><tr>
 </table>
 
 
 <div id="covertest">
-	<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
+	<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo urlencode($artname); ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
 </div>
 
 
