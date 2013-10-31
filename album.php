@@ -1,5 +1,5 @@
 <html>
-	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 
 	<script>
@@ -23,15 +23,6 @@ require_once('config.inc.php');
 $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
-mysql_connect(DBHOST, DBUSER,DBPASS);
-mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-$albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
-$albumcount = mysql_num_rows($albumcountsql);
-if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
-
-
-
-
 echo "<div id='title'><title>".$artname."</title></div>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
@@ -39,21 +30,29 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 $sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";
  
-
-
- 
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('Ung�ltige Abfrage: ' . mysqli_error());
 }
-
 echo "<div id='playalbum'>";
 
   ?>
- <br><div id="album">
+ <br><div style="
+padding-left: 40px;
+width: auto;
+left: 320px;
+top: 262px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:fixed;
+">
 <?php
- echo "<div><h1>$artname [$albumcount]</h1></div>";
+ echo "<div><h1>$artname</h1></div>";
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
@@ -66,8 +65,8 @@ if ($count2==4) {
 }
 
   ?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo addslashes($artname); ?>', '<?php echo $artistid; ?>', '<?php echo addslashes($zeile['name']); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo addslashes($artname); ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo addslashes($zeile['name']); ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
   <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
   <?php
 if ($count2==3) {
@@ -84,7 +83,7 @@ echo "</table><div>";
 mysqli_free_result( $db_erg );
 if($count=="" or $count=="0") { ?>
 <script language="JavaScript">
-getdatanoalbum('<?php echo $artistid; ?>', '<?php echo $artname; ?>');
+getdatanoalbum('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>');
 </script>
 <?php
 }
