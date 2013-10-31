@@ -34,7 +34,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
 
-mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$_REQUEST['artistID']."', '$title', '".$zeile['id']."')");
+mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".urlencode($_REQUEST['artistID'])."', '$title', '".$zeile['id']."')");
 }
 
 
@@ -56,7 +56,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
 	mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
-	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$_REQUEST['artistID']."', '$title', '".$_REQUEST['albumID']."')");
+	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".urlencode($_REQUEST['artistID'])."', '$title', '".$_REQUEST['albumID']."')");
 }
 
 
