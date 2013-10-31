@@ -4,6 +4,7 @@
 
 	<script type="text/javascript" src="jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
+	<script type="text/javascript" src="jquery.contextmenu.js"></script>
 
 	<script>
 	
@@ -27,7 +28,6 @@ $(document).ready(function() {
 			}
 		});
 	}
-	
 	function nocover(artid, artname){
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./nocover.php" , success: function(data){
@@ -57,8 +57,7 @@ $(document).ready(function() {
 		});
 	}
 
-
-		function sleep(milliseconds) {
+	function sleep(milliseconds) {
 		  var start = new Date().getTime();
 		  for (var i = 0; i < 1e7; i++) {
 			if ((new Date().getTime() - start) > milliseconds){
@@ -94,7 +93,7 @@ $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 }
 
  ?>
@@ -108,7 +107,8 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 
   echo "<tr>";
   ?>
-	<td><a href='#<?php echo $alpha; ?>' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
+
+	<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo addslashes($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
   <?php
   echo "</tr>";
  
@@ -164,3 +164,7 @@ playeroben();
 	</div>
 </div>
 	<link id="favicon" rel="icon" type="image/png" href="os_logo.jpg" /> 
+
+	<div id="menu1" style="width:200px;background-color:white;border:1px solid black;padding:5px;">
+	This is my custom context menu
+</div>
