@@ -23,6 +23,12 @@ require_once('config.inc.php');
 $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+$albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
+$albumcount = mysql_num_rows($albumcountsql);
+if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
+
 echo "<div id='title'><title>".$artname."</title></div>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
@@ -38,21 +44,9 @@ if ( ! $db_erg )
 echo "<div id='playalbum'>";
 
   ?>
- <br><div style="
-padding-left: 40px;
-width: auto;
-left: 320px;
-top: 262px;
-display:inline-block;
--webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:20px;
-margin:0 0 20px 12px;
-position:fixed;
-">
+ <br><div id="album"">
 <?php
- echo "<div><h1>$artname</h1></div>";
+ echo "<div><h1>$artname [$albumcount]</h1></div>";
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
