@@ -31,8 +31,6 @@ if($_REQUEST['action']=="getdir") {
 				}
 				});
 			}
-			
-			
 		}
 	</script> 
 	

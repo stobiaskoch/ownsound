@@ -50,7 +50,7 @@ $pic = $jset["responseData"]["results"][$i]["url"];
 $picwidth = $jset["responseData"]["results"][$i]["width"];
 $picheight = $jset["responseData"]["results"][$i]["height"];
  $pictitle = $jset["responseData"]["results"][$i]["contentNoFormatting"];
-?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $album; ?>', '<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
+?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo urlencode($album); ?>', '<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
 <?php
 
 
@@ -63,7 +63,7 @@ $picheight = $jset["responseData"]["results"][$i]["height"];
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
 <input type="submit" value="Ändern">
 </form><br>
-	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>', '<?php echo $album; ?>')">Zurück</a>
+	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artist; ?>', '<?php echo $artistID; ?>', '<?php echo urlencode($album); ?>')">Zurück</a>
 <?php
 }
 

@@ -65,8 +65,8 @@ if ($count2==4) {
 }
 
   ?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo $artname; ?>', '<?php echo $artistid; ?>', '<?php echo $zeile['name']; ?>')"><?php echo $zeile['name']; ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
   <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
   <?php
 if ($count2==3) {
@@ -83,7 +83,7 @@ echo "</table><div>";
 mysqli_free_result( $db_erg );
 if($count=="" or $count=="0") { ?>
 <script language="JavaScript">
-getdatanoalbum('<?php echo $artistid; ?>', '<?php echo $artname; ?>');
+getdatanoalbum('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>');
 </script>
 <?php
 }

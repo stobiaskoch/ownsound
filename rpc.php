@@ -1,6 +1,7 @@
 ﻿<?php
-	mysql_connect("localhost","root","strese84") or die ("Keine Verbindung moeglich");
-	mysql_select_db("musikdatenbank") or die ("Die Datenbank existiert nicht");
+	require_once('config.inc.php');
+	mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
+	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 	mysql_query("SET NAMES 'utf8'");
 	
 	$result = mysql_query("SELECT * FROM artist WHERE name LIKE '%" . $_GET['search'] . "%' LIMIT 5");

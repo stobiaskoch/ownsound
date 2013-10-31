@@ -36,7 +36,7 @@ if($dir!=FALSE) {
 	$FullFileName = realpath($DirectoryToScan.'/'.$file);
 	if ((substr($FullFileName, 0, 1) != '.') && is_file($FullFileName)) {
 	
-		set_time_limit(30);
+		set_time_limit(180);
 
 		$ThisFileInfo = $getID3->analyze($FullFileName);
 		getid3_lib::CopyTagsToComments($ThisFileInfo);
@@ -62,11 +62,12 @@ if($dir!=FALSE) {
 		$path = addslashes($path);
 		
 		$playtime = $ThisFileInfo['playtime_string'];
-
-		if($getID3->info['id3v2']['APIC'][0]['data']!="") {
-			$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
-			file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
-			$coverthere = "yes";
+		if(COVERSEARCH!=FALSE) {
+			if($getID3->info['id3v2']['APIC'][0]['data']!="") {
+				$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
+				file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+				$coverthere = "yes";
+			}
 		}
 		
 //checke, ob artist vorhanden
@@ -86,8 +87,6 @@ if($dir!=FALSE) {
 			if($checkartist!=$artist) {
 				mysql_query("INSERT INTO artist (name) VALUES ('$artist')");
 				mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
-
-				
 			}
 			//artistID ermitteln
 				$sql    = "SELECT id FROM artist WHERE name = '$artist'";
@@ -102,10 +101,10 @@ if($dir!=FALSE) {
 		$Daten = mysql_fetch_assoc($query); 
 		$checkalbum = $Daten['name'];
 		$checkalbum = addslashes($checkalbum);
-
+		
 	//wenn nicht, schreiben
-
-		if($Daten['artist']!=$artistID) {
+		
+		//if($Daten['artist']!=$artistID) {
 		
 			if($checkalbum!=$album) {
 			
@@ -114,47 +113,46 @@ if($dir!=FALSE) {
 				
 			//albumID ermitteln
 
-				$sql    = "SELECT id FROM album WHERE name = '$album'";
-				$query = mysql_query($sql); 
-				$Daten = mysql_fetch_assoc($query); 
-				$albumID = $Daten['id'];
 			}
-		}
+		//}
+		$sql    = "SELECT id FROM album WHERE name = '$album'";
+		$query = mysql_query($sql) OR DIE("Konnte Album ID nicht auslesen:<br/>".$sql); 
+		$Daten = mysql_fetch_assoc($query); 
+		$albumID = $Daten['id'];
 		//cover vorhanden? schreiben
-		if($coverthere=="yes") {
-			$type = mime_content_type($artworktmp) . "\n";
-			$type = "Content-Type: ".$type;
-			$size = getimagesize($artworktmp);
-			if ($size[0]>5 || $size[1]>5) {
-			
-				$src_img = imagecreatefromjpeg($artworktmp);
-				$dst_img = imagecreatetruecolor(70,70);
-				imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 70, 70, $size[0], $size[1]);
-				imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
-				imagedestroy($src_img);
-				imagedestroy($dst_img);
+		if(COVERSEARCH!=FALSE) {
+			if($coverthere=="yes") {
+				$type = mime_content_type($artworktmp) . "\n";
+				$type = "Content-Type: ".$type;
+				$size = getimagesize($artworktmp);
+				if ($size[0]>5 || $size[1]>5) {
 				
-				$src_img = imagecreatefromjpeg($artworktmp);
-				$dst_img = imagecreatetruecolor(140,140);
-				imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
-				imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'.jpeg');
-				imagedestroy($src_img);
-				imagedestroy($dst_img);
+					$src_img = imagecreatefromjpeg($artworktmp);
+					$dst_img = imagecreatetruecolor(70,70);
+					imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 70, 70, $size[0], $size[1]);
+					imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+					imagedestroy($src_img);
+					imagedestroy($dst_img);
+					
+					$src_img = imagecreatefromjpeg($artworktmp);
+					$dst_img = imagecreatetruecolor(140,140);
+					imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
+					imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'.jpeg');
+					imagedestroy($src_img);
+					imagedestroy($dst_img);
 
+					$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
+					$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
+					$hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
+					$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
 
-
-				$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
-				$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
-				$hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
-				$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
-
-				mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-				mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
-				unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
-				unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+					mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
+					mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
+					unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
+					unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+				}
 			}
 		}
-		
 //checke, ob titel von diesem artist vorhanden
 
 		$sql    = "SELECT path FROM title WHERE path = '$path' AND artist='$artistID'";
@@ -166,7 +164,8 @@ if($dir!=FALSE) {
 	//wenn nicht, schreiben
 		
 		if($checkpath!=$path) {
-			mysql_query("INSERT INTO title (name, artist, path, album, duration, track) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime', '$track') ON DUPLICATE KEY UPDATE name='$title', artist='$artistID', path='$path', album='$albumID', duration='$playtime';");	
+			$sql="INSERT INTO title (name, artist, path, album, duration, track) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime', '$track') ON DUPLICATE KEY UPDATE name='$title', artist='$artistID', path='$path', album='$albumID', duration='$playtime'";
+			mysql_query($sql) OR DIE (mysql_error()."Title konnte nicht eingetragen werden.<br/>".$sql);	
 			$titlecount++;
 			echo $titlecount." - ".$title."<br>";
 			mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");

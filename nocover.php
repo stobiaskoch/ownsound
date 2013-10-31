@@ -78,8 +78,8 @@ if ($count2==4) {
 		$artname = $Daten['name'];
 		
   ?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artname; ?>', '<?php echo $artistID; ?>', '<?php echo $album; ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artname; ?>', '<?php echo $artistID; ?>', '<?php echo $album; ?>')">[<?php echo $artname ."]<br>".$zeile['name']; ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artname; ?>', '<?php echo $artistID; ?>', '<?php echo urlencode($album); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artname; ?>', '<?php echo $artistID; ?>', '<?php echo urlencode($album); ?>')">[<?php echo $artname ."]<br>".$zeile['name']; ?></a></td>
   <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
   <?php
 if ($count2==3) {

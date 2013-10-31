@@ -128,7 +128,7 @@ if($count<="9") {$count="0$count";}
 
 
 <div id="covertest">
-	<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo $albname; ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
+	<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo $artname; ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
 </div>
 
 

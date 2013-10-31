@@ -1,4 +1,6 @@
 <?php
+require_once('config.inc.php');
+
 $albumid = $_REQUEST['albid'];
 $albname = $_REQUEST['albname'];
 $artistid = $_REQUEST['artistid'];
@@ -44,7 +46,7 @@ $artname = $_REQUEST['art'];
 $rest = $albname{0};
 
 
-$db_link = mysqli_connect ("localhost", "root", "strese84", "musikdatenbank" );
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
 

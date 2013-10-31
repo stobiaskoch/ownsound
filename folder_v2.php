@@ -76,7 +76,7 @@ echo "<br>";
 foreach ($dirs as $dirtoscan) {
 ?>
 <script language="JavaScript">
-getdata('<?php echo $dirtoscan; ?>');
+getdata('<?php echo urlencode($dirtoscan); ?>');
 </script>
 <?php
 }
