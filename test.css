@@ -118,7 +118,7 @@ position:fixed;
 
 #searchartist {
  right:10px;
- top:130px;
+ top:158px;
 padding-left: 40px;
 width: 14%;
  min-height: 72px;
@@ -133,7 +133,7 @@ z-index:2;
 }
 #playerdiv {
  right:10px;
- top:262px;
+ top:292px;
 padding-left: 40px;
 width: auto;
 display:inline-block;
@@ -172,4 +172,34 @@ box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
+}
+
+#album {
+padding-left: 40px;
+width: 580px;
+left: 320px;
+top: 262px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:fixed;
+}
+
+#content {
+padding-left: 40px;
+width: 580px;
+min-height: 200px;
+left: 320px;
+top: 262px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:fixed;
+ overflow : auto;
 }
