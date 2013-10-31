@@ -8,7 +8,8 @@
             $("#playalbum").html(data);
     }
     });
-	document.getElementById("title").innerHTML="<title>"+albname+"</title>";
+	var titleoben = decodeURIComponent(albname);
+	document.getElementById("title").innerHTML="<title>"+titleoben+"</title>";
 	}
 			function getdatanoalbum(artid, albname){
 		$.ajax({ url: "./noalbum.php?artid="+artid+"&albname="+albname , success: function(data){
@@ -29,7 +30,9 @@ $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'");
 $albumcount = mysql_num_rows($albumcountsql);
 if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
 
-echo "<div id='title'><title>".$artname."</title></div>";
+?>
+<div id='title'><title><?php echo $artname; ?></title></div>
+<?php
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
@@ -46,7 +49,7 @@ echo "<div id='playalbum'>";
   ?>
  <br><div id="album"">
 <?php
- echo "<div><h1>$artname [$albumcount]</h1></div>";
+echo "<div><h1>$artname [$albumcount]</h1></div>";
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
