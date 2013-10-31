@@ -14,27 +14,8 @@ if($_REQUEST ['order']=="login") {
 	$row = mysql_fetch_object($ergebnis);
 	if($row->password != $password)
 		{ 
-		?>
-<center>
-<div id="login">
-	<center><img src='os_logo_small.jpg'></center>
-</div>
-<fieldset style="width: 300px;">
-		<legend style="margin-right: 150px;">Login fehlgeschlagen</legend>
-			<table>
-			<tr>
-				<form action="login.php" method="post">
-				<td>Username</td><td><input type="text" name="name" /></td>
-				</tr><td>Passwort</td><td><input type="password" name="password" /></td>
-			<tr>
-				<input type="hidden" name="order" value="login"/>
-
-				<td><input type="submit" value="Anmelden" /></td>
-				</form>
-			</tr>
-			</table>
-	</fieldset>
-		<?php
+		echo "<center>Login fehlgeschlagen</center>";
+		echo "<meta http-equiv='refresh' content='3; URL=login.php'>";
 		die();
 		}
 	else
@@ -55,7 +36,7 @@ if($_REQUEST ['order']=="login") {
 </head>	
 <center>
 <div id="login">
-	<center><img src='os_logo_small.jpg'></center>
+	<center><img src='os_logo.jpg' width='70%'></center>
 </div>
 <fieldset style="width: 300px;">
 		<legend style="margin-right: 250px;">Login</legend>
