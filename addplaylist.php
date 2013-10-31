@@ -1,7 +1,19 @@
 <?php
 require_once('config.inc.php');
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+$user = $_COOKIE['loggedIn'];
 
+$sql="CREATE TABLE IF NOT EXISTS `".$user."_playlist` (
+  `artist` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `title` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+
+$db_erg = mysqli_query( $db_link, $sql );
+if ( ! $db_erg )
+{
+  die('Ungültige Abfrage: ' . mysqli_error());
+}
 
 if($_REQUEST['order']=="addalbum") {
 
@@ -16,28 +28,16 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-if(file_exists('./tmp/playlist.php')) {
-	unlink('./tmp/playlist.php');
-}
-$datei_handle=fopen("./tmp/playlist.php",a);
-fwrite($datei_handle,"<?php\n");
-fclose($datei_handle);
+mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
-	$information = "\$playlist[]=array('artist'=>'".$_REQUEST['artistID']."','title'=>'". $title . "','mp3'=>'mp3.php?id=".$path."');\n";
-	$datei_handle=fopen("./tmp/playlist.php",a);
-	fwrite($datei_handle,$information);
-	fclose($datei_handle);
 
+mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$_REQUEST['artistID']."', '$title', '".$zeile['id']."')");
 }
 
-$information = "\$playlist=json_encode(\$playlist);\nprint_r(\$playlist);\n?>\n";
 
-$datei_handle=fopen("./tmp/playlist.php",a);
-fwrite($datei_handle,$information);
-fclose($datei_handle);
 
 }
 
@@ -50,29 +50,15 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-if(file_exists('./tmp/playlist.php')) {
-	unlink('./tmp/playlist.php');
-}
-$datei_handle=fopen("./tmp/playlist.php",a);
-fwrite($datei_handle,"<?php\n");
-fclose($datei_handle);
+
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $title = str_replace("'", "\'", $zeile['name']);
 $path = str_replace("'", "\'", $zeile['path']);
-
-	$information = "\$playlist[]=array('artist'=>'".$_REQUEST['artistID']."','title'=>'". $title . "','mp3'=>'mp3.php?id=".$path."');\n";
-	$datei_handle=fopen("./tmp/playlist.php",a);
-	fwrite($datei_handle,$information);
-	fclose($datei_handle);
-
+	mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
+	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$_REQUEST['artistID']."', '$title', '".$_REQUEST['albumID']."')");
 }
 
-$information = "\$playlist=json_encode(\$playlist);\nprint_r(\$playlist);\n?>\n";
-
-$datei_handle=fopen("./tmp/playlist.php",a);
-fwrite($datei_handle,$information);
-fclose($datei_handle);
 
 }
 
