@@ -165,6 +165,3 @@ playeroben();
 </div>
 	<link id="favicon" rel="icon" type="image/png" href="os_logo.jpg" /> 
 
-	<div id="menu1" style="width:200px;background-color:white;border:1px solid black;padding:5px;">
-	This is my custom context menu
-</div>
