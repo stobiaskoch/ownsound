@@ -1,14 +1,15 @@
 <?php
-//Der Pfad zum Verzeichnis
-$mp3Location = '/media/usb1/Musik/ACDC/Live/';
- // This fetches a file name from the URL.
-// The "basename" function is there for
-// security, to make sure only a filename
-// is passed, not a path.
-$mp3Path = $_GET['id'];
-//$mp3Name="01 Thunderstruck.mp3"; 
-// Construct the actual mp3 path.
-//$mp3Path = $mp3Location . $mp3Name;
+$id = $_GET['id'];
+require_once('config.inc.php');
+
+mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+ 
+ 
+ 				$sql    = "SELECT path FROM title WHERE id = '$id'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				$mp3Path = $Daten['path'];
  
 // Make sure the file exists
 if(!file_exists($mp3Path) || !is_file($mp3Path)) {
