@@ -12,9 +12,30 @@ if($_REQUEST ['order']=="login") {
 	$password = md5($password);
 	$ergebnis = mysql_query("SELECT * FROM user WHERE name='$name'"); 
 	$row = mysql_fetch_object($ergebnis);
-	if($row->password == $password)
+	if($row->password != $password)
 		{ 
-		echo "Login fehlgeschlagen";
+		?>
+<center>
+<div id="login">
+	<center><img src='os_logo_small.jpg'></center>
+</div>
+<fieldset style="width: 300px;">
+		<legend style="margin-right: 150px;">Login fehlgeschlagen</legend>
+			<table>
+			<tr>
+				<form action="login.php" method="post">
+				<td>Username</td><td><input type="text" name="name" /></td>
+				</tr><td>Passwort</td><td><input type="password" name="password" /></td>
+			<tr>
+				<input type="hidden" name="order" value="login"/>
+
+				<td><input type="submit" value="Anmelden" /></td>
+				</form>
+			</tr>
+			</table>
+	</fieldset>
+		<?php
+		die();
 		}
 	else
 		{
@@ -34,7 +55,7 @@ if($_REQUEST ['order']=="login") {
 </head>	
 <center>
 <div id="login">
-	<center><img src='os_logo.jpg' width='70%'></center>
+	<center><img src='os_logo_small.jpg'></center>
 </div>
 <fieldset style="width: 300px;">
 		<legend style="margin-right: 250px;">Login</legend>
