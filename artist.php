@@ -1,11 +1,10 @@
 <html>
+	<link id="favicon" rel="icon" type="image/bmp" href="os_icon2.bmp" /> 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 	<script type="text/javascript" src="jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
-	<script type="text/javascript" src="jquery.contextmenu.js"></script>
-
 	<script>
 	
 	
@@ -163,5 +162,4 @@ playeroben();
 	<div id="information" style="font-size:0.6em;"><center><img src='os_logo.jpg' width='70%'></center>
 	</div>
 </div>
-	<link id="favicon" rel="icon" type="image/png" href="os_logo.jpg" /> 
 
