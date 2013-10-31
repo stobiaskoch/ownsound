@@ -27,7 +27,15 @@ $(document).ready(function() {
 			}
 		});
 	}
-			
+	
+	function nocover(artid, artname){
+		document.getElementById("results").innerHTML="";
+		$.ajax({ url: "./nocover.php" , success: function(data){
+            $("#play").html(data);		
+			}
+		});
+	}
+	
 	function getdatanewcover(artid, artname){
 		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#gshd" , success: function(data){
             $("#play").html(data);
