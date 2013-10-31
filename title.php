@@ -37,6 +37,7 @@ $(document).ready(function()
             stats();
     }
     });
+			sleep(1000);
 			getdataalbum(albumID, artist, artistID, album);
 
 	}
