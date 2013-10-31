@@ -34,8 +34,10 @@ $(document).ready(function()
 		$.ajax({ url: "./google.php?order=save&url="+pic+"&album="+album+"&albumID="+albumID+"&artist="+artist+"&artistID="+artistID});
 		$.ajax({ url: "./title.php?albid="+albumID+"&art="+artist+"&artid="+artistID+"&albname="+album , success: function(data){
             $("#playalbum").html(data);
+            stats();
     }
     });
+			sleep(1000);
 			getdataalbum(albumID, artist, artistID, album);
 
 	}

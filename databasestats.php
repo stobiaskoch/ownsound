@@ -12,8 +12,14 @@ $album = mysql_num_rows($albumresult);
 $titleresult = mysql_query("SELECT * FROM title"); 
 $title = mysql_num_rows($titleresult);
 
+$nocoverresult = mysql_query("SELECT * FROM album WHERE imgdata=''"); 
+$nocover = mysql_num_rows($nocoverresult);
+
 echo "$artist Künstler<br>";
 echo "$album Alben<br>";
 echo "$title Tracks<br>";
+?>
+<a href='#ownsound' onclick="nocover()"><?php echo $nocover; ?> ohne Cover</a>
+<?php
 
 ?>
