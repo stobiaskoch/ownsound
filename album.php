@@ -9,14 +9,13 @@
     }
     });
 	var titleoben = decodeURIComponent(albname);
-	document.getElementById("title").innerHTML="<title>"+titleoben+"</title>";
+	var jetzt = titleoben.replace("+", " ");
+	var jetzt = jetzt.replace("+", " ");
+	var jetzt = jetzt.replace("+", " ");
+	var jetzt = jetzt.replace("+", " ");
+	document.getElementById("title").innerHTML="<title>"+jetzt+"</title>";
 	}
-			function getdatanoalbum(artid, albname){
-		$.ajax({ url: "./noalbum.php?artid="+artid+"&albname="+albname , success: function(data){
-            $("#playalbum").html(data);
-    }
-    });
-	}
+
 	</script>
 </head>	
 <?php
@@ -29,7 +28,14 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
 $albumcount = mysql_num_rows($albumcountsql);
 if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
-
+	if($albumcount==0) {
+		$albumcount = "Keine Alben gefunden";
+		$sql = "SELECT * FROM title WHERE artist='$artistid' ORDER BY path";
+	}
+	else
+	{
+		$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";
+	}
 ?>
 <div id='title'><title><?php echo $artname; ?></title></div>
 <?php
@@ -37,7 +43,8 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
-$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";
+
+
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
@@ -61,11 +68,20 @@ if ($count2==4) {
 
 }
 
-  ?>
+
+	if($albumcount!=0) {
+	?>
 	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
 	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
-  <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
-  <?php
+	<?php
+	}
+	else
+	{
+	?>
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
+	<?php
+	}
+
 if ($count2==3) {
 	$count2 = 0;
   echo "</tr>";
@@ -78,10 +94,5 @@ echo "</table><div>";
 
 
 mysqli_free_result( $db_erg );
-if($count=="" or $count=="0") { ?>
-<script language="JavaScript">
-getdatanoalbum('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>');
-</script>
-<?php
-}
+
 ?>
