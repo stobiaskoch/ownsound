@@ -73,7 +73,7 @@ $titlecount = mysql_num_rows($titleresult);
 
 
 mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
-for ($i = 1; $i <= 10; $i++) {
+for ($i = 1; $i <= 8; $i++) {
 $count = floatval($titlecount);
 $randid = rand(0, $count);
 $randid = round($randid);
@@ -95,7 +95,7 @@ $artistID = $zeile['artist'];
 				$Daten = mysql_fetch_assoc($query); 
 				$artist = $Daten['name'];
 				
-	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$randid."')");
+	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$i - $title', '".$randid."')");
 }
 
 }
