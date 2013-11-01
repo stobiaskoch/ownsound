@@ -145,7 +145,7 @@ playeroben();
 	</div>
 </div>
 
-<div id="searchartist"">Künstlersuche
+<div id="searchartist"">Künstlersuche 
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
 	</form>
