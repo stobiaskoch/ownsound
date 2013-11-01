@@ -1,5 +1,5 @@
 <html>
-	<link id="favicon" rel="icon" type="image/bmp" href="os_icon2.bmp" /> 
+	<link id="favicon" rel="icon" type="image/png" href="os_icon2.png" /> 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
