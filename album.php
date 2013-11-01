@@ -114,7 +114,7 @@ $trenner2 = 0;
 for ($i = 1; $i <= $trenner; $i++) {
 
 ?>
-<a href='#ownsound' onclick="getdatabig('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
+<a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
 $trenner2 = $i * 15;
