@@ -51,7 +51,6 @@ $(document).ready(function() {
 	}
 	
 	function playeroben(){
-		sleep(3000);
 		$.ajax({ url: "./player.php" , success: function(data){
 			$("#playeroben").html(data);
 			}
@@ -66,7 +65,14 @@ $(document).ready(function() {
 			}
 		  }
 	}
-
+			function addalbum(order, albumid, artistid){
+		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
+				sleep(500);
+		$.ajax({ url: "./player.php" , success: function(data){
+            $("#playeroben").html(data);
+    }
+    });
+	}
 </script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
@@ -105,7 +111,7 @@ $sql = "SELECT * FROM artist WHERE name LIKE '".$alphazaheln."%'";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungï¿½ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
 
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -131,13 +137,43 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 
 echo "</table></div><br>";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 foreach($alphabet as $alpha) {
 $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
 
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungï¿½ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
 echo "<div id='artistlist'>";
 echo "<h3><span id='$alpha'></span></h3>$alpha :";
@@ -190,7 +226,7 @@ playeroben();
 	</div>
 </div>
 
-<div id="searchartist"">Kï¿½nstlersuche
+<div id="searchartist"">Künstlersuche
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
 	</form>
@@ -200,6 +236,7 @@ playeroben();
 	
 	
 <div id="playerdiv">
+<a href='#dhfig' onclick="addalbum('random', '0', '0')"><img src='shuffle.png' width="5%"></a>
 	<div id="playeroben" style="font-size:0.6em;">
 	</div>
 </div>
