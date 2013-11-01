@@ -3,26 +3,26 @@ require_once('config.inc.php');
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $albumid = $_REQUEST['albid'];
 $albname = $_REQUEST['albname'];
-echo "<title>".$albname."</title>";
+echo "<title>".urldecode($albname)."</title>";
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+	<script src="jquery.jeditable.js"></script> 
 	<script src="jquery.form.js"></script> 
 	
 	
 	<script>
-$(document).ready(function()
-{
-	$('#upload').ajaxForm(function() { 
-		var id = "get.php?picid=<?php echo $albumid; ?>&size=small";
-		document.getElementById("covertest").innerHTML="<span class='crest' style='background: url("+id+") no-repeat 0 0;'></span>";
-		document.upload.reset();
-    }); 
+$(document).ready(function() {
 
-})
-
+   $('.edit').editable('jeditable.php', {
+       indicator : "Saving...",  
+       submit   : 'OK'                  
+	});  
+ });
+ 
+ 
 		function google(artist, albumname, albumid, artistid){
 		$.ajax({ url: "./google.php?order=search&artist="+artist+"&album="+albumname+"&albumID="+albumid+"&artistID="+artistid , success: function(data){
             $("#content").html(data);
@@ -32,18 +32,20 @@ $(document).ready(function()
 	
 				function googledownload(pic, album, albumID, artist, artistID){
 		$.ajax({ url: "./google.php?order=save&url="+pic+"&album="+album+"&albumID="+albumID+"&artist="+artist+"&artistID="+artistID});
+		sleep(2500);
 		$.ajax({ url: "./title.php?albid="+albumID+"&art="+artist+"&artid="+artistID+"&albname="+album , success: function(data){
             $("#playalbum").html(data);
             stats();
     }
     });
-			sleep(1000);
+			
 			getdataalbum(albumID, artist, artistID, album);
 
 	}
 	
 			function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
+				sleep(500);
 		$.ajax({ url: "./player.php" , success: function(data){
             $("#playeroben").html(data);
     }
@@ -60,12 +62,12 @@ $artistid = $_REQUEST['artid'];
 
 $artname = $_REQUEST['art'];
 
-$sql = "SELECT * FROM title WHERE album='$albumid' ORDER BY path";
+$sql = "SELECT * FROM title WHERE album='$albumid' ORDER BY track";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('Ung�ltige Abfrage: ' . mysqli_error());
 }
     ?>
  <br>
@@ -103,8 +105,8 @@ $titlecheck2 = mb_strlen($titlecheck);
 	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>')">[<?php echo $artname; ?>]</a>
   
   <?php
-
-echo "<a style='$titlecheck3'> - $albname</a></h1><br>";
+echo "<a style='$titlecheck3' class='edit' id=".$albumid.">$albname</a></h1><br>";
+//echo "<a style='$titlecheck3'> - $albname</a></h1><br>";
 
 echo '<table border="0">';
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -119,16 +121,17 @@ if($count<="9") {$count="0$count";}
 </tr>
 
 <?php
+
 }
 ?>
 		</tr>
 	<td></td>
-<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo urlencode($artname); ?>')">Album hinzufügen</a></td><tr>
+<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo urlencode($artname); ?>')">Album hinzuf�gen</a></td><tr>
 </table>
 
 
-<div id="covertest">
-	<a style="position: absolute; top: 50px; right: 18px;" href='#dhfig' onclick="google('<?php echo urlencode($artname); ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
+<div id="covertitle">
+	<a href='#dhfig' onclick="google('<?php echo urlencode($artname); ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
 </div>
 
 
@@ -138,6 +141,7 @@ if($count<="9") {$count="0$count";}
 
 </div>
 <?php
+ende:
 mysqli_free_result( $db_erg );
 
 

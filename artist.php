@@ -27,6 +27,7 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
 	function nocover(artid, artname){
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./nocover.php" , success: function(data){
@@ -50,8 +51,9 @@ $(document).ready(function() {
 	}
 	
 	function playeroben(){
+		sleep(3000);
 		$.ajax({ url: "./player.php" , success: function(data){
-            $("#playeroben").html(data);
+			$("#playeroben").html(data);
 			}
 		});
 	}
@@ -77,7 +79,9 @@ die();
 }
 require_once('config.inc.php');
 $alphabet = range('A', 'Z');
+$zahlen = range('0', '9');
 ?><div id="navigation"><?php
+ echo "<a name='kapitel1' href='#numbers'># </a>";
 foreach($alphabet as $alpha) {
 
  echo "<a name='kapitel1' href='#".$alpha."'> $alpha </a>";
@@ -86,40 +90,104 @@ echo "</div><br><br><br><br>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
+
+
+
+
+
+
+echo "<div id='artistlist'>";
+echo "<h3><span id='numbers'></span></h3># :";
+echo "<table border='0'>";
+foreach($zahlen as $alphazaheln) {
+$sql = "SELECT * FROM artist WHERE name LIKE '".$alphazaheln."%'";
+
+$db_erg = mysqli_query( $db_link, $sql );
+if ( ! $db_erg )
+{
+  die('Ungültige Abfrage: ' . mysqli_error());
+}
+
+while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
+{
+	$checkartistid = $zeile['id'];
+	mysql_connect(DBHOST, DBUSER,DBPASS);
+	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+	$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
+	$trackcount = mysql_num_rows($tracksql);
+	  if($trackcount>=1) {
+	  echo "<tr>";
+	  ?>
+		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+	  <?php
+		
+	  echo "</tr>";
+	}
+	 
+}
+
+
+ }
+
+echo "</table></div><br>";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 foreach($alphabet as $alpha) {
 $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
 
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('UngÃƒÆ’Ã‚Â¼ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
-
- ?>
- <div id="artistlist">
-<?php
-
-
- echo "<h3><span id='$alpha'></span></h3>$alpha :";
+echo "<div id='artistlist'>";
+echo "<h3><span id='$alpha'></span></h3>$alpha :";
 echo "<table border='0'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
-
-
-$checkartistid = $zeile['id'];
-mysql_connect(DBHOST, DBUSER,DBPASS);
-mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
-$trackcount = mysql_num_rows($tracksql);
-  if($trackcount>=1) {
-  echo "<tr>";
-  ?>
-	<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
-  <?php
-	
-  echo "</tr>";
-}
- 
+	$checkartistid = $zeile['id'];
+	mysql_connect(DBHOST, DBUSER,DBPASS);
+	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+	$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
+	$trackcount = mysql_num_rows($tracksql);
+	  if($trackcount>=1) {
+	  echo "<tr>";
+	  ?>
+		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+	  <?php
+		
+	  echo "</tr>";
+	}
+	 
 }
 echo "</table></div><br>";
 
@@ -152,7 +220,7 @@ playeroben();
 	</div>
 </div>
 
-<div id="searchartist"">KÃ¼nstlersuche
+<div id="searchartist"">Künstlersuche
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
 	</form>
