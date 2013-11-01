@@ -17,17 +17,23 @@ $album = $_REQUEST['album'];
 	
 	<script>
 	
-	var id = "artist.php?order=newcover&coverid=<?php echo $artistID; ?>&covername=<?php echo $artist; ?>";
-	
+
+
+
+
 $(document).ready(function()
 {
 	$('#upload').ajaxForm(function() { 
-		window.document.location.href = id;
+		$.ajax({ url: "./title.php?albid=<?php echo $albumID; ?>&art=<?php echo urlencode($artist); ?>&artid=<?php echo $artistID; ?>&albname=<?php echo urlencode($album); ?>" , success: function(data){
+            $("#playalbum").html(data);
+            stats();
+    }
+    });
+			sleep(1000);
+			getdataalbum(albumID, artist, artistID, album);
     }); 
 
 })
-
-
 	</script>
 
 </head>	

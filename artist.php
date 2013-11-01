@@ -107,7 +107,9 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
   echo "<tr>";
   ?>
 
-	<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo addslashes($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+  
+  
+	<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
   <?php
   echo "</tr>";
  
