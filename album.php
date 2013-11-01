@@ -16,10 +16,19 @@
 	document.getElementById("title").innerHTML="<title>"+jetzt+"</title>";
 	}
 
+		function getdatabig(artid, artname, limit){
+		document.getElementById("results").innerHTML="";
+		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
+            $("#play").html(data);		
+			}
+		});
+	}
 	</script>
 </head>	
 <?php
 require_once('config.inc.php');
+$limit = $_REQUEST['limit'];
+if($limit=="") {$limit=0;}
 $artistid = $_REQUEST['artid'];
 $artname= $_REQUEST['artname'];
 
@@ -34,7 +43,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	}
 	else
 	{
-		$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name";
+		$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name LIMIT ".$limit.", 12";
 	}
 ?>
 <div id='title'><title><?php echo $artname; ?></title></div>
@@ -54,9 +63,14 @@ if ( ! $db_erg )
 echo "<div id='playalbum'>";
 
   ?>
- <br><div id="album"">
+ <br><div id="album">
 <?php
 echo "<div><h1>$artname [$albumcount]</h1></div>";
+if($albumcount>=15) {
+$trenner = $albumcount / 15;
+$trenner = round($trenner, 0);
+$trenner = $trenner +1;
+}
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
@@ -89,10 +103,23 @@ if ($count2==3) {
 
 }
 }
-echo "</table><div>";
 
 
+?>
+</table><div>
 
+<?php
+if($albumcount>=15) {
+$trenner2 = 0;
+for ($i = 1; $i <= $trenner; $i++) {
+
+?>
+<a href='#ownsound' onclick="getdatabig('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
+
+<?php
+$trenner2 = $i * 15;
+}
+}
 mysqli_free_result( $db_erg );
 
 ?>
