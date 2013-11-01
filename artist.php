@@ -92,30 +92,37 @@ $sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
+  die('UngÃƒÂ¼ltige Abfrage: ' . mysqli_error());
 }
 
  ?>
  <div id="artistlist">
 <?php
+
+
  echo "<h3><span id='$alpha'></span></h3>$alpha :";
 echo "<table border='0'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 
 
+$checkartistid = $zeile['id'];
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
+$trackcount = mysql_num_rows($tracksql);
+  if($trackcount>=1) {
   echo "<tr>";
   ?>
-
-  
-  
 	<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
   <?php
+	
   echo "</tr>";
+}
  
 }
 echo "</table></div><br>";
-  
+
  }
 
 
@@ -145,7 +152,7 @@ playeroben();
 	</div>
 </div>
 
-<div id="searchartist"">Künstlersuche 
+<div id="searchartist"">Künstlersuche
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
 	</form>
@@ -161,7 +168,7 @@ playeroben();
 
 
 <div id="infooben">
-	<div id="information" style="font-size:0.6em;"><center><img src='os_logo.jpg' width='70%'></center>
+	<div id="information" style="font-size:0.6em;"><center><img src='os_logo_smaller.JPG'></center>
 	</div>
 </div>
 
