@@ -5,8 +5,10 @@ if($_REQUEST ['order']=="logout") {
 }
 
 if($_COOKIE['loggedIn']) {
+	// nur ein test
+	// 	mail('s.t.koch77@gmail.com', 'Dein OwnSound-Passwort', 'Vergessen, wa?');
 	echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
-		exit;
+	exit;
 }
 
 if($_REQUEST ['order']=="login") {
@@ -32,13 +34,20 @@ if($_REQUEST ['order']=="login") {
 
 }	
 ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//DE" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<style type="text/css" title="currentStyle">
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
+	<script type="text/javascript" src="./js/ownsound.js"></script>
+
+<style type="text/css" title="currentStyle">
 	@import "./test.css";
 </style>
-</head>	
+</head>		
 <center>
 <div id="login">
 	<center><img src='./img/os_logo_small.jpg' width='70%'></center>
@@ -57,4 +66,5 @@ if($_REQUEST ['order']=="login") {
 				</form>
 			</tr>
 			</table>
+			<a style="font-size: 9px;" href="passreset.php">Passwort vergessen?</a>
 	</fieldset>

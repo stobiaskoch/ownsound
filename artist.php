@@ -107,7 +107,7 @@ echo "</table></div><br>";
 
 mysqli_free_result( $db_erg );
 ?>
-<div id="play" style="position:fixed; bottom: 8px; left:480px; overflow : auto; "></div></div>
+<div id="play" style="position:fixed; bottom: 8px; left:480px; overflow : auto; "></div>
 
 <script language="JavaScript">
 stats();
@@ -120,7 +120,7 @@ playeroben();
 	</div>
 </div>
 
-<div id="searchartist"">Künstlersuche
+<div id="searchartist">Künstlersuche
 	<form id="search2" name="search2" action="search.php">
 		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 	</form>
