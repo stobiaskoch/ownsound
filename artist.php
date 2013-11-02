@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//DE" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<link id="favicon" rel="icon" type="image/png" href="os_icon2.png" /> 
+	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
-	<script type="text/javascript" src="jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="jquery-ui-1.10.3.custom.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
 	<script>
 	
 	
@@ -20,9 +21,9 @@ $(document).ready(function() {
 	
 	
 	
-	function getdata(artid, artname){
+	function getdata(artid){
 		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname , success: function(data){
+		$.ajax({ url: "./album.php?artid="+artid , success: function(data){
             $("#play").html(data);		
 			}
 		});
@@ -84,6 +85,8 @@ echo "<meta http-equiv='refresh' content='0; URL=login.php'>";
 die();
 }
 require_once('config.inc.php');
+include('./js/functions.php');
+
 $alphabet = range('A', 'Z');
 $zahlen = range('0', '9');
 ?><div id="navigation"><?php
@@ -95,12 +98,6 @@ foreach($alphabet as $alpha) {
 echo "</div><br><br><br><br>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-
-
-
-
-
-
 
 echo "<div id='artistlist'>";
 echo "<h3><span id='numbers'></span></h3># :";
@@ -124,7 +121,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 	  if($trackcount>=1) {
 	  echo "<tr>";
 	  ?>
-		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php getartist($checkartistid); ?></a></td>
 	  <?php
 		
 	  echo "</tr>";
@@ -136,34 +133,6 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
  }
 
 echo "</table></div><br>";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,7 +157,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 	  if($trackcount>=1) {
 	  echo "<tr>";
 	  ?>
-		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+		<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php getartist($checkartistid); ?></a></td>
 	  <?php
 		
 	  echo "</tr>";
@@ -204,17 +173,6 @@ mysqli_free_result( $db_erg );
 ?>
 <div id="play" style="position:fixed; bottom: 8px; left:480px; overflow : auto; "></div></div>
 
-<?php
-if($_REQUEST['order']=="newcover") { 
-$coverid = $_REQUEST['coverid'];
-$covername = $_REQUEST['covername'];
-
-?>
-<script language="JavaScript">
-	getdatanewcover('<?php echo $coverid; ?>', '<?php echo $covername ?>');
-	playeroben();
-</script>
-<?php } ?>
 <script language="JavaScript">
 stats();
 playeroben();
@@ -228,7 +186,7 @@ playeroben();
 
 <div id="searchartist"">Künstlersuche
 	<form id="search2" name="search2" action="search.php">
-		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(this.value)"/>
+		<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 	</form>
 	<div id="results" style="z-index:2;" >
 	</div>
@@ -236,14 +194,14 @@ playeroben();
 	
 	
 <div id="playerdiv">
-<a href='#dhfig' onclick="addalbum('random', '0', '0')"><img src='shuffle.png' width="5%"></a>
+<a href='#dhfig' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="5%"></a>
 	<div id="playeroben" style="font-size:0.6em;">
 	</div>
 </div>
 
 
 <div id="infooben">
-	<div id="information" style="font-size:0.6em;"><center><img src='os_logo_smaller.JPG'></center>
+	<div id="information" style="font-size:0.6em;"><center><img src='./img/os_logo_smaller.JPG'></center>
 	</div>
 </div>
-
+	<title>OwnSound</title>

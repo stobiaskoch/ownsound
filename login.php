@@ -8,8 +8,7 @@ if($_REQUEST ['order']=="login") {
 	mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 	$name = $_POST["name"]; 
-	$password = $_POST["password"]; 
-	$password = md5($password);
+	$password = md5($_POST["password"]);
 	$ergebnis = mysql_query("SELECT * FROM user WHERE name='$name'"); 
 	$row = mysql_fetch_object($ergebnis);
 	if($row->password != $password)
@@ -36,15 +35,15 @@ if($_REQUEST ['order']=="login") {
 </head>	
 <center>
 <div id="login">
-	<center><img src='os_logo.jpg' width='70%'></center>
+	<center><img src='./img/os_logo_small.jpg' width='70%'></center>
 </div>
 <fieldset style="width: 300px;">
-		<legend style="margin-right: 250px;">Login</legend>
+		<legend style="margin-right: 240px;">Login</legend>
 			<table>
 			<tr>
 				<form action="login.php" method="post">
-				<td>Username</td><td><input type="text" name="name" /></td>
-				</tr><td>Passwort</td><td><input type="password" name="password" /></td>
+				<td>Username</td><td><input type="text" name="name" size="20"/></td>
+				</tr><td>Passwort</td><td><input type="password" name="password" size="20"/></td>
 			<tr>
 				<input type="hidden" name="order" value="login"/>
 

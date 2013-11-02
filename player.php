@@ -14,8 +14,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<link href="./skin/pink.flag/jplayer.pink.flag.css" rel="stylesheet" type="text/css" /> 
-	<script src="./jquery-1.9.1.js"></script>	
-	<script src="./jquery-ui.js"></script>
+	<script src="./js/jquery-1.9.1.js"></script>	
+	<script src="./js/jquery-ui.js"></script>
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
 

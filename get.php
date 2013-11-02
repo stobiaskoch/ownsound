@@ -24,7 +24,7 @@ if($data!="") {echo $data;}
 else 
 {
 
-echo readfile('no_cover.jpg');
+echo readfile('./img/no_cover.jpg');
 
 }
 

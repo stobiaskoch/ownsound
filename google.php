@@ -12,7 +12,7 @@ $album = $_REQUEST['album'];
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
 
-	<script src="jquery.form.js"></script> 
+	<script src="./js/jquery.form.js"></script> 
 	
 	
 	<script>
@@ -24,13 +24,13 @@ $album = $_REQUEST['album'];
 $(document).ready(function()
 {
 	$('#upload').ajaxForm(function() { 
-		$.ajax({ url: "./title.php?albid=<?php echo $albumID; ?>&art=<?php echo urlencode($artist); ?>&artid=<?php echo $artistID; ?>&albname=<?php echo urlencode($album); ?>" , success: function(data){
+			$.ajax({ url: "./title.php?albumID=<?php echo $albumID; ?>&artistID=<?php echo $artistID; ?>" , success: function(data){
             $("#playalbum").html(data);
-            stats();
     }
     });
 			sleep(1000);
-			getdataalbum(albumID, artist, artistID, album);
+			stats();
+			getdataalbum(albumID, artistID);
     }); 
 
 })
@@ -44,32 +44,39 @@ $(document).ready(function()
 if($_REQUEST['order']=="search") {
 
 $albumsearch = "$artist $album";
+$albumsearch = urlencode($albumsearch);
 $albumsearch = str_replace(" ", "+", $albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch;
 $json = file_get_contents($jsrc);
 sleep(1);
 $jset = json_decode($json, true);
-
+echo "Suche nach: ".urldecode($albumsearch)."<br>";
+echo '<table border="1">';
+echo "<tr>";
 for ($i = 0; $i <= 3; $i++) {
+
 $pic = $jset["responseData"]["results"][$i]["url"];
 $picwidth = $jset["responseData"]["results"][$i]["width"];
 $picheight = $jset["responseData"]["results"][$i]["height"];
  $pictitle = $jset["responseData"]["results"][$i]["contentNoFormatting"];
-?><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo urlencode($album); ?>', '<?php echo $albumID; ?>', '<?php echo urlencode($artist); ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
-<?php
 
-
-
-
-}
+echo "<th>$picwidth x $picheight</th>";
 ?>
+<td><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='140' height='140' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
+</td>
+
+<?php
+}
+
+?>
+</tr></table>
 <form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data" >
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
 <input type="submit" value="Ändern">
 </form><br>
-	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo urlencode($artist); ?>', '<?php echo $artistID; ?>', '<?php echo urlencode($album); ?>')">Zurück</a>
+	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">Zurück</a>
 <?php
 }
 

@@ -1,10 +1,10 @@
 <?php
 require_once('config.inc.php');
-$dblink = $_COOKIE['loggedIn'];
+$user = $_COOKIE['loggedIn'];
 //$playlist = array();
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
-$sql = "SELECT * FROM ".$dblink."_playlist";
+$sql = "SELECT * FROM ".$user."_playlist";
 
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )

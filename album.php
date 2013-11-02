@@ -3,17 +3,11 @@
 <head>
 
 	<script>
-		function getdataalbum(albid, artname, artid, albname){
-		$.ajax({ url: "./title.php?albid="+albid+"&art="+artname+"&artid="+artid+"&albname="+albname , success: function(data){
+		function getdataalbum(albumID, artistID){
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
             $("#playalbum").html(data);
     }
     });
-	var titleoben = decodeURIComponent(albname);
-	var jetzt = titleoben.replace("+", " ");
-	var jetzt = jetzt.replace("+", " ");
-	var jetzt = jetzt.replace("+", " ");
-	var jetzt = jetzt.replace("+", " ");
-	document.getElementById("title").innerHTML="<title>"+jetzt+"</title>";
 	}
 
 		function getdatabig(artid, artname, limit){
@@ -27,13 +21,16 @@
 </head>	
 <?php
 require_once('config.inc.php');
+include('./js/functions.php');
 $limit = $_REQUEST['limit'];
 if($limit=="") {$limit=0;}
+
 $artistid = $_REQUEST['artid'];
-$artname= $_REQUEST['artname'];
+
 
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+
 $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
 $albumcount = mysql_num_rows($albumcountsql);
 if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
@@ -46,7 +43,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 		$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name LIMIT ".$limit.", 12";
 	}
 ?>
-<div id='title'><title><?php echo $artname; ?></title></div>
+<div id='title'><title><?php getartist($artistid); ?></title></div>
 <?php
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
@@ -64,8 +61,9 @@ echo "<div id='playalbum'>";
 
   ?>
  <br><div id="album">
+
+<div><h1><?php getartist($artistid); echo " [$albumcount]" ?></h1></div>
 <?php
-echo "<div><h1>$artname [$albumcount]</h1></div>";
 if($albumcount>=15) {
 $trenner = $albumcount / 15;
 $trenner = round($trenner, 0);
@@ -74,6 +72,7 @@ $trenner = $trenner +1;
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
+$albumID = $zeile['id'];
 $count++;
 $count2++;
 if ($count2==4) {
@@ -85,14 +84,14 @@ if ($count2==4) {
 
 	if($albumcount!=0) {
 	?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>', '<?php echo urlencode($zeile['name']); ?>')"><?php echo $zeile['name']; ?></a></td>
+	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><?php getalbum($albumID); ?></a></td>
 	<?php
 	}
 	else
 	{
 	?>
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php getalbum($albumID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
 	<?php
 	}
 

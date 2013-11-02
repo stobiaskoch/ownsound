@@ -1,16 +1,21 @@
 <?php
 require_once('config.inc.php');
+include('./js/functions.php');
+
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-$albumid = $_REQUEST['albid'];
-$albname = $_REQUEST['albname'];
-echo "<title>".urldecode($albname)."</title>";
+
+$albumID = $_REQUEST['albumID'];
+$artistID = $_REQUEST['artistID'];
+
 ?>
+<title><?php getalbum($albumID); ?></title>
+
 <html>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-	<script src="jquery.jeditable.js"></script> 
-	<script src="jquery.form.js"></script> 
+	<script src="./js/jquery.jeditable.js"></script> 
+	<script src="./js/jquery.form.js"></script> 
 	
 	
 	<script>
@@ -30,21 +35,20 @@ $(document).ready(function() {
     });
 	}
 	
-				function googledownload(pic, album, albumID, artist, artistID){
-		$.ajax({ url: "./google.php?order=save&url="+pic+"&album="+album+"&albumID="+albumID+"&artist="+artist+"&artistID="+artistID});
+				function googledownload(pic, albumID, artistID){
+		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
 		sleep(2500);
-		$.ajax({ url: "./title.php?albid="+albumID+"&art="+artist+"&artid="+artistID+"&albname="+album , success: function(data){
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
             $("#playalbum").html(data);
             stats();
     }
     });
 			
-			getdataalbum(albumID, artist, artistID, album);
-
+			getdataalbum(albumID, artistID);
 	}
 	
-			function addalbum(order, albumid, artistid){
-		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
+			function addalbum(order, albumID, artistID){
+		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumID+"&artistID="+artistID});
 				sleep(500);
 		$.ajax({ url: "./player.php" , success: function(data){
             $("#playeroben").html(data);
@@ -58,11 +62,7 @@ $(document).ready(function() {
 </head>	
 <?php
 
-$artistid = $_REQUEST['artid'];
-
-$artname = $_REQUEST['art'];
-
-$sql = "SELECT * FROM title WHERE album='$albumid' ORDER BY track";
+$sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY track";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
@@ -71,24 +71,11 @@ if ( ! $db_erg )
 }
     ?>
  <br>
-<div id="content" style="
-padding-left: 40px;
-width: 580px;
-min-height: 200px;
-left: 320px;
-top: 262px;
-display:inline-block;
--webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:20px;
-margin:0 0 20px 12px;
-position:fixed;
- overflow : auto; ">
+<div id="content">
 
  <?php
 
-$titlecheck = "$artname - $albname";
+$titlecheck = "$artist - $album";
 $titlecheck2 = mb_strlen($titlecheck);
 
  if($titlecheck2>="10") {
@@ -102,22 +89,23 @@ $titlecheck2 = mb_strlen($titlecheck);
  }
  ?>
 
-	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $artistid; ?>')">[<?php echo $artname; ?>]</a>
+	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php getartist($artistID); ?>]</a>
   
-  <?php
-echo "<a style='$titlecheck3' class='edit' id=".$albumid.">$albname</a></h1><br>";
-//echo "<a style='$titlecheck3'> - $albname</a></h1><br>";
 
-echo '<table border="0">';
+<a style='<?php echo $titlecheck3; ?>' class='edit' id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
+<table border="0">
+
+<?php
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $path=$zeile['path'];
+$titleID = $zeile['id'];
 $count++;
 if($count<="9") {$count="0$count";}
   echo "<tr>";
   	echo "<td>". $count . " - </td>";
 ?> 
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $zeile['id']; ?>', '<?php echo urlencode($artname); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
 </tr>
 
 <?php
@@ -126,12 +114,12 @@ if($count<="9") {$count="0$count";}
 ?>
 		</tr>
 	<td></td>
-<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumid; ?>', '<?php echo urlencode($artname); ?>')">Album hinzufügen</a></td><tr>
+<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php getartist($artistID); ?>')">Album hinzufügen</a></td><tr>
 </table>
 
 
 <div id="covertitle">
-	<a href='#dhfig' onclick="google('<?php echo urlencode($artname); ?>', '<?php echo urlencode($albname); ?>', '<?php echo $albumid; ?>', '<?php echo $artistid; ?>')"><img src='./get.php?picid=<?php echo $albumid; ?>&size=big' width="140" height="140" title="Cover Ã¤ndern"></a>
+	<a href='#dhfig' onclick="google('<?php getartist($artistID); ?>', '<?php getalbum($albumID); ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
 </div>
 
 
