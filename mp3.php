@@ -19,15 +19,17 @@ if(!file_exists($mp3Path) || !is_file($mp3Path)) {
  
 // Set the appropriate content-type
 // and provide the content-length.
-$mime_type = "audio/mpeg"; 
 $fsize=filesize($mp3Path);
 $shortlen=$fsize-1;
-header('Content-type: '.$mime_type);
+header('Content-type: audio/mpeg');
 header('Content-length: ' .$fsize);
-header('Cache-Control: no-cache');
+header("Expires: -1");
+header("Cache-Control: no-store, no-cache, must-revalidate");
+header("Cache-Control: post-check=0, pre-check=0", false);
 header( 'Content-Range: bytes 0-'.$shortlen.'/'.$fsize); 
 header( 'Accept-Ranges: bytes');
  
 // Print the mp3 data
 readfile($mp3Path);
 ?>
+
