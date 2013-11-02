@@ -75,32 +75,36 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 $albumID = $zeile['id'];
 $count++;
 $count2++;
-if ($count2==4) {
+
+
+
+	if($albumcount!=0) {
+	if ($count2==4) {
   echo "<tr>";
 } else {
 
 }
-
-
-	if($albumcount!=0) {
 	?>
 	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
 	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><?php getalbum($albumID); ?></a></td>
 	<?php
-	}
-	else
-	{
-	?>
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php getalbum($albumID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
-	<?php
-	}
-
-if ($count2==3) {
+	if ($count2==3) {
 	$count2 = 0;
   echo "</tr>";
 } else {
 
 }
+	}
+	else
+	{
+	?>
+	<tr>
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
+	</tr>
+	<?php
+	}
+
+
 }
 
 

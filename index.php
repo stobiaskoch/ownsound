@@ -1,8 +1,14 @@
 <?php
+if($_REQUEST ['order']=="logout") {
+	$name = $_COOKIE['loggedIn']; 
+	setcookie ("loggedIn", $name, time() - 3600);
+}
+
 if($_COOKIE['loggedIn']) {
 	echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
 		exit;
 }
+
 if($_REQUEST ['order']=="login") {
 	require_once('config.inc.php');
 	mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
@@ -14,7 +20,7 @@ if($_REQUEST ['order']=="login") {
 	if($row->password != $password)
 		{ 
 		echo "<center>Login fehlgeschlagen</center>";
-		echo "<meta http-equiv='refresh' content='3; URL=login.php'>";
+		echo "<meta http-equiv='refresh' content='3; URL=index.php'>";
 		die();
 		}
 	else
@@ -41,7 +47,7 @@ if($_REQUEST ['order']=="login") {
 		<legend style="margin-right: 240px;">Login</legend>
 			<table>
 			<tr>
-				<form action="login.php" method="post">
+				<form action="index.php" method="post">
 				<td>Username</td><td><input type="text" name="name" size="20"/></td>
 				</tr><td>Passwort</td><td><input type="password" name="password" size="20"/></td>
 			<tr>

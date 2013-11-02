@@ -6,82 +6,15 @@
 
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
-	<script>
-	
-	
-$(document).ready(function() {
-	$('#search').keyup(function() {
-		if($(this).val().length >= 1) {
-			$.get("rpc.php", {search: $(this).val()}, function(data) {
-				$("#results").html(data);
-			});
-		}
-	});
-});
-	
-	
-	
-	function getdata(artid){
-		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid , success: function(data){
-            $("#play").html(data);		
-			}
-		});
-	}
-	
-	function nocover(artid, artname){
-		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./nocover.php" , success: function(data){
-            $("#play").html(data);		
-			}
-		});
-	}
-	
-	function getdatanewcover(artid, artname){
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#gshd" , success: function(data){
-            $("#play").html(data);
-			}
-		});
-	}
-	
-	function stats(){
-		$.ajax({ url: "./databasestats.php" , success: function(data){
-            $("#stats").html(data);
-			}
-		});
-	}
-	
-	function playeroben(){
-		$.ajax({ url: "./player.php" , success: function(data){
-			$("#playeroben").html(data);
-			}
-		});
-	}
+	<script type="text/javascript" src="./js/ownsound.js"></script>
 
-	function sleep(milliseconds) {
-		  var start = new Date().getTime();
-		  for (var i = 0; i < 1e7; i++) {
-			if ((new Date().getTime() - start) > milliseconds){
-			  break;
-			}
-		  }
-	}
-			function addalbum(order, albumid, artistid){
-		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-				sleep(500);
-		$.ajax({ url: "./player.php" , success: function(data){
-            $("#playeroben").html(data);
-    }
-    });
-	}
-</script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
 </style>
 </head>	
 <?php
 if(!$_COOKIE['loggedIn']) {
-echo "<meta http-equiv='refresh' content='0; URL=login.php'>";
+echo "<meta http-equiv='refresh' content='0; URL=index.php'>";
 die();
 }
 require_once('config.inc.php');
@@ -95,7 +28,10 @@ foreach($alphabet as $alpha) {
 
  echo "<a name='kapitel1' href='#".$alpha."'> $alpha </a>";
 } 
-echo "</div><br><br><br><br>";
+?>
+ | <a href='#ownsound' onclick="settings()"> Einstellungen </a> | <a href='index.php?order=logout'>Logout</a>
+ <?php
+echo "</div><br>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
@@ -201,7 +137,7 @@ playeroben();
 
 
 <div id="infooben">
-	<div id="information" style="font-size:0.6em;"><center><img src='./img/os_logo_smaller.JPG'></center>
+	<div id="information"<center><img src='./img/os_logo_smaller.JPG'></center>
 	</div>
 </div>
 	<title>OwnSound</title>
