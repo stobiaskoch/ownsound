@@ -31,12 +31,12 @@ foreach($alphabet as $alpha) {
 ?>
  | <a href='#ownsound' onclick="settings()"> Einstellungen </a> | <a href='index.php?order=logout'>Logout</a>
  <?php
-echo "</div><br>";
+echo "</div>";
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 echo "<div id='artistlist'>";
-echo "<h3><span id='numbers'></span></h3># :";
+echo "<a id='numbers'></a># :";
 echo "<table border='0'>";
 foreach($zahlen as $alphazaheln) {
 $sql = "SELECT * FROM artist WHERE name LIKE '".$alphazaheln."%'";
@@ -80,8 +80,8 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-echo "<div id='artistlist'>";
-echo "<h3><span id='$alpha'></span></h3>$alpha :";
+echo "<div id='artistlist' style='position:relative;'>";
+echo "<a id='$alpha' style='position:absolute; top:-8px;visibility: hidden;'></a>$alpha :";
 echo "<table border='0'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
@@ -137,7 +137,7 @@ playeroben();
 
 
 <div id="infooben">
-	<div id="information"<center><img src='./img/os_logo_smaller.JPG'></center>
+	<div id="information"><center><img src='./img/os_logo_smaller.JPG'></center>
 	</div>
 </div>
 	<title>OwnSound</title>
