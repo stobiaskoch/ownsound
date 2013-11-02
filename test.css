@@ -11,11 +11,6 @@ a:active { color:black; text-decoration:none; }
   src: local('Awesome-Font'), local('Awesome-Font-Regular'), url(./js/d-QWLnp4didxos_6urzFtg.woff) format('woff');
 }
 
-h3{ position:relative;visibility: hidden; }
-h3 span{ position:absolute; top:-60px;visibility: hidden;}
-
-a.#navigation{ position:fixed; top:-60px;visibility: hidden;}
-
  p {
 font-size: 20px;
 margin:0 0 20px 12px;
