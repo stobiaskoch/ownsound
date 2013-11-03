@@ -105,7 +105,7 @@ if($count<="9") {$count="0$count";}
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
 -->
-	<td width='300px'><div class="target<?php echo $count; ?>"><?php gettitle($titleID); ?></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
