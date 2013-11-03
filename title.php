@@ -8,16 +8,13 @@ $albumID = $_REQUEST['albumID'];
 $artistID = $_REQUEST['artistID'];
 
 ?>
-<title><?php getalbum($albumID); ?></title>
-
 <html>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
 	<script src="./js/jquery.jeditable.js"></script> 
+	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.form.js"></script> 
-	
-	
 	<script>
 $(document).ready(function() {
 
@@ -105,8 +102,50 @@ if($count<="9") {$count="0$count";}
   echo "<tr>";
   	echo "<td>". $count . " - </td>";
 ?> 
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></td> 
-</tr>
+	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
+	
+	
+	
+	<script type="text/javascript">
+      $(document).ready(function(){
+
+        $('.target<?php echo $count; ?>').contextMenu('context-menu-1', {
+            'Abspielen': {
+                click: function(element) {  // element is the jquery obj clicked on when context menu launched
+                    addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>');
+                },
+                klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
+            },
+            'Umbennen': {
+                click: function(element){ alert('Hasse gedacht... :D'); },
+                klass: "second-menu-item"
+            }
+        });
+      });
+</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</tr>
 
 <?php
 
@@ -114,7 +153,9 @@ if($count<="9") {$count="0$count";}
 ?>
 		</tr>
 	<td></td>
+	
 <td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php getartist($artistID); ?>')">Album hinzufügen</a></td><tr>
+
 </table>
 
 
