@@ -27,12 +27,16 @@ $(document).ready(function(){
 	var cssSelector = {
         jPlayer: "#jquery_jplayer_1", 
         cssSelectorAncestor: "#jp_container_1"
+			
     };
     var playlist = []; // Empty playlist
     var options = {
         swfPath: "./jplayer", 
         supplied: "mp3",
-		autoPlay: true 
+		smoothPlayBar: true,
+		preload: 'metadata',
+		volume: 0.5,
+		autohide: true
     };
     var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
     $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
@@ -45,7 +49,27 @@ $(document).ready(function(){
 
 	
 });
-//]]>
+
+function autoplay() {
+	$('#jquery_jplayer_1').jPlayer("play");
+}
+
+    document.onkeydown = function(event) {
+ 
+        var actionBox = document.getElementById('action');
+ 
+        if (event.keyCode == 32) {
+ 
+          event.cancelBubble = true;
+          event.returnValue = false;
+ 
+          $('#jquery_jplayer_1').jPlayer("play");
+ 
+        }
+ 
+        return event.returnValue;
+ 
+      }
 </script>
 
 <body>
@@ -95,12 +119,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 
-
-
-
-
-
-	
+<script language="JavaScript">
+autoplay();
+</script>
 
 </body>
 </html>
