@@ -240,10 +240,11 @@ font-size:0.6em;
 }
 
 .context-menu {
+/*
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
-
+*/
         background-color: #f2f2f2;
         border: 1px solid #999;
 
@@ -256,6 +257,7 @@ font-size:0.6em;
         padding: 3px;
         text-decoration: none;
         color: #333;
+		font-size:0.7em;
       }
       .context-menu a:hover {
         background-color: #666;
