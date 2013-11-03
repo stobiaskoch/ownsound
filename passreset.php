@@ -40,12 +40,12 @@ if($_REQUEST ['order']=="reset") {
 	$username = $Daten['name'];
 	mysql_query("UPDATE user SET password='$password' WHERE email='$name'");
 	mail($name, 'Dein neues OwnSound-Passwort', 'Hallo '.$fullname.',
-Deine Zugangsaten wurde auf
+Deine Zugangsaten wurden auf
 Benutzename: '.$username.'
 Passwort: '.$newpass.'
-zurückgesetzt
+zurÃ¼ckgesetzt
 
-Du Kannst Dich jetzt wieder auf www.ownsound.org einloggen.');
+Du Kannst Dich jetzt wieder auf '.$_SERVER['SERVER_NAME'].''.OWNURL.' einloggen.');
 	echo "<meta http-equiv='refresh' content='0; URL=index.php'>";
 }	
 ?>
@@ -62,15 +62,15 @@ Du Kannst Dich jetzt wieder auf www.ownsound.org einloggen.');
 <div id="login">
 	<center><img src='./img/os_logo_small.jpg' width='70%'></center>
 </div>
-<fieldset style="width: 300px;">
-		<legend style="margin-right: 240px;">Login</legend>
+<fieldset style="width: 150px;">
+		<legend style="margin-right: 220px; width: 150px">Passwort-Reset</legend>
 			<table>
 			<tr>
 				<form action="passreset.php" method="post">
 				<td>E-Mailadresse</td><td><input type="text" name="name" size="20"/></td>
 			<tr>
 				<input type="hidden" name="order" value="reset"/>
-				<td><input type="submit" value="Anmelden" /></td>
+				<td><input type="submit" value="Zurücksetzen" /></td> 
 				</form>
 			</tr>
 			</table>
