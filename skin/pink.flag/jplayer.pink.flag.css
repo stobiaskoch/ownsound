@@ -340,9 +340,13 @@ div.jp-seeking-bg {
 	background: url("jplayer.pink.flag.jpg") 0px -240px no-repeat;
 	width: 197px;
 	height: 13px;
+	bottom: 100px;
 	padding: 0 2px 2px 2px;
 	margin-bottom: 4px;
-	overflow:hidden;
+	white-space: nowrap;
+/*	
+overflow:hidden;
+*/
 }
 
 div.jp-video .jp-progress {
@@ -357,7 +361,8 @@ div.jp-video .jp-progress {
 	background: url("jplayer.pink.flag.jpg") 0px -260px repeat-x;
 	width:0px;
 	height: 100%;
-	overflow:hidden;
+/*	overflow:hidden; */
+	white-space: nowrap;
 	cursor:pointer;
 }
 
