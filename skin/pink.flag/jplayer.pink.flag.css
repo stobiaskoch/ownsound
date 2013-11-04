@@ -341,6 +341,7 @@ div.jp-seeking-bg {
 	position: relative;
 	width: 197px;
 	height: 13px;
+	right: 1px;
 	padding: 0 2px 2px 2px;
 	margin-bottom: 4px;
 /*	overflow:hidden;
