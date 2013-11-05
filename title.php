@@ -1,11 +1,13 @@
 <?php
 require_once('config.inc.php');
 include('./js/functions.php');
-
-$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-
 $albumID = $_REQUEST['albumID'];
 $artistID = $_REQUEST['artistID'];
+$yearExpire = time() + 60*60*24*365; // 1 Year
+setcookie('lastalbum', $albumID, $yearExpire);
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+
+
 
 ?>
 <html>
@@ -25,8 +27,8 @@ $(document).ready(function() {
  });
  
  
-		function google(artist, albumname, albumid, artistid){
-		$.ajax({ url: "./google.php?order=search&artist="+artist+"&album="+albumname+"&albumID="+albumid+"&artistID="+artistid , success: function(data){
+		function google(artistID, albumID){
+		$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
             $("#content").html(data);
     }
     });
@@ -47,8 +49,8 @@ $(document).ready(function() {
 			function addalbum(order, albumID, artistID){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumID+"&artistID="+artistID});
 				sleep(500);
-		$.ajax({ url: "./player.php" , success: function(data){
-            $("#playeroben").html(data);
+		$.ajax({ url: "./player2.php" , success: function(data){
+            $("#playlist").html(data);
     }
     });
 	}
@@ -64,32 +66,18 @@ $sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY track";
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
     ?>
  <br>
 <div id="content">
 
- <?php
 
-$titlecheck = "$artist - $album";
-$titlecheck2 = mb_strlen($titlecheck);
 
- if($titlecheck2>="10") {
- $titlecheck3 = "font-size:1.5em;";
- }
- if($titlecheck2>="38") {
- $titlecheck3 = "font-size:1.2em;";
- }
-  if($titlecheck2>="60") {
- $titlecheck3 = "font-size:1em;";
- }
- ?>
-
-	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue; <?php echo $titlecheck3; ?>" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php getartist($artistID); ?>]</a>
+	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
   
 
-<a style='<?php echo $titlecheck3; ?>' class='edit' id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
+<a class='edit' id="<?php echo $albumID; ?>" title="Klicken zum Bearbeiten"><?php echo getalbum($albumID); ?></a></h1><br>
 <table border="0">
 
 <?php
@@ -97,6 +85,8 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $path=$zeile['path'];
 $titleID = $zeile['id'];
+$artist = getartist($artistID);
+
 $count++;
 if($count<="9") {$count="0$count";}
   echo "<tr>";
@@ -105,21 +95,22 @@ if($count<="9") {$count="0$count";}
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
 -->
-	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
 			$('.target<?php echo $count; ?>').contextMenu('context-menu-1', {
+				'<?php echo addslashes(getartist($artistID)); ?> - <?php echo addslashes(gettitle($titleID)); ?>': {},
 				'Abspielen': {
 					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>');
+						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
 					},
 					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
 				},
 				'Einreihen': {
 					click: function(element){ 
-					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>');
+					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
 					},
 					klass: "second-menu-item"
 				},
@@ -127,7 +118,7 @@ if($count<="9") {$count="0$count";}
 					click: function(element){ alert('kommt...'); },
 					klass: "third-menu-item"
 				},
-				'LÃ¶schen': {
+				'Löschen': {
 					click: function(element){ alert('kommt...'); },
 					klass: "fourth-menu-item"
 }
@@ -146,15 +137,47 @@ if($count<="9") {$count="0$count";}
 }
 ?>
 		</tr>
-	<td></td>
+	<td></td><tr>
 	
-<td width='253px'><a href='#dhfig' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php getartist($artistID); ?>')">Album hinzufÃ¼gen</a></td><tr>
 
 </table>
+<br><div class="target_album"><a href='#'>Album hinzufügen</a></div></td>
+		<script type="text/javascript">
+		  $(document).ready(function(){
 
+			$('.target_album').contextMenu('context-menu-1', {
+				'<?php echo addslashes($artist); ?> - <?php echo addslashes(getalbum($albumID)); ?><br>': {},
+				'Abspielen': {
+					click: function(element) {  // element is the jquery obj clicked on when context menu launched
+						addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
+					},
+					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
+				},
+				'Einreihen': {
+					click: function(element){ 
+					addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
+					},
+					klass: "second-menu-item"
+				},
+				'Umbennen': {
+					click: function(element){ alert('kommt...'); },
+					klass: "third-menu-item"
+				},
+				'Löschen': {
+					click: function(element){ alert('kommt...'); },
+					klass: "fourth-menu-item"
+}
+  },
+  {
+
+    leftClick: true // trigger on left click instead of right click
+  }
+);
+		  });
+		</script>
 
 <div id="covertitle">
-	<a href='#dhfig' onclick="google('<?php getartist($artistID); ?>', '<?php getalbum($albumID); ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" height="140" title="Cover Ã¤ndern"></a>
+	<a href='#dhfig' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"><img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
 </div>
 
 

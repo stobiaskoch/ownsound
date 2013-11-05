@@ -43,7 +43,7 @@ if($_REQUEST ['order']=="reset") {
 Deine Zugangsaten wurden auf
 Benutzename: '.$username.'
 Passwort: '.$newpass.'
-zurÃ¼ckgesetzt
+zurückgesetzt
 
 Du Kannst Dich jetzt wieder auf '.$_SERVER['SERVER_NAME'].''.OWNURL.' einloggen.');
 	echo "<meta http-equiv='refresh' content='0; URL=index.php'>";
@@ -70,7 +70,7 @@ Du Kannst Dich jetzt wieder auf '.$_SERVER['SERVER_NAME'].''.OWNURL.' einloggen.
 				<td>E-Mailadresse</td><td><input type="text" name="name" size="20"/></td>
 			<tr>
 				<input type="hidden" name="order" value="reset"/>
-				<td><input type="submit" value="Zurücksetzen" /></td> 
+				<td><input type="submit" value="Zur�cksetzen" /></td> 
 				</form>
 			</tr>
 			</table>

@@ -1,6 +1,8 @@
 <?php
 if($_REQUEST ['order']=="logout") {
 	$name = $_COOKIE['loggedIn']; 
+	setcookie ("lastartist", "", time() - 3600);
+	setcookie ("lastalbum", "", time() - 3600);
 	setcookie ("loggedIn", $name, time() - 3600);
 }
 

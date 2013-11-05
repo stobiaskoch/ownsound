@@ -31,7 +31,7 @@ div.jp-video {
 	background-color:#eee;
 }
 div.jp-audio {
-	width:420px;
+	width:240px;
 }
 div.jp-audio-stream {
 	width:182px;
@@ -200,8 +200,13 @@ a.jp-next:hover {
 /* @group progress bar */
 
 div.jp-progress {
-	overflow:hidden;
-	background-color: #ddd;
+	position: relative;
+	width: 197px;
+	height: 13px;
+	right: 1px;
+
+
+	margin-bottom: 4px;
 }
 div.jp-audio div.jp-progress {
 	position: absolute;
@@ -225,11 +230,15 @@ div.jp-video div.jp-progress {
 div.jp-seek-bar {
 	background: url("jplayer.blue.monday.jpg") 0 -202px repeat-x;
 	width:0px;
-	height:100%;
-	cursor: pointer;
+	height: 100%;
+	position:absolute;
+	top: 0px;
+	cursor:pointer;
 }
 div.jp-play-bar {
 	background: url("jplayer.blue.monday.jpg") 0 -218px repeat-x ;
+		position: relative;
+			top: -19px;
 	width:0px;
 	height:100%;
 }

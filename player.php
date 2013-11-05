@@ -13,11 +13,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-	<link href="./skin/pink.flag/jplayer.pink.flag.css" rel="stylesheet" type="text/css" /> 
+	<link href="./skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery-1.9.1.js"></script>	
 	<script src="./js/jquery-ui.js"></script>
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
+
 
 
 </head>
@@ -61,25 +62,27 @@ function autoplay() {
         if (event.keyCode == 32) {
  
           event.cancelBubble = true;
-          event.returnValue = false;
+          event.preventDefault = false;
  
           $('#jquery_jplayer_1').jPlayer("play");
  
         }
  
-        return event.returnValue;
+        return event.event.preventDefault;
  
       }
+	  
+
 </script>
 
 <body>
 
- <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+ <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 
-		<div id="jp_container_1" class="jp-audio">
-			<div class="jp-type-playlist">
-				<div class="jp-gui jp-interface">
-					<ul class="jp-controls">
+		<div id="jp_container_1" class="jp-audio" style="width:440px;">
+			<div class="jp-type-playlist" style="width:440px;">
+				<div class="jp-gui jp-interface" style="width:440px;">
+					<ul class="jp-controls" style="width:440px;">
 						<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
 						<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
 						<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
@@ -98,8 +101,8 @@ function autoplay() {
 					<div class="jp-volume-bar">
 						<div class="jp-volume-bar-value"></div>
 					</div>
-					<div class="jp-current-time"></div>
-					<div class="jp-duration"></div>
+					<div class="jp-current-time" style="padding-left: 10px;"></div>
+					<div class="jp-duration" style="padding-right: 10px;"></div>
 					<ul class="jp-toggles">
 						<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
 						<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
@@ -107,21 +110,8 @@ function autoplay() {
 						<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
 					</ul>
 				</div>
-				<div class="jp-playlist">
-					<ul>
-						<li></li>
-					</ul>
-				</div>
-				<div class="jp-no-solution">
-					<span>Update Required</span>
-					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
-				</div>
+			
 			</div>
-		</div>
-
-<script language="JavaScript">
-autoplay();
-</script>
-
+		</div>	
 </body>
 </html>

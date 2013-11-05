@@ -148,6 +148,14 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
+z-index:5;
+}
+
+#player {
+left:350px;
+top:500px;
+z-index:12;
+position:fixed !important;
 }
 
 #infooben {

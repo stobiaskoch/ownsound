@@ -1,15 +1,14 @@
+<?php
+$artistid = $_REQUEST['artid'];
+$yearExpire = time() + 60*60*24*365; // 1 Year
+setcookie('lastartist', $artistid, $yearExpire);
+setcookie ("lastalbum", "", time() - 3600);
+?>
 <html>
-	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">	
 <head>
-
+	<script src="./js/jquery.contextMenu.js"></script> 
 	<script>
-		function getdataalbum(albumID, artistID){
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
-            $("#playalbum").html(data);
-    }
-    });
-	}
-
 		function getdatabig(artid, artname, limit){
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
@@ -24,8 +23,6 @@ require_once('config.inc.php');
 include('./js/functions.php');
 $limit = $_REQUEST['limit'];
 if($limit=="") {$limit=0;}
-
-$artistid = $_REQUEST['artid'];
 
 
 mysql_connect(DBHOST, DBUSER,DBPASS);
@@ -55,16 +52,16 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ung�ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
-echo "<div id='playalbum'>";
+echo "<div id='play'>";
 
   ?>
  <br><div id="album">
 
-<div><h1><?php getartist($artistid); echo " [$albumcount]" ?></h1></div>
+<div><h1><?php echo getartist($artistid); echo " [$albumcount]" ?></h1></div>
 <?php
-if($albumcount>=15) {
+if($albumcount>=16) {
 $trenner = $albumcount / 15;
 $trenner = round($trenner, 0);
 $trenner = $trenner +1;
@@ -73,6 +70,7 @@ echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $albumID = $zeile['id'];
+$titleID = $zeile['id'];
 $count++;
 $count2++;
 
@@ -85,8 +83,8 @@ $count2++;
 
 }
 	?>
-	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><?php getalbum($albumID); ?></a></td>
+	<td width="70px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><?php echo getalbum($albumID); ?></a></td>
 	<?php
 	if ($count2==3) {
 	$count2 = 0;
@@ -99,7 +97,44 @@ $count2++;
 	{
 	?>
 	<tr>
+	<!--
 	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
+-->
+	<td width='300px'><div class="target1"><a href="#"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+
+		<script type="text/javascript">
+		  $(document).ready(function(){
+
+			$('.target1').contextMenu('context-menu-1', {
+				'<?php echo getartist($artistid); ?> - <?php echo $zeile['name']; ?>': {},
+				'Abspielen': {
+					click: function(element) {  // element is the jquery obj clicked on when context menu launched
+						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistid; ?>');
+					},
+					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
+				},
+				'Einreihen': {
+					click: function(element){ 
+					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php echo $artistid; ?>');
+					},
+					klass: "second-menu-item"
+				},
+				'Umbennen': {
+					click: function(element){ alert('kommt...'); },
+					klass: "third-menu-item"
+				},
+				'Löschen': {
+					click: function(element){ alert('kommt...'); },
+					klass: "fourth-menu-item"
+}
+  },
+  {
+
+    leftClick: true // trigger on left click instead of right click
+  }
+);
+		  });
+		</script>
 	</tr>
 	<?php
 	}

@@ -9,9 +9,5 @@ define("DBDATABASE", "");
 
 //Music Directory
 define("MUSICDIR", "/media/usb1/Musik/Adele/");
-
-
-//url
-define("OWNURL", "/ownsound");
 */
 ?>

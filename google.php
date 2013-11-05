@@ -1,11 +1,13 @@
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <?php
 require_once('config.inc.php');
+include('./js/functions.php');
 mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 $artistID = $_REQUEST['artistID'];
-$artist = $_REQUEST['artist'];
+$artist = addslashes(getartist($_REQUEST['artistID']));
 $albumID = $_REQUEST['albumID'];
-$album = $_REQUEST['album'];
+$album = addslashes(getalbum($_REQUEST['albumID']));
 ?>
 <html>
 <head>
@@ -43,15 +45,18 @@ $(document).ready(function()
 
 if($_REQUEST['order']=="search") {
 
-$albumsearch = "$artist $album";
-$albumsearch = urlencode($albumsearch);
+$albumsearch = "$artist - $album";
+//$albumsearch = urlencode($albumsearch);
+echo "Suche nach: ".stripslashes($albumsearch)."<br>";
+
 $albumsearch = str_replace(" ", "+", $albumsearch);
+$albumsearch = urlencode($albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
-$jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch;
+$jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch."&tbs=iar:t,ift:jpg";
 $json = file_get_contents($jsrc);
 sleep(1);
 $jset = json_decode($json, true);
-echo "Suche nach: ".urldecode($albumsearch)."<br>";
+
 
 for ($i = 0; $i <= 3; $i++) {
 echo '<table border="0" style="float:left;">';
@@ -74,9 +79,9 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 <form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data" >
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
-<input type="submit" value="Ã„ndern">
+<input type="submit" value="Ändern">
 </form><br>
-	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">ZurÃ¼ck</a>
+	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">Zurück</a>
 <?php
 }
 

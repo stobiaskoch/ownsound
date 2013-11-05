@@ -18,7 +18,7 @@ if($order=="save") {
 $name=$_REQUEST['name'];
 $fullname=$_REQUEST['fullname'];
 $email=$_REQUEST['email'];
-$password_hash = md5($_POST['password']);
+$password_hash = md5($_POST['passwort']);
 echo $password_hash;
 
 mysql_query("INSERT INTO `user`(`name`, `fullname`, `email`, `password`, `group`) VALUES ('$name', '$fullname', '$email', '$password_hash', 'admin')");

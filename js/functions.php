@@ -9,7 +9,7 @@ function getartist ($id) {
 				$query = mysql_query($sql); 
 				$Daten = mysql_fetch_assoc($query); 
 				
-				echo $Daten['name'];
+				return $Daten['name'];
 
 }
 
@@ -19,7 +19,7 @@ function getalbum ($id) {
 				$query = mysql_query($sql); 
 				$Daten = mysql_fetch_assoc($query); 
 				
-				echo $Daten['name'];
+				return $Daten['name'];
 
 }
 
@@ -29,7 +29,7 @@ function gettitle ($id) {
 				$query = mysql_query($sql); 
 				$Daten = mysql_fetch_assoc($query); 
 				
-				echo $Daten['name'];
+				return $Daten['name'];
 
 }
 ?>

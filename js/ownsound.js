@@ -6,9 +6,23 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
 });
+
+	function getdatabig(artid, artname, limit){
+		document.getElementById("results").innerHTML="";
+		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
+            $("#play").html(data);		
+			}
+		});
+	}
 	
-	
+	function getdataalbum(albumID, artistID){
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
+            $("#play").html(data);
+    }
+    });
+	}
 	
 	function getdata(artid){
 		document.getElementById("results").innerHTML="";
@@ -18,7 +32,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	function nocover(artid, artname){
+	function nocover(){
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./nocover.php" , success: function(data){
             $("#play").html(data);		
@@ -40,13 +54,20 @@ $(document).ready(function() {
 		});
 	}
 	
-	function playeroben(){
+	function player(){
 		$.ajax({ url: "./player.php" , success: function(data){
-			$("#playeroben").html(data);
+			$("#player").html(data);
 			}
 		});
 	}
 
+	function playlist(){
+		$.ajax({ url: "./player2.php" , success: function(data){
+			$("#playlist").html(data);
+			}
+		});
+	}
+	
 	function sleep(milliseconds) {
 		  var start = new Date().getTime();
 		  for (var i = 0; i < 1e7; i++) {
@@ -58,16 +79,15 @@ $(document).ready(function() {
 			function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
 				sleep(500);
-		$.ajax({ url: "./player.php" , success: function(data){
-            $("#playeroben").html(data);
-    }
-    });
+				playlist();
+
 	}
 	
 	
 		function settings(){
 		$.ajax({ url: "./settings.php" , success: function(data){
-            $("#infooben").html(data);
+	            $("#infooben").html(data);
+
 			}
 		});
 	}
