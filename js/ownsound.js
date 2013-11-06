@@ -102,9 +102,11 @@ $(document).ready(function() {
 	}
 			function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
+			$("#jquery_jplayer_1").jPlayer( "clearMedia" );
+				player();
 				sleep(500);
 				playlist();
-				player();
+				
 
 	}
 	
