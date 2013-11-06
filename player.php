@@ -89,11 +89,6 @@ function autoplay() {
 
 
 		});
-		$('#player').css({
-'top': '200',
-'left': '200',
-'position': 'absolute'
-});
 	});
 </script>
 
@@ -112,9 +107,11 @@ function autoplay() {
 				</div>
 			</div>
 		</div>
-		
-		
-		<div id="malsehenobdraggable" style="position: absolute; top:-100px; left: -790px;">
+		<?php
+		$top = $_COOKIE["palletteX"];
+		$left = $_COOKIE["palletteY"];
+		?>
+		<div id="malsehenobdraggable" style="position: fixed; top:<?php echo $top; ?>px; left:<?php echo $left; ?>px;">
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 
 		<div id="jp_container_1" class="jp-audio" style="width:440px;">

@@ -5,39 +5,11 @@
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
-	<script src="./js/jquery.ui.core.js"></script>
-	<script src="./js/jquery.ui.widget.js"></script>
-	<script src="./js/jquery.ui.mouse.js"></script>
-	<script src="./js/jquery.ui.draggable.js"></script>
 
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
 </style>
-<script>
-	  	$(function() {
-		$( "#malsehenobdraggable" ).draggable({ 
-			stop: function (event, ui) {
-				createCookie("palletteX", ui.position.left, 100);
-				createCookie("palletteY", ui.position.top, 100);
-     }
-
-
-
-		});
-		$('#player').css({
-'top': readCookie("palletteX"),
-'left': readCookie("palletteY"),
-'position': 'relative'
-});
-	});
-	
-
-
-
-
-	</script>
 </head>	
 <?php
 
