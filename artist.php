@@ -17,7 +17,7 @@
 </style>
 <script>
 	  	$(function() {
-		$( "#player" ).draggable({ 
+		$( "#malsehenobdraggable" ).draggable({ 
 			stop: function (event, ui) {
 				createCookie("palletteX", ui.position.left, 100);
 				createCookie("palletteY", ui.position.top, 100);
@@ -177,7 +177,7 @@ playlist();
 
 </div>
 
-<div id="player" style="font-size:0.6em;"></div>
+
 
 
 

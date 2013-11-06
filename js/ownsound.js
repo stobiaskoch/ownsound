@@ -80,13 +80,13 @@ $(document).ready(function() {
 	
 	function player(){
 		$.ajax({ url: "./player.php" , success: function(data){
-			$("#player").html(data);
+			$("#playlist").html(data);
 			}
 		});
 	}
 
 	function playlist(){
-		$.ajax({ url: "./player2.php" , success: function(data){
+		$.ajax({ url: "./player.php" , success: function(data){
 			$("#playlist").html(data);
 			}
 		});
@@ -102,8 +102,7 @@ $(document).ready(function() {
 	}
 			function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-			$("#jquery_jplayer_1").jPlayer( "clearMedia" );
-				player();
+			
 				sleep(500);
 				playlist();
 				

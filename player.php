@@ -15,9 +15,14 @@
 
 	<link href="./skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery-1.9.1.js"></script>	
-	<script src="./js/jquery-ui.js"></script>
+	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
+	<script type="text/javascript" src="./js/ownsound.js"></script>
+	<script src="./js/jquery.ui.core.js"></script>
+	<script src="./js/jquery.ui.widget.js"></script>
+	<script src="./js/jquery.ui.mouse.js"></script>
+	<script src="./js/jquery.ui.draggable.js"></script>
 
 
 
@@ -43,8 +48,9 @@ $(document).ready(function(){
     $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
         $.each(data,function(index,value){
             myPlaylist.add(value); // add each element in data in myPlaylist
+			
         })
-		$("#jquery_jplayer_1").jPlayer( "clearMedia" );
+		
     }); 
 	
 	
@@ -73,11 +79,42 @@ function autoplay() {
  
       }
 	  
+	  	$(function() {
+		$( "#malsehenobdraggable" ).draggable({ 
+			stop: function (event, ui) {
+				createCookie("palletteX", ui.position.left, 100);
+				createCookie("palletteY", ui.position.top, 100);
+     }
 
+
+
+		});
+		$('#player').css({
+'top': '200',
+'left': '200',
+'position': 'absolute'
+});
+	});
 </script>
 
 <body>
 
+				<div id="jp_container_1" class="jp-audio">
+			<div class="jp-type-playlist">
+				<div class="jp-playlist">
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+				<div class="jp-no-solution">
+					<span>Update Required</span>
+					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+				</div>
+			</div>
+		</div>
+		
+		
+		<div id="malsehenobdraggable" style="position: absolute; top:-100px; left: -790px;">
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 
 		<div id="jp_container_1" class="jp-audio" style="width:440px;">
@@ -114,5 +151,6 @@ function autoplay() {
 			
 			</div>
 		</div>	
+	</div>
 </body>
 </html>

@@ -17,6 +17,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.form.js"></script> 
+	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script>
 $(document).ready(function() {
 
@@ -46,14 +47,7 @@ $(document).ready(function() {
 			getdataalbum(albumID, artistID);
 	}
 	
-			function addalbum(order, albumID, artistID){
-		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumID+"&artistID="+artistID});
-				sleep(500);
-		$.ajax({ url: "./player2.php" , success: function(data){
-            $("#playlist").html(data);
-    }
-    });
-	}
+
 	
 
 	</script>
