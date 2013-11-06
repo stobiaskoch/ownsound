@@ -1,7 +1,4 @@
 <?php
-echo '<html><head>';
-echo '<title>OwnSound-Scanner V2</title>';
-echo '</head><body>';
 // requests
 	$titlecount = "0";
 	$DirectoryToScan = $_REQUEST['dirtoscan'];
@@ -26,6 +23,8 @@ $foldertoscan = $foldertoscan - 1;
 $folderscanned = $Daten['folderscanned'];
 
 echo "Durchsuche Verzeichniss $folderscanned von $foldertoscan : $DirectoryToScan<br>";
+$bar = 100 / $foldertoscan;
+//$bar = $folderscanned * $bar;
 
 if($DirectoryToScan=="") { exit; } 
 
@@ -179,4 +178,8 @@ echo '</body></html>';
 	if($folderscanned==$foldertoscan) {
 		mysql_query("UPDATE scanner_log SET endtime=(NOW()) WHERE id='0'");
 	}
-?>		
+	echo $bar;
+?>	
+<script language="JavaScript">
+progress(<?php echo $bar; ?>);
+</script>	

@@ -5,9 +5,12 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
     $folders[] = $filename;
 }
 ?>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="jquery.ui.progressbar.css">
+	<script src="./js/jquery-1.9.1.js"></script>
+	<script src="./js/jquery.ui.core.js"></script>
+	<script src="./js/jquery.ui.widget.js"></script>
+	<script src="./js/jquery.ui.progressbar.js"></script>
 <script type="text/javascript" src="./js/ownsound.js"></script>
-
 <script src="./js/jquery.form.js"></script> 
 <script>
 $(document).ready(function()
@@ -31,6 +34,12 @@ $(document).ready(function()
 
 })
 
+
+		$(function() {
+		$( "#progressbar" ).progressbar({
+			value: 37
+		});
+	});
 
 
 </script>

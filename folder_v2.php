@@ -1,19 +1,22 @@
 <html>
 <head>
+	<link rel="stylesheet" href="./themes/base/jquery.ui.all.css">
 	<script src="./js/jquery-1.9.1.js"></script>
-	<script src="./js/jquery.easyui.min.js"></script>
+	<script src="./js/jquery.ui.core.js"></script>
+	<script src="./js/jquery.ui.widget.js"></script>
+	<script src="./js/jquery.ui.progressbar.js"></script>
+
 	<script>
+		
+		$(function() {
+		$( "#progressbar" ).progressbar({
 
+			value: 1
 
-		function start(){
-			var value = $('#p').progressbar('getValue');
-			if (value < 100){
-				value += Math.floor(Math.random() * 10);
-				$('#p').progressbar('setValue', value);
-				setTimeout(arguments.callee, 200);
-			}
-		};
-
+		});
+	});
+	
+	
 	
 	function getdatascandirfuckyou(dir){
 		$.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
@@ -22,7 +25,16 @@
     });
 	}
 
-
+		function progress(bar) {
+		var progressbar = $( "#progressbar" );
+		var val = progressbar.progressbar( "value" ) || 0;
+		$( "#progressbar" ).progressbar({
+			value: val + bar
+		});
+				if ( bar < 93 ) {
+				setTimeout( progress, 100 );
+			}
+		}
 	</script>
 
 </head>	
@@ -88,9 +100,9 @@ unset($dirs[$pos]);
 
 mysql_query("UPDATE scanner_log SET foldertoscan=$dirstoscan WHERE id='0'");
 echo "<br>";
-
+?> <div id="progressbar"></div> <?php
 //print_r($dirs);
-//die();
+
 foreach ($dirs as $dirtoscan) {
 ?>
 <script language="JavaScript">
@@ -104,4 +116,4 @@ getdatascandirfuckyou('<?php echo urlencode($dirtoscan); ?>');
 
 </body></html>
 
-<div id="p" class="easyui-progressbar" style="width:400px;"></div>
+

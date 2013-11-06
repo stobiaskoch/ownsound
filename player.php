@@ -44,6 +44,7 @@ $(document).ready(function(){
         $.each(data,function(index,value){
             myPlaylist.add(value); // add each element in data in myPlaylist
         })
+		$("#jquery_jplayer_1").jPlayer( "clearMedia" );
     }); 
 	
 	
