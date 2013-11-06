@@ -28,7 +28,7 @@ $(document).ready(function()
 	<div style="font-size: 12px; top: 50px; left: 890px; position:fixed;"><a href='#ownsound' onclick="settingsclose()"> schliessen </a></div>
 	<div style="font-size: 12px; top: 260px; left: 868px; position:fixed;"><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>
 	<div style="font-size: 12px; top: 50px; left: 890px; position:fixed;"><a href='#ownsound' onclick="settingsclose()"> schliessen </a></div>
-<form method="post" name="scansettings" id="scansettings" action="./blal.php">
+<form method="post" name="scansettings" id="scansettings" action="./null.php">
 <div id="scansettings" style="border: 1px solid #000000; padding: 10px; width: 250px;">
 Ordner: <input style="font-size: 12px;" type="text" id="scandir" name="scandir" value="<?php echo MUSICDIR; ?>"><br>
 <input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
