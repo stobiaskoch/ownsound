@@ -1,7 +1,6 @@
 <?php
 echo '<html><head>';
 echo '<title>OwnSound-Scanner V2</title>';
-echo '<style type="text/css">BODY,TD,TH { font-family: sans-serif; font-size: 9pt; }</style>';
 echo '</head><body>';
 // requests
 	$titlecount = "0";
@@ -23,7 +22,7 @@ $sql    = "SELECT * FROM scanner_log WHERE id = '0'";
 $query = mysql_query($sql); 
 $Daten = mysql_fetch_assoc($query); 
 $foldertoscan = $Daten['foldertoscan'];
-$foldertoscan = $foldertoscan - 2;
+$foldertoscan = $foldertoscan - 1;
 $folderscanned = $Daten['folderscanned'];
 
 echo "Durchsuche Verzeichniss $folderscanned von $foldertoscan : $DirectoryToScan<br>";
@@ -178,7 +177,6 @@ echo '<br>'. $titlecount.' neue Tracks gefunden.';
 echo '</body></html>';	 	 
 	}	
 	if($folderscanned==$foldertoscan) {
-		echo "yeah!";
 		mysql_query("UPDATE scanner_log SET endtime=(NOW()) WHERE id='0'");
 	}
 ?>		

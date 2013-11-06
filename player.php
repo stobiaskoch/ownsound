@@ -101,8 +101,8 @@ function autoplay() {
 					<div class="jp-volume-bar">
 						<div class="jp-volume-bar-value"></div>
 					</div>
-					<div class="jp-current-time" style="padding-left: 10px;"></div>
-					<div class="jp-duration" style="padding-right: 10px;"></div>
+					<div class="jp-current-time"></div>
+					<div class="jp-duration"></div>
 					<ul class="jp-toggles">
 						<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
 						<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>

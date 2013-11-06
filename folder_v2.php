@@ -1,17 +1,33 @@
 <html>
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+	<script src="./js/jquery-1.9.1.js"></script>
+	<script src="./js/jquery.easyui.min.js"></script>
 	<script>
-		function getdata(dir){
+
+
+		function start(){
+			var value = $('#p').progressbar('getValue');
+			if (value < 100){
+				value += Math.floor(Math.random() * 10);
+				$('#p').progressbar('setValue', value);
+				setTimeout(arguments.callee, 200);
+			}
+		};
+
+	
+	function getdatascandirfuckyou(dir){
 		$.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
             $("#statnr").html(data);
     }
     });
 	}
+
+
 	</script>
 
-</head>		
+</head>	
 <?php
+
 require_once('config.inc.php');
 require_once('./getid3/getid3.php');
 mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
@@ -28,7 +44,8 @@ $dirs = array();
 // Initialize getID3 engine
 $getID3 = new getID3;
 
-$DirectoryToScan = MUSICDIR; // change to whatever directory you want to scan
+//$DirectoryToScan = MUSICDIR; // change to whatever directory you want to scan
+$DirectoryToScan = $_REQUEST['scandir'];
 
 $out  = '';  
 function scan($folder){  
@@ -71,15 +88,20 @@ unset($dirs[$pos]);
 
 mysql_query("UPDATE scanner_log SET foldertoscan=$dirstoscan WHERE id='0'");
 echo "<br>";
+
 //print_r($dirs);
 //die();
 foreach ($dirs as $dirtoscan) {
 ?>
 <script language="JavaScript">
-getdata('<?php echo urlencode($dirtoscan); ?>');
+getdatascandirfuckyou('<?php echo urlencode($dirtoscan); ?>');
 </script>
 <?php
 }
-echo "<div id='statnr'></div>";
-echo '</body></html>';
+?>
 
+<div id='statnr'></div>
+
+</body></html>
+
+<div id="p" class="easyui-progressbar" style="width:400px;"></div>

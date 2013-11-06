@@ -17,8 +17,26 @@
 </style>
 <script>
 	  	$(function() {
-		$( "#player" ).draggable({ grid: [ 40, 40 ] });
+		$( "#player" ).draggable({ 
+			stop: function (event, ui) {
+				createCookie("palletteX", ui.position.left, 100);
+				createCookie("palletteY", ui.position.top, 100);
+     }
+
+
+
+		});
+		$('#player').css({
+'top': readCookie("palletteX"),
+'left': readCookie("palletteY"),
+'position': 'relative'
+});
 	});
+	
+
+
+
+
 	</script>
 </head>	
 <?php
@@ -155,9 +173,15 @@ playlist();
 
 <div id="infooben">
 	<div id="information"><center><img src='./img/os_logo_smaller.JPG'></center></div>
+	<div style="font-size: 12px; top: 260px; left: 868px; position:fixed;"><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>
+
 </div>
 
 <div id="player" style="font-size:0.6em;"></div>
+
+
+
+
 	<title>OwnSound</title>
 
 <?php
