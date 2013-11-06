@@ -28,7 +28,8 @@ $dirs = array();
 // Initialize getID3 engine
 $getID3 = new getID3;
 
-$DirectoryToScan = MUSICDIR; // change to whatever directory you want to scan
+//$DirectoryToScan = MUSICDIR; // change to whatever directory you want to scan
+$DirectoryToScan = $_REQUEST['scandir'];
 
 $out  = '';  
 function scan($folder){  
