@@ -2,21 +2,18 @@
 <head>
 	<link rel="stylesheet" href="./themes/base/jquery.ui.all.css">
 	<script src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.ui.core.js"></script>
 	<script src="./js/jquery.ui.widget.js"></script>
 	<script src="./js/jquery.ui.progressbar.js"></script>
-
 	<script>
-		
-		$(function() {
+ function progress() {
+		var ht = readCookie("progress");
 		$( "#progressbar" ).progressbar({
-
-			value: 1
-
+			value: 1 * ht
 		});
-	});
-	
-	
+
+	}
 	
 	function getdatascandirfuckyou(dir){
 		$.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
@@ -25,16 +22,6 @@
     });
 	}
 
-		function progress(bar) {
-		var progressbar = $( "#progressbar" );
-		var val = progressbar.progressbar( "value" ) || 0;
-		$( "#progressbar" ).progressbar({
-			value: val + bar
-		});
-				if ( bar < 93 ) {
-				setTimeout( progress, 100 );
-			}
-		}
 	</script>
 
 </head>	

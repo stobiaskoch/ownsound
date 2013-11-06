@@ -1,3 +1,4 @@
+<script src="./js/jquery.ui.progressbar.js"></script>
 <?php
 // requests
 	$titlecount = "0";
@@ -24,7 +25,7 @@ $folderscanned = $Daten['folderscanned'];
 
 echo "Durchsuche Verzeichniss $folderscanned von $foldertoscan : $DirectoryToScan<br>";
 $bar = 100 / $foldertoscan;
-//$bar = $folderscanned * $bar;
+$bar = $folderscanned * $bar;
 
 if($DirectoryToScan=="") { exit; } 
 
@@ -178,8 +179,8 @@ echo '</body></html>';
 	if($folderscanned==$foldertoscan) {
 		mysql_query("UPDATE scanner_log SET endtime=(NOW()) WHERE id='0'");
 	}
-	echo $bar;
 ?>	
 <script language="JavaScript">
-progress(<?php echo $bar; ?>);
+createCookie("progress", <?php echo $bar; ?>, 100);
+progress();
 </script>	

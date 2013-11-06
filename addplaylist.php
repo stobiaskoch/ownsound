@@ -4,6 +4,7 @@ include('./js/functions.php');
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $user = $_COOKIE['loggedIn'];
 //sonst gibts immer ne leere playlist in der datenbank
+if($user=="" or $user==" ") { die(); }
 if ( ! isset ( $user ) )
 {
   die();

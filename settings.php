@@ -35,13 +35,7 @@ $(document).ready(function()
 })
 
 
-		$(function() {
-		$( "#progressbar" ).progressbar({
-			value: 37
-		});
-	});
-
-
+createCookie("progress", 30, 100);
 </script>
 <div id="information"><h1>Einstellungen</h1>
 	
