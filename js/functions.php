@@ -42,4 +42,14 @@ function getartistID ($id) {
 				return $Daten['id'];
 
 }
+
+function getartistIDfromalbumID ($id) {
+
+				$sql    = "SELECT artist FROM album WHERE id = '$id'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				
+				return $Daten['artist'];
+
+}
 ?>

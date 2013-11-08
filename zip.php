@@ -7,9 +7,12 @@ require_once('config.inc.php');
 include('./js/functions.php');
 $path = array();
 $albumID = $_REQUEST['albumID'];
+$artistID = getartistIDfromalbumID($albumID);
+$artist = getartist($artistID);
+$album = getalbum($albumID);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $sql = "SELECT * FROM `title` WHERE album='".$albumID."' ORDER BY path";
-$zipname = urlencode(getalbum($albumID));
+$zipname = $artist . " - " . $album;
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
