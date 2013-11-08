@@ -3,10 +3,19 @@
 	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
-
+	
+	<script src="./js/jquery.ui.core.js"></script>
+	<script src="./js/jquery.ui.widget.js"></script>
+	<script src="./js/jquery.ui.progressbar.js"></script>
+	<script src="./js/jquery.contextMenu.js"></script> 
+	<script src="./js/jquery.form.js"></script> 
+	<script src="./js/jquery.jeditable.js"></script> 
+<script>
+createCookie("screenwidth", screen.width , 100);
+createCookie("screenheight", screen.height, 100);
+</script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
 </style>
@@ -64,6 +73,7 @@ if ( ! $db_erg )
 
 			?>
 				<tr>
+					
 					<td><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?></a></td>
 				</tr>
 			<?php
@@ -151,7 +161,12 @@ playlist();
 
 
 
-
+<div id="playercover" style="
+position: fixed;
+bottom: 7px;
+left: 875px;
+z-index: 700;
+"></div>
 
 
 	<title>OwnSound</title>

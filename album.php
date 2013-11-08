@@ -7,16 +7,6 @@ setcookie ("lastalbum", "", time() - 3600);
 <html>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">	
 <head>
-	<script src="./js/jquery.contextMenu.js"></script> 
-	<script>
-		function getdatabig(artid, artname, limit){
-		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
-            $("#play").html(data);		
-			}
-		});
-	}
-	</script>
 </head>	
 <?php
 require_once('config.inc.php');
@@ -24,11 +14,12 @@ include('./js/functions.php');
 $limit = $_REQUEST['limit'];
 if($limit=="") {$limit=0;}
 
-
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
+
 $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
+
 $albumcount = mysql_num_rows($albumcountsql);
 if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
 	if($albumcount==0) {
@@ -100,13 +91,12 @@ $count2++;
 	<!--
 	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
 -->
-	<td width='300px'><div class="target1"><a href="#"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="einzelsong"><a href="#"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
-			$('.target1').contextMenu('context-menu-1', {
-				'<?php echo getartist($artistid); ?> - <?php echo $zeile['name']; ?>': {},
+			$('.einzelsong').contextMenu('context-menu-1', {
 				'Abspielen': {
 					click: function(element) {  // element is the jquery obj clicked on when context menu launched
 						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistid; ?>');
@@ -123,7 +113,7 @@ $count2++;
 					click: function(element){ alert('kommt...'); },
 					klass: "third-menu-item"
 				},
-				'LÃ¶schen': {
+				'Löschen': {
 					click: function(element){ alert('kommt...'); },
 					klass: "fourth-menu-item"
 }

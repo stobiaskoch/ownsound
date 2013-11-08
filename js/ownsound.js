@@ -6,8 +6,55 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+
+
+
 	
 });
+
+
+
+
+		function google(artistID, albumID){
+		$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
+            $("#content").html(data);
+    }
+    });
+	}
+	
+				function googledownload(pic, albumID, artistID){
+		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
+		sleep(2500);
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
+            $("#playalbum").html(data);
+            stats();
+    }
+    });
+			
+			getdataalbum(albumID, artistID);
+	}
+
+
+
+
+
+
+
+
+
+
+
+	function getdatabig(artid, artname, limit){
+		document.getElementById("results").innerHTML="";
+		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
+            $("#play").html(data);		
+			}
+		});
+	}
+
+
+
 	function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();
@@ -102,21 +149,32 @@ $(document).ready(function() {
 	}
 			function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-			
 				sleep(500);
 				playlist();
 				
 
 	}
 	
+				function zipalbum(albumid){
+				var geturl;
+  geturl = $.ajax({
+    type: "GET",
+    url: 'zip.php?albumID='+albumid,
+    success: function () {
+      alert("done!"+ geturl.getAllResponseHeaders());
+    }
+  });
+	}
 	
 		function settings(){
 		$.ajax({ url: "./settings.php" , success: function(data){
-	            $("#infooben").html(data);
+	            $("#information").html(data);
 
 			}
 		});
 	}
+	
+	
 			function settingsclose(){
 				document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
 			}

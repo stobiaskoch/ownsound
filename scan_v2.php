@@ -25,7 +25,7 @@ $folderscanned = $Daten['folderscanned'];
 
 echo "Durchsuche Verzeichniss $folderscanned von $foldertoscan : $DirectoryToScan<br>";
 $bar = 100 / $foldertoscan;
-$bar = $folderscanned * $bar;
+//$bar = $folderscanned * $bar;
 
 if($DirectoryToScan=="") { exit; } 
 
@@ -181,6 +181,5 @@ echo '</body></html>';
 	}
 ?>	
 <script language="JavaScript">
-createCookie("progress", <?php echo $bar; ?>, 100);
-progress();
+createCookie("progress2", <?php echo $bar; ?>, 100);
 </script>	

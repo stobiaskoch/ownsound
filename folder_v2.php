@@ -7,26 +7,46 @@
 	<script src="./js/jquery.ui.widget.js"></script>
 	<script src="./js/jquery.ui.progressbar.js"></script>
 	<script>
- function progress() {
-		var ht = readCookie("progress");
-		$( "#progressbar" ).progressbar({
-			value: 1 * ht
+	$(function() {
+		
+		var progressbar = $( "#progressbar" ),
+			progressLabel = $( ".progress-label" ),
+			progressvalue = readCookie("progress2"),
+			progressvalue = progressvalue * 1;
+
+		progressbar.progressbar({
+			value: false,
+			change: function() {
+				progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+			},
+			complete: function() {
+				progressLabel.text( "Complete!" );
+			}
 		});
 
-	}
+		function progress() {
+			var val = progressbar.progressbar( "value" ) || 0;
+
+			progressbar.progressbar( "value", val + readCookie("progress2") * 1 );
+
+			if ( val < 99 ) {
+				setTimeout( progress, 100 );
+			}
+		}
+
+		setTimeout( progress, 3000 );
+	});
 	
 	function getdatascandirfuckyou(dir){
-		$.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
+                $.ajax({ url: "./scan_v2.php?dirtoscan="+dir, success: function(data){
             $("#statnr").html(data);
     }
     });
-	}
-
+        }
 	</script>
 
 </head>	
 <?php
-
 require_once('config.inc.php');
 require_once('./getid3/getid3.php');
 mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
@@ -87,7 +107,7 @@ unset($dirs[$pos]);
 
 mysql_query("UPDATE scanner_log SET foldertoscan=$dirstoscan WHERE id='0'");
 echo "<br>";
-?> <div id="progressbar"></div> <?php
+?> <div id="progressbar"><div class="progress-label">Loading...</div></div> <?php
 //print_r($dirs);
 
 foreach ($dirs as $dirtoscan) {

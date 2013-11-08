@@ -13,39 +13,23 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 <html>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-	<script src="./js/jquery.jeditable.js"></script> 
+
+	
 	<script src="./js/jquery.contextMenu.js"></script> 
-	<script src="./js/jquery.form.js"></script> 
-	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script>
 $(document).ready(function() {
 
    $('.edit').editable('jeditable.php', {
-       indicator : "Saving...",  
-       submit   : 'OK'                  
-	});  
+       indicator : "<img src='img/indicator.gif'>", 
+	event     : "dblclick",
+	cancel    : "Cancel",
+	submit   : 'OK',
+	tooltip   : "Click to edit..."	   
+});  
  });
  
  
-		function google(artistID, albumID){
-		$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
-            $("#content").html(data);
-    }
-    });
-	}
-	
-				function googledownload(pic, albumID, artistID){
-		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
-		sleep(2500);
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
-            $("#playalbum").html(data);
-            stats();
-    }
-    });
-			
-			getdataalbum(albumID, artistID);
-	}
+
 	
 
 	
@@ -71,7 +55,7 @@ if ( ! $db_erg )
 	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
   
 
-<a class='edit' id="<?php echo $albumID; ?>" title="Klicken zum Bearbeiten"><?php echo getalbum($albumID); ?></a></h1><br>
+<a class='edit' id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
 <table border="0">
 
 <?php
@@ -95,7 +79,9 @@ if($count<="9") {$count="0$count";}
 		  $(document).ready(function(){
 
 			$('.target<?php echo $count; ?>').contextMenu('context-menu-1', {
-				'<?php echo addslashes(getartist($artistID)); ?> - <?php echo addslashes(gettitle($titleID)); ?>': {},
+				'<?php echo addslashes(getartist($artistID)); ?> - <?php echo addslashes(gettitle($titleID)); ?>': {
+				klass: "menu-item-oben" 
+				},
 				'Abspielen': {
 					click: function(element) {  // element is the jquery obj clicked on when context menu launched
 						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
@@ -135,12 +121,14 @@ if($count<="9") {$count="0$count";}
 	
 
 </table>
-<br><div class="target_album"><a href='#'>Album hinzufügen</a></div></td>
+<br><div class="target_album"><a href='#'>Albumsoptionen</a></div></td>
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
 			$('.target_album').contextMenu('context-menu-1', {
-				'<?php echo addslashes($artist); ?> - <?php echo addslashes(getalbum($albumID)); ?><br>': {},
+				'<?php echo addslashes($artist); ?> - <?php echo addslashes(getalbum($albumID)); ?><br>': {
+					klass: "menu-item-oben" 
+				},
 				'Abspielen': {
 					click: function(element) {  // element is the jquery obj clicked on when context menu launched
 						addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
@@ -152,6 +140,12 @@ if($count<="9") {$count="0$count";}
 					addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
 					},
 					klass: "second-menu-item"
+				},
+				'Download': {
+					click: function(element){ 
+					zipalbum('<?php echo $albumID; ?>')
+					},
+					klass: "third-menu-item"
 				},
 				'Umbennen': {
 					click: function(element){ alert('kommt...'); },
