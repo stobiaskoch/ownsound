@@ -155,15 +155,8 @@ $(document).ready(function() {
 
 	}
 	
-				function zipalbum(albumid){
-				var geturl;
-  geturl = $.ajax({
-    type: "GET",
-    url: 'zip.php?albumID='+albumid,
-    success: function () {
-      alert("done!"+ geturl.getAllResponseHeaders());
-    }
-  });
+	function zipalbum(albumID){
+		window.open("./zip.php?albumID="+albumID, "zip");   
 	}
 	
 		function settings(){

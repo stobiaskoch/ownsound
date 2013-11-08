@@ -1,7 +1,5 @@
 <?php
-error_reporting(E_ALL);
 if (is_writable("./tmp")) {
-
 } else {
     die('Die Datei kann nicht geschrieben werden');
 }
@@ -28,14 +26,24 @@ $zipname = urlencode(getalbum($albumID));
 	while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 	{
 		$path = $zeile['path'];
-		$zip->addFile($path);
+		$new_filename = substr($path,strrpos($path,'/') + 1);
+		$zip->addFile($path,$new_filename);
 		
 	}
-	
+	$query = "select imgdata,imgtype,imgdata_small from album where id=$albumID";
+	$result = @MYSQL_QUERY($query); 
+	$data = @MYSQL_RESULT($result,0,"imgdata"); 
+	$file = './tmp/folder.jpeg';
+	$handle = fopen ($file, 'w+');
+	fwrite($handle, $data);
+	fclose($handle);
+	$new_filename = substr($file,strrpos($file,'/') + 1);
+	$zip->addFile($file,$new_filename);
     $zip->close();
 	header('Content-Type: application/zip');
 	header('Content-Length: ' . filesize($tempfile));
 	header('Content-Disposition: attachment; filename='.$zipname.'.zip');
 	readfile($tempfile);
+	unlink($file);
 	unlink($tempfile); 
 ?>
