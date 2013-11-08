@@ -10,9 +10,11 @@ $albumID = $_REQUEST['albumID'];
 $artistID = getartistIDfromalbumID($albumID);
 $artist = getartist($artistID);
 $album = getalbum($albumID);
+
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $sql = "SELECT * FROM `title` WHERE album='".$albumID."' ORDER BY path";
 $zipname = $artist . " - " . $album;
+//die($zipname);
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
@@ -43,7 +45,7 @@ $zipname = $artist . " - " . $album;
 	$new_filename = substr($file,strrpos($file,'/') + 1);
 	$zip->addFile($file,$new_filename);
     $zip->close();
-	header('Content-Type: application/zip');
+	header('Content-Type: application/zip; charset=ISO-8859-1');
 	header('Content-Length: ' . filesize($tempfile));
 	header('Content-Disposition: attachment; filename='.$zipname.'.zip');
 	readfile($tempfile);
