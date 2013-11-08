@@ -68,12 +68,12 @@ $artist = getartist($artistID);
 $count++;
 if($count<="9") {$count="0$count";}
   echo "<tr>";
-  	echo "<td>". $count . " - </td>";
+  	echo "<td>". $zeile['track'] . " - </td>";
 ?> 
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
 -->
-	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
@@ -99,7 +99,13 @@ if($count<="9") {$count="0$count";}
 					klass: "third-menu-item"
 				},
 				'Löschen': {
-					click: function(element){ alert('kommt...'); },
+					click: function(element){ 
+					if (confirm('Willst Du <?php echo addslashes(gettitle($titleID)); ?> wirklich endgültig löschen?'))
+					{
+						deletetitle('<?php echo $titleID; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
+					}
+					
+					},
 					klass: "fourth-menu-item"
 }
   },
@@ -152,7 +158,13 @@ if($count<="9") {$count="0$count";}
 					klass: "third-menu-item"
 				},
 				'Löschen': {
-					click: function(element){ alert('kommt...'); },
+					click: function(element){ 
+					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+					{
+						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
+					}
+					
+					},
 					klass: "fourth-menu-item"
 }
   },

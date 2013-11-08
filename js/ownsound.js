@@ -178,3 +178,24 @@ $(document).ready(function() {
 			function settingsclose(){
 				document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
 			}
+			
+			
+	function deletetitle(titleID, albumID, artistID){
+		$.ajax({ url: "./delete.php?order=deletetitle&titleID="+titleID , success: function(data){
+			getdataalbum(albumID, artistID);
+    }
+    });
+	}
+	
+	function deletealbum(albumID, artistID){
+		$.ajax({ url: "./delete.php?order=deletealbum&albumID="+albumID , success: function(data){
+			getdata(artistID);
+    }
+    });
+	}
+	
+	function deleteartist(artistID){
+		$.ajax({ url: "./delete.php?order=deleteartist&artistID="+artistID , success: function(data){
+    }
+    });
+	}		

@@ -1,12 +1,13 @@
 <?php
-$artistid = $_REQUEST['artid'];
+$artistID = $_REQUEST['artid'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
-setcookie('lastartist', $artistid, $yearExpire);
+setcookie('lastartist', $artistID, $yearExpire);
 setcookie ("lastalbum", "", time() - 3600);
 ?>
 <html>
-	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">	
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
+	<script src="./js/jquery.contextMenu.js"></script> 
 </head>	
 <?php
 require_once('config.inc.php');
@@ -18,20 +19,20 @@ mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
 
-$albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistid'"); 
+$albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistID'"); 
 
 $albumcount = mysql_num_rows($albumcountsql);
 if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$albumcount Alben"; }
 	if($albumcount==0) {
 		$albumcount = "Keine Alben gefunden";
-		$sql = "SELECT * FROM title WHERE artist='$artistid' ORDER BY path";
+		$sql = "SELECT * FROM title WHERE artist='$artistID' ORDER BY path";
 	}
 	else
 	{
-		$sql = "SELECT * FROM album WHERE artist='$artistid' ORDER BY name LIMIT ".$limit.", 12";
+		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name LIMIT ".$limit.", 12";
 	}
 ?>
-<div id='title'><title><?php getartist($artistid); ?></title></div>
+<div id='title'><title><?php getartist($artistID); ?></title></div>
 <?php
 
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
@@ -50,7 +51,7 @@ echo "<div id='play'>";
   ?>
  <br><div id="album">
 
-<div><h1><?php echo getartist($artistid); echo " [$albumcount]" ?></h1></div>
+<div><h1><?php echo getartist($artistID); echo " [$albumcount]" ?></h1></div>
 <?php
 if($albumcount>=16) {
 $trenner = $albumcount / 15;
@@ -74,8 +75,54 @@ $count2++;
 
 }
 	?>
-	<td width="70px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistid; ?>')"><?php echo getalbum($albumID); ?></a></td>
+	<td width="70px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
+	<td width="116px"><div class="atarget<?php echo $count; ?>"><a href="#"><?php echo getalbum($albumID); ?></a></div></td>
+	
+			<script type="text/javascript">
+		  $(document).ready(function(){
+
+			$('.atarget<?php echo $count; ?>').contextMenu('context-menu-1', {
+				'Öffnen': {
+					click: function(element) {  // element is the jquery obj clicked on when context menu launched
+						getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
+					},
+					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
+				},
+				'Abspielen': {
+					click: function(element) {  // element is the jquery obj clicked on when context menu launched
+						addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
+					},
+					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
+				},
+				'Einreihen': {
+					click: function(element){ 
+					addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
+					},
+					klass: "second-menu-item"
+				},
+				'Umbennen': {
+					click: function(element){ alert('kommt...'); },
+					klass: "third-menu-item"
+				},
+				'Löschen': {
+					click: function(element){ 
+					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+					{
+						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
+					}
+					
+					},
+					klass: "fourth-menu-item"
+}
+  },
+  {
+
+    leftClick: true // trigger on left click instead of right click
+  }
+);
+		  });
+		</script>
+	
 	<?php
 	if ($count2==3) {
 	$count2 = 0;
@@ -89,7 +136,7 @@ $count2++;
 	?>
 	<tr>
 	<!--
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistid); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
+	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistID); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
 -->
 	<td width='300px'><div class="einzelsong"><a href="#"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
 
@@ -99,13 +146,13 @@ $count2++;
 			$('.einzelsong').contextMenu('context-menu-1', {
 				'Abspielen': {
 					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistid; ?>');
+						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
 					},
 					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
 				},
 				'Einreihen': {
 					click: function(element){ 
-					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php echo $artistid; ?>');
+					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
 					},
 					klass: "second-menu-item"
 				},
@@ -142,7 +189,7 @@ $trenner2 = 0;
 for ($i = 1; $i <= $trenner; $i++) {
 
 ?>
-<a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistid; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
+<a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
 $trenner2 = $i * 15;

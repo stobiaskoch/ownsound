@@ -1,7 +1,6 @@
 <?php
 require_once('config.inc.php');
 $user = $_COOKIE['loggedIn'];
-//$playlist = array();
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 $sql = "SELECT * FROM ".$user."_playlist";

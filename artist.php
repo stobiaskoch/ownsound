@@ -161,12 +161,7 @@ playlist();
 
 
 
-<div id="playercover" style="
-position: fixed;
-bottom: 7px;
-left: 875px;
-z-index: 700;
-"></div>
+
 
 
 	<title>OwnSound</title>
