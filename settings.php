@@ -29,15 +29,30 @@ $(document).ready(function()
     }); 
 
 })
-
+var notifications = readCookie("notifications");
 $(function() {
         $('button#noti').click(function(){
+		
+		if (notifications == 'yes') {
             $.desknoty({
                 icon: "./img/os_icon2noti.jpg",
                 title: "OwnSound",
-                body: "Benachrichtigungen sind angeschaltet"
- 
+                body: "Benachrichtigungen sind ausgeschaltet"
+				
             });
+			createCookie("notifications", 'no' , 100);
+			}
+			else
+			{
+			    $.desknoty({
+                icon: "./img/os_icon2noti.jpg",
+                title: "OwnSound",
+                body: "Benachrichtigungen sind angeschaltet"
+				
+            });
+			createCookie("notifications", 'yes' , 100);
+			}
+			
         });
     });
 	
@@ -64,12 +79,10 @@ echo "<option>$folder</option>";
 
 
 <br>
+<div style="font-size:1.0em;">
 <input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
 <input type="submit" value=" Scan starten ">
 </form>
-</div>
-	<br><button id="noti">Enable notifications</button>
-	
-	
-
+</div></div>
+	<br><button id="noti">Dis/Enable notifications</button>
 </div>

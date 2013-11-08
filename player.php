@@ -1,13 +1,3 @@
-<?php
-	//TEST
-	error_reporting(E_ALL | E_STRICT);
-	ini_set('open_basedir', '/media/usb1/Musik/');
-	//$pfad=$_SERVER['DOCUMENT_ROOT']."
-	
-	
-	
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +10,7 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function() {
+
 function notify(str, strtext, artist) {
 
 
@@ -68,11 +59,14 @@ $.desknoty({
 						document.getElementById("playnow").innerHTML="<center>"+artist+" - "+str+"</center>";
 						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
 						strtext = artist+' - '+str;
-						notify(str, strtext, artist);
+						var notifications = readCookie("notifications");
+						if (notifications == 'yes') {
+							notify(str, strtext, artist);
+						}
                   }
             });
 });	
-	
+/*	
 	$('#jquery_jplayer_1').bind($.jPlayer.event.pause, function(event) { // binding to the play event so this runs every time media is played
           var current = myPlaylist.current; //This is an integer which represents the index of the array object currently being played.
           var playlist = myPlaylist.playlist //This is an array, which holds each of the set of the items youve defined (e.q. title, mp3, artist etc...)
@@ -86,34 +80,16 @@ $.desknoty({
 
 						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
 						strtext = 'pausiert... '+artist+' - '+str;
-						notify(str, strtext, artist);
+						var notifications = readCookie("notifications");
+						if (notifications == 'yes') {
+							notify(str, strtext, artist);
+						}
                   }
             });
 });	
-	
+*/	
 });
 
-function autoplay() {
-	$('#jquery_jplayer_1').jPlayer("play");
-}
-
-    document.onkeydown = function(event) {
- 
-        var actionBox = document.getElementById('action');
- 
-        if (event.keyCode == 32) {
- 
-          event.cancelBubble = true;
-          event.preventDefault = false;
- 
-          $('#jquery_jplayer_1').jPlayer("play");
- 
-        }
- 
-        return event.event.preventDefault;
- 
-      }
-	  
 
 </script>
 

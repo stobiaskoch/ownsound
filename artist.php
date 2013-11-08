@@ -15,6 +15,8 @@
 <script>
 createCookie("screenwidth", screen.width , 100);
 createCookie("screenheight", screen.height, 100);
+// Muss bei install gesetzt werden
+//createCookie("notifications", 'yes' , 100);
 </script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
@@ -134,7 +136,7 @@ playlist();
 		<form id="search2" name="search2" action="search.php">
 			<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 		</form>
-	<div id="results" style="z-index:2;" >
+	<div id="results" style="z-index:30;" >
 	</div>
 </div>
 	
