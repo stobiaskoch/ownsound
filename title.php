@@ -1,6 +1,7 @@
 <?php
 require_once('config.inc.php');
 include('./js/functions.php');
+require_once './js/thumb/ThumbLib.inc.php';
 $albumID = $_REQUEST['albumID'];
 $artistID = $_REQUEST['artistID'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
@@ -127,7 +128,7 @@ if($count<="9") {$count="0$count";}
 	
 
 </table>
-<br><div class="target_album"><a href='#'>Albumsoptionen</a></div></td>
+<div class="target_album"><a href='#'>Albumsoptionen</a></div></td>
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
@@ -175,9 +176,25 @@ if($count<="9") {$count="0$count";}
 );
 		  });
 		</script>
-
+<?php
+	$query = "select imgdata,imgtype,imgdata_small from album where id=$albumID";
+	$result = @MYSQL_QUERY($query); 
+	$data = @MYSQL_RESULT($result,0,"imgdata"); 
+	$file = './tmp/folder.jpeg';
+	$handle = fopen ($file, 'w+');
+	fwrite($handle, $data);
+	fclose($handle);
+	$thumb = PhpThumbFactory::create('./tmp/folder.jpeg');
+/* Params: $percent, $reflection, $white, $border, $borderColor */
+	$thumb->createReflection(10, 40, 90, true, '#a4a4a4');
+	$thumb->save('./tmp/test.png', 'png');
+?>
 <div id="covertitle">
-	<a href='#dhfig' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"><img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" height="140" title="Cover ändern"></a>
+
+
+	<a href='#dhfig' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"><img src='./tmp/test.png' width="140" title="Cover ändern"></a>
+
+	
 </div>
 
 
@@ -189,6 +206,5 @@ if($count<="9") {$count="0$count";}
 <?php
 ende:
 mysqli_free_result( $db_erg );
-
 
 ?>
