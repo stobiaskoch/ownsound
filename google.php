@@ -17,7 +17,7 @@ $album = addslashes(getalbum($_REQUEST['albumID']));
 	<script src="./js/jquery.form.js"></script> 
 	
 	
-	<script>
+<script>
 	
 
 
@@ -32,7 +32,7 @@ $(document).ready(function()
     });
 			sleep(1000);
 			stats();
-			getdataalbum(albumID, artistID);
+			getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
     }); 
 
 })
@@ -53,8 +53,9 @@ $albumsearch = str_replace(" ", "+", $albumsearch);
 $albumsearch = urlencode($albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch."&tbs=iar:t,ift:jpg";
+
 $json = file_get_contents($jsrc);
-sleep(1);
+sleep(3);
 $jset = json_decode($json, true);
 
 

@@ -33,7 +33,7 @@ if ( ! $db_erg )
 if($_REQUEST['order']=="playalbum" or $_REQUEST['order']=="addalbum") {
 $i = 1;
 
-	$sql = "SELECT * FROM `title` WHERE album='".$_REQUEST['albumID']."' ORDER BY path";
+	$sql = "SELECT * FROM `title` WHERE album='".$_REQUEST['albumID']."' ORDER BY track";
 
 				if($_REQUEST['order']=="playalbum") {
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
@@ -50,7 +50,7 @@ $i = 1;
 		$title = str_replace("'", "\'", $zeile['name']);
 		$title = utf8_encode($title);
 		$artist = addslashes(getartist($_REQUEST['artistID']));
-		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$i - $title', '".$zeile['id']."')");
+		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$zeile['id']."')");
 		$i++;
 	}
 	
@@ -79,7 +79,7 @@ $i = 1;
 			if($_REQUEST['order']=="playtitle") {
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
 			}
-		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$i - $title', '".$_REQUEST['albumID']."')");
+		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$_REQUEST['albumID']."')");
 		$i++;
 	}
 
@@ -139,7 +139,7 @@ $query = mysql_query($sql);
 $Daten = mysql_fetch_assoc($query); 
 $artist = $Daten['name'];
 				
-	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$i - $title', '".$randid."')");
+	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$randid."')");
 }
 
 }

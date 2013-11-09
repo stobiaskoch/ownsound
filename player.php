@@ -1,35 +1,30 @@
-<?php
-	//TEST
-	error_reporting(E_ALL | E_STRICT);
-	ini_set('open_basedir', '/media/usb1/Musik/');
-	//$pfad=$_SERVER['DOCUMENT_ROOT']."
-	
-	
-	
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
 	<link href="./skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" /> 
-	<script src="./js/jquery-1.9.1.js"></script>	
-	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="./js/jquery.desknoty.js"></script>	
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
-	<script type="text/javascript" src="./js/ownsound.js"></script>
-	<script src="./js/jquery.ui.core.js"></script>
-	<script src="./js/jquery.ui.widget.js"></script>
-	<script src="./js/jquery.ui.mouse.js"></script>
-	<script src="./js/jquery.ui.draggable.js"></script>
-
-
-
 </head>
 <script type="text/javascript">
+$(document).ready(function() {
+
+function notify(str, strtext, artist) {
+
+
+$.desknoty({
+      icon: "./getcover.php?title="+str+"&artist="+artist+"&size=small",
+      title: 'OwnSound',
+      body: strtext
+ 
+            });
+  }  
+
+
 //<![CDATA[
-$(document).ready(function(){
+
 	var cssSelector = {
         jPlayer: "#jquery_jplayer_1", 
         cssSelectorAncestor: "#jp_container_1"
@@ -40,7 +35,7 @@ $(document).ready(function(){
         swfPath: "./jplayer", 
         supplied: "mp3",
 		smoothPlayBar: true,
-		preload: 'metadata',
+		preload: 'none',
 		volume: 0.5,
 		autohide: true
     };
@@ -48,48 +43,54 @@ $(document).ready(function(){
     $.getJSON("./playlist.php",function(data){  // get the JSON array produced by my PHP
         $.each(data,function(index,value){
             myPlaylist.add(value); // add each element in data in myPlaylist
-			
         })
 		
     }); 
-	
-	
+	$('#jquery_jplayer_1').bind($.jPlayer.event.play, function(event) { // binding to the play event so this runs every time media is played
+          var current = myPlaylist.current; //This is an integer which represents the index of the array object currently being played.
+          var playlist = myPlaylist.playlist //This is an array, which holds each of the set of the items youve defined (e.q. title, mp3, artist etc...)
 
-	
+          $.each(playlist, function(index, object) { //$.each is a jQuery iteration method which lets us iterate over an array(playlist), so we actually look at playlist[index] = object
+                  if(index == current) {   
+                   		var play = $('.currentSong p').text(object.title);
+						var songtitle = (object.title);
+						var artist = (object.artist);
+						str = songtitle.replace(/\'/g,'\\\'');
+						document.getElementById("playnow").innerHTML="<center>Now playing: "+artist+" - "+str+"</center>";
+						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
+						strtext = artist+' - '+str;
+						var notifications = readCookie("notifications");
+						if (notifications == 'yes') {
+							notify(str, strtext, artist);
+						}
+                  }
+            });
+});	
+/*	
+	$('#jquery_jplayer_1').bind($.jPlayer.event.pause, function(event) { // binding to the play event so this runs every time media is played
+          var current = myPlaylist.current; //This is an integer which represents the index of the array object currently being played.
+          var playlist = myPlaylist.playlist //This is an array, which holds each of the set of the items youve defined (e.q. title, mp3, artist etc...)
+
+          $.each(playlist, function(index, object) { //$.each is a jQuery iteration method which lets us iterate over an array(playlist), so we actually look at playlist[index] = object
+                  if(index == current) {   
+                   		var play = $('.currentSong p').text(object.title);
+						var songtitle = (object.title);
+						var artist = (object.artist);
+						str = songtitle.replace(/\'/g,'\\\'');
+
+						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
+						strtext = 'pausiert... '+artist+' - '+str;
+						var notifications = readCookie("notifications");
+						if (notifications == 'yes') {
+							notify(str, strtext, artist);
+						}
+                  }
+            });
+});	
+*/	
 });
 
-function autoplay() {
-	$('#jquery_jplayer_1').jPlayer("play");
-}
 
-    document.onkeydown = function(event) {
- 
-        var actionBox = document.getElementById('action');
- 
-        if (event.keyCode == 32) {
- 
-          event.cancelBubble = true;
-          event.preventDefault = false;
- 
-          $('#jquery_jplayer_1').jPlayer("play");
- 
-        }
- 
-        return event.event.preventDefault;
- 
-      }
-	  
-	  	$(function() {
-		$( "#malsehenobdraggable" ).draggable({ 
-			stop: function (event, ui) {
-				createCookie("palletteX", ui.position.left, 100);
-				createCookie("palletteY", ui.position.top, 100);
-     }
-
-
-
-		});
-	});
 </script>
 
 <body>
@@ -108,15 +109,20 @@ function autoplay() {
 			</div>
 		</div>
 		<?php
-		$top = $_COOKIE["palletteX"];
-		$left = $_COOKIE["palletteY"];
+		$left = $_COOKIE["screenwidth"];
+		$left = $left / 2;
+		$left = $left - 314;
 		?>
-		<div id="malsehenobdraggable" style="position: fixed; top:<?php echo $top; ?>px; left:<?php echo $left; ?>px;">
+		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; left:<?php echo $left; ?>px;">
+		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
-
-		<div id="jp_container_1" class="jp-audio" style="width:440px;">
+	
+		<div id="jp_container_1" class="jp-audio" style="width:620px;">
+		
 			<div class="jp-type-playlist" style="width:440px;">
+			
 				<div class="jp-gui jp-interface" style="width:440px;">
+				
 					<ul class="jp-controls" style="width:440px;">
 						<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
 						<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
@@ -138,16 +144,19 @@ function autoplay() {
 					</div>
 					<div class="jp-current-time"></div>
 					<div class="jp-duration"></div>
+					<div id="playnow" style="position: absolute; left:<?php echo $left - 240; ?>px; top: 8px; font-size: 7.9px;"></div>
 					<ul class="jp-toggles">
 						<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
 						<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
 						<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
 						<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
 					</ul>
+					
 				</div>
-			
+			<div id="playercover" style="position: absolute; right: 6px; bottom: 6px;"></div>
 			</div>
 		</div>	
+		
 	</div>
 </body>
 </html>

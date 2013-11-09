@@ -1,5 +1,5 @@
 <?php
-require_once('../ownsound/config.inc.php');
+require_once('./../ownsound.config.php');
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 
 
@@ -30,6 +30,26 @@ function gettitle ($id) {
 				$Daten = mysql_fetch_assoc($query); 
 				
 				return $Daten['name'];
+
+}
+
+function getartistID ($id) {
+
+				$sql    = "SELECT id FROM artist WHERE name = '$id'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				
+				return $Daten['id'];
+
+}
+
+function getartistIDfromalbumID ($id) {
+
+				$sql    = "SELECT artist FROM album WHERE id = '$id'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				
+				return $Daten['artist'];
 
 }
 ?>
