@@ -56,7 +56,7 @@ $.desknoty({
 						var songtitle = (object.title);
 						var artist = (object.artist);
 						str = songtitle.replace(/\'/g,'\\\'');
-						document.getElementById("playnow").innerHTML="<center>"+artist+" - "+str+"</center>";
+						document.getElementById("playnow").innerHTML="<center>Now playing: "+artist+" - "+str+"</center>";
 						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
 						strtext = artist+' - '+str;
 						var notifications = readCookie("notifications");
@@ -144,7 +144,7 @@ $.desknoty({
 					</div>
 					<div class="jp-current-time"></div>
 					<div class="jp-duration"></div>
-					<div id="playnow" style="position: absolute; left:<?php echo $left - 240; ?>px; font-size: 7.9px;"></div>
+					<div id="playnow" style="position: absolute; left:<?php echo $left - 240; ?>px; top: 8px; font-size: 7.9px;"></div>
 					<ul class="jp-toggles">
 						<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
 						<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
