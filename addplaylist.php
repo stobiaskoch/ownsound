@@ -76,12 +76,13 @@ $i = 1;
 	{
 		
 		$title = str_replace("'", "\'", $zeile['name']);
-		$title = utf8_encode($title);
+	//	$title = utf8_encode($title);
 		$artist = addslashes(getartist($_REQUEST['artistID']));
+		$albumID = $zeile['album'];
 			if($_REQUEST['order']=="playtitle") {
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
 			}
-		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$_REQUEST['albumID']."')");
+		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$_REQUEST['albumID']."', '$albumID')");
 		$i++;
 	}
 
@@ -118,7 +119,7 @@ $titlecount = mysql_num_rows($titleresult);
 
 
 mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
-for ($i = 1; $i <= 8; $i++) {
+for ($i = 1; $i <= 16; $i++) {
 $count = floatval($titlecount);
 $randid = rand(0, $count);
 $randid = round($randid);
@@ -134,14 +135,16 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $title = str_replace("'", "\'", $zeile['name']);
 $title = utf8_encode($title);
+$albumID = $zeile['album'];
 
 $artistID = $zeile['artist'];
 $sql    = "SELECT name FROM artist WHERE id = '$artistID'";
 $query = mysql_query($sql); 
 $Daten = mysql_fetch_assoc($query); 
 $artist = $Daten['name'];
+
 				
-	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$randid."')");
+	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$randid."', '$albumID')");
 }
 
 }
