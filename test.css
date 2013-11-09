@@ -148,7 +148,6 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
-z-index:5;
 }
 
 #player {
@@ -208,7 +207,7 @@ position:fixed;
 #content {
 padding-left: 40px;
 width: 580px;
-min-height: 200px;
+min-height: 250px;
 left: 320px;
 top: 300px;
 display:inline-block;
@@ -230,7 +229,7 @@ right: 46px;
 #titlelist {
 padding-left: 40px;
 width: 580px;
-min-height: 200px;
+min-height: 250px;
 left: 300px;
 top: 262px;
 display:inline-block;

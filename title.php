@@ -187,14 +187,15 @@ if($count<="9") {$count="0$count";}
 	$thumb = PhpThumbFactory::create('./tmp/folder.jpeg');
 /* Params: $percent, $reflection, $white, $border, $borderColor */
 	$thumb->createReflection(10, 40, 90, true, '#a4a4a4');
-	$thumb->save('./tmp/test.png', 'png');
+	$thumb->save('./tmp/temp.png', 'png');
 ?>
 <div id="covertitle">
 
 
-	<a href='#dhfig' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"><img src='./tmp/test.png' width="140" title="Cover ändern"></a>
-
-	
+<map name="Landkarte">
+	 <area shape="rect" coords="1,1,249,139" href='#' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
+</map>
+<img src='./tmp/temp.png' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 </div>
 
 
