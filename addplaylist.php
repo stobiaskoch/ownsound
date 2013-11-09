@@ -17,7 +17,9 @@ if ( ! isset ( $_REQUEST['order'] ) )
 $sql="CREATE TABLE IF NOT EXISTS `".$user."_playlist` (
   `artist` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
   `title` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
-  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
+  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `artistID` int(11) NOT NULL,
+  `albumID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 
 $db_erg = mysqli_query( $db_link, $sql );
@@ -50,7 +52,7 @@ $i = 1;
 		$title = str_replace("'", "\'", $zeile['name']);
 		$title = utf8_encode($title);
 		$artist = addslashes(getartist($_REQUEST['artistID']));
-		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid) VALUES ('".$artist."', '$title', '".$zeile['id']."')");
+		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$zeile['id']."', '".$_REQUEST['albumID']."')");
 		$i++;
 	}
 	

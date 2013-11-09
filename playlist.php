@@ -15,16 +15,19 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 
 	$artist=$zeile['artist'];
+	$artist=utf8_decode($artist);
 	$title=$zeile['title'];
+	$title=utf8_decode($title);
 	$titleid=$zeile['titleid'];
+	$albumID=$zeile['albumID'];
 
- $playlist[]=array('artist'=>$artist,'title'=>$title,'mp3'=>'mp3.php?id='.$titleid);
+ $playlist[]=array('artistID'=>$albumID, 'artist'=>$artist,'title'=>$title,'mp3'=>'mp3.php?id='.$titleid);
 
 }
 
 
 
-//$playlist[]=array('artist'=>'Alice In Chains','title'=>'God Smack','mp3'=>'mp3.php?id=/mnt/musik/Alice in Chains - Dirt (1992)/Alice In Chains - Dirt/08. Alice In Chains - God Smack.mp3');
+//$playlist[]=array('artist'=>'Alice In Chains', 'artist'=>'Alice In Chains','title'=>'God Smack','mp3'=>'mp3.php?id=/mnt/musik/Alice in Chains - Dirt (1992)/Alice In Chains - Dirt/08. Alice In Chains - God Smack.mp3');
 $playlist=json_encode($playlist);
 print_r($playlist);
 ?> 

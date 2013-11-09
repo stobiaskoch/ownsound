@@ -11,11 +11,11 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-function notify(str, strtext, artist) {
+function notify(strtext, albumID) {
 
 
 $.desknoty({
-      icon: "./getcover.php?title="+str+"&artist="+artist+"&size=small",
+      icon: "./get.php?picid="+albumID+"&size=small",
       title: 'OwnSound',
       body: strtext
  
@@ -53,15 +53,16 @@ $.desknoty({
           $.each(playlist, function(index, object) { //$.each is a jQuery iteration method which lets us iterate over an array(playlist), so we actually look at playlist[index] = object
                   if(index == current) {   
                    		var play = $('.currentSong p').text(object.title);
+						var albumID = (object.artistID);
 						var songtitle = (object.title);
 						var artist = (object.artist);
 						str = songtitle.replace(/\'/g,'\\\'');
 						document.getElementById("playnow").innerHTML="<center>Now playing: "+artist+" - "+str+"</center>";
-						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
+						document.getElementById("playercover").innerHTML="<img src='./get.php?picid="+albumID+"&size=small' width='70' height='70'>";
 						strtext = artist+' - '+str;
 						var notifications = readCookie("notifications");
 						if (notifications == 'yes') {
-							notify(str, strtext, artist);
+							notify(strtext, albumID);
 						}
                   }
             });
@@ -111,13 +112,13 @@ $.desknoty({
 		<?php
 		$left = $_COOKIE["screenwidth"];
 		$left = $left / 2;
-		$left = $left - 314;
+		$left = $left - 214;
 		?>
 		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; left:<?php echo $left; ?>px;">
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	
-		<div id="jp_container_1" class="jp-audio" style="width:620px;">
+		<div id="jp_container_1" class="jp-audio" style="width:520px;">
 		
 			<div class="jp-type-playlist" style="width:440px;">
 			

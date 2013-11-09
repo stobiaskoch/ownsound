@@ -142,8 +142,8 @@ playlist();
 	
 	
 <div id="playerdiv">
-	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="5%" title="Shuffle"></a>
-	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.jpg' width="5%" title="Playlist leeren"></a>
+	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
+	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
 	<div id="playlist" style="font-size:0.6em;"></div>
 </div>
 	

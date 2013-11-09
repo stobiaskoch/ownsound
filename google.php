@@ -50,7 +50,7 @@ $albumsearch = "$artist - $album";
 echo "Suche nach: ".stripslashes($albumsearch)."<br>";
 
 $albumsearch = str_replace(" ", "+", $albumsearch);
-$albumsearch = urlencode($albumsearch);
+//$albumsearch = urlencode($albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch."&tbs=iar:t,ift:jpg";
 
