@@ -2,21 +2,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <head>
 
-	<script>
-		function getdataalbum(albumID, artistID){
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID, success: function(data){
-            $("#playalbum").html(data);
-    }
-    });
-	document.getElementById("title").innerHTML="<title>"+albname+"</title>";
-	}
-			function getdatanoalbum(artid, albname){
-		$.ajax({ url: "./noalbum.php?artid="+artid+"&albname="+albname , success: function(data){
-            $("#playalbum").html(data);
-    }
-    });
-	}
-	</script>
 </head>	
 <?php
 require_once('config.inc.php');

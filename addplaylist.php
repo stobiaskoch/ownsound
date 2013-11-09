@@ -119,7 +119,7 @@ $titlecount = mysql_num_rows($titleresult);
 
 
 mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
-for ($i = 1; $i <= 16; $i++) {
+for ($i = 1; $i <= 13; $i++) {
 $count = floatval($titlecount);
 $randid = rand(0, $count);
 $randid = round($randid);
