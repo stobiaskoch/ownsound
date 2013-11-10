@@ -65,21 +65,21 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 $path=$zeile['path'];
 $titleID = $zeile['id'];
 $artist = getartist($artistID);
-
+$track = $zeile['track'];
 $count++;
-if($count<="9") {$count="0$count";}
+if($track<="9") {$track="0$track";}
   echo "<tr>";
-  	echo "<td>". $zeile['track'] . " - </td>";
+  	echo "<td>". $track . " - </td>";
 ?> 
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
 -->
-	<td width='300px'><div class="target<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
-			$('.target<?php echo $count; ?>').contextMenu('context-menu-1', {
+			$('.targettrack<?php echo $count; ?>').contextMenu('context-menu-1', {
 				'<?php echo addslashes(getartist($artistID)); ?> - <?php echo addslashes(gettitle($titleID)); ?>': {
 				klass: "menu-item-oben" 
 				},
@@ -128,7 +128,7 @@ if($count<="9") {$count="0$count";}
 	
 
 </table>
-<div class="target_album"><a href='#'>Albumsoptionen</a></div></td>
+<div class="target_album"><a href='#OwnSound'>Albumsoptionen</a></div></td>
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
@@ -186,23 +186,17 @@ if($count<="9") {$count="0$count";}
 	fclose($handle);
 	$thumb = PhpThumbFactory::create('./tmp/folder.jpeg');
 /* Params: $percent, $reflection, $white, $border, $borderColor */
-	$thumb->createReflection(10, 40, 90, true, '#a4a4a4');
-	$thumb->save('./tmp/temp.png', 'png');
+	$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->save('./tmp/temp.jpg', 'jpg');
+//	$thumb->save('./tmp/temp.jpg', 'jpg');
 ?>
 <div id="covertitle">
 
 
 <map name="Landkarte">
-	 <area shape="rect" coords="1,1,249,139" href='#' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
+	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
 </map>
-<img src='./tmp/temp.png' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
+<img src='./tmp/temp.jpg' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 </div>
-
-
-
-
-
-
 </div>
 <?php
 ende:

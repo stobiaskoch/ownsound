@@ -44,14 +44,14 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
+  die('Ungültige Abfrage: ' . mysqli_error());
 }
 echo "<div id='play'>";
 
   ?>
- <br><div id="album">
-
-<div><h1><?php echo getartist($artistID); echo " [$albumcount]" ?></h1></div>
+<div id="album">
+<div>
+<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo getartist($artistID); echo " [$albumcount]" ?></h1></div><br>
 <?php
 if($albumcount>=16) {
 $trenner = $albumcount / 15;
@@ -75,54 +75,17 @@ $count2++;
 
 }
 	?>
-	<td width="70px"><a href='#ownsound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><div class="atarget<?php echo $count; ?>"><a href="#"><?php echo getalbum($albumID); ?></a></div></td>
+	<td width="70px"><a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a>
 	
-			<script type="text/javascript">
-		  $(document).ready(function(){
+	<a href='#owncloud' onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/play-icon.png' width='14' height='14'></a>
+	<a href='#owncloud' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/add-icon.png' width='14' height='14'></a>
+	<a href='#owncloud' onclick="if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+								{
+									deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
+								} return false;
+								"> <img src='./img/truncate.png' width='14' height='14'></a></td>
+								<td width="116px"><a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><?php echo getalbum($albumID); ?></a></div></td>
 
-			$('.atarget<?php echo $count; ?>').contextMenu('context-menu-1', {
-				'Öffnen': {
-					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
-					},
-					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
-				},
-				'Abspielen': {
-					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
-					},
-					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
-				},
-				'Einreihen': {
-					click: function(element){ 
-					addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
-					},
-					klass: "second-menu-item"
-				},
-				'Umbennen': {
-					click: function(element){ alert('kommt...'); },
-					klass: "third-menu-item"
-				},
-				'Löschen': {
-					click: function(element){ 
-					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
-					{
-						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
-					}
-					
-					},
-					klass: "fourth-menu-item"
-}
-  },
-  {
-
-    leftClick: true // trigger on left click instead of right click
-  }
-);
-		  });
-		</script>
-	
 	<?php
 	if ($count2==3) {
 	$count2 = 0;
@@ -182,13 +145,14 @@ $count2++;
 
 ?>
 </table><div>
-
+<div id="pages" style="position: fixed;">
 <?php
 if($albumcount>=15) {
 $trenner2 = 0;
 for ($i = 1; $i <= $trenner; $i++) {
 
 ?>
+
 <a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
@@ -198,3 +162,4 @@ $trenner2 = $i * 15;
 mysqli_free_result( $db_erg );
 
 ?>
+</div>

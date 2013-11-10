@@ -6,6 +6,7 @@
 	<script src="./js/jquery.ui.core.js"></script>
 	<script src="./js/jquery.ui.widget.js"></script>
 	<script src="./js/jquery.ui.progressbar.js"></script>
+	<script src="./js/jquery.jeditable.js"></script> 
 	<script>
 	$(function() {
 		
