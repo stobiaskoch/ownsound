@@ -31,12 +31,13 @@ $.desknoty({
 			
     };
     var playlist = []; // Empty playlist
+	var oldvolume = readCookie("volume");
     var options = {
         swfPath: "./jplayer", 
         supplied: "mp3",
 		smoothPlayBar: true,
 		preload: 'none',
-		volume: 0.5,
+		volume: oldvolume,
 		autohide: true
     };
     var myPlaylist = new jPlayerPlaylist(cssSelector, playlist, options);
@@ -67,28 +68,11 @@ $.desknoty({
                   }
             });
 });	
-/*	
-	$('#jquery_jplayer_1').bind($.jPlayer.event.pause, function(event) { // binding to the play event so this runs every time media is played
-          var current = myPlaylist.current; //This is an integer which represents the index of the array object currently being played.
-          var playlist = myPlaylist.playlist //This is an array, which holds each of the set of the items youve defined (e.q. title, mp3, artist etc...)
 
-          $.each(playlist, function(index, object) { //$.each is a jQuery iteration method which lets us iterate over an array(playlist), so we actually look at playlist[index] = object
-                  if(index == current) {   
-                   		var play = $('.currentSong p').text(object.title);
-						var songtitle = (object.title);
-						var artist = (object.artist);
-						str = songtitle.replace(/\'/g,'\\\'');
-
-						document.getElementById("playercover").innerHTML="<img src='./getcover.php?title="+str+"&artist="+artist+"&size=small' width='70' height='70'>";
-						strtext = 'pausiert... '+artist+' - '+str;
-						var notifications = readCookie("notifications");
-						if (notifications == 'yes') {
-							notify(str, strtext, artist);
-						}
-                  }
-            });
-});	
-*/	
+	$('#jquery_jplayer_1').bind($.jPlayer.event.volumechange , function(event) {		
+						var voolume = $("#jquery_jplayer_1").data("jPlayer").options.volume;
+						createCookie("volume", voolume, 100);
+						});
 });
 
 
