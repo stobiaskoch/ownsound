@@ -1,10 +1,11 @@
-<?php
+﻿<?php
 require_once('config.inc.php');
 $folders = array();
 foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
     $folders[] = $filename;
 }
 ?>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script type="text/javascript" src="./js/ownsound.js"></script>
 <script src="./js/jquery.form.js"></script> 
 <script src="./js/jquery.desknoty.js"></script>	
@@ -79,7 +80,7 @@ echo "<option>$folder</option>";
 
 
 <br>
-<div style="font-size:1.0em;">
+<div style="font-size:1.5em;">
 <input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
 <input type="submit" value=" Scan starten ">
 </form>

@@ -10,7 +10,9 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 				$query = mysql_query($sql); 
 				$Daten = mysql_fetch_assoc($query); 
 				$mp3Path = $Daten['path'];
- 
+		//		$mp3Path = "'".$mp3Path."'";
+				
+		//	echo utf8_encode($Daten['path']);
 // Make sure the file exists
 if(!file_exists($mp3Path) || !is_file($mp3Path)) {
     header('HTTP/1.0 404 Not Found');

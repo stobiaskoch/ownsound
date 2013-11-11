@@ -13,7 +13,7 @@ $album = addslashes(getalbum($_REQUEST['albumID']));
 <head>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
-
+	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.form.js"></script> 
 	
 	
@@ -30,7 +30,7 @@ $(document).ready(function()
             $("#playalbum").html(data);
     }
     });
-			sleep(1000);
+			sleep(1);
 			stats();
 			getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
     }); 
@@ -55,7 +55,7 @@ $albumsearch = str_replace(" ", "+", $albumsearch);
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch."&tbs=iar:t,ift:jpg";
 
 $json = file_get_contents($jsrc);
-sleep(3);
+sleep(1);
 $jset = json_decode($json, true);
 
 
@@ -96,6 +96,7 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 
 
 if($_REQUEST['order']=="save") {
+require_once './js/thumb/ThumbLib.inc.php';
 $url = $_REQUEST['url'];
 
   $newfname = "./tmp/".$albumID."_original.jpg";
@@ -117,38 +118,7 @@ $url = $_REQUEST['url'];
     fclose($newf);
   }
   
-  
-
-$tmpname = $newfname;
-$size = getimagesize($tmpname);  
-  
-$src_img = imagecreatefromjpeg($tmpname);
-$dst_img = imagecreatetruecolor(70,70);
-imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 70, 70, $size[0], $size[1]);
-imagejpeg($dst_img, './tmp/kleinesbild.jpg');
-imagedestroy($src_img);
-imagedestroy($dst_img);
-
-
-
-$src_img = imagecreatefromjpeg($tmpname);
-$dst_img = imagecreatetruecolor(140,140);
-imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
-imagejpeg($dst_img, './tmp/grossesbild.jpg');
-imagedestroy($src_img);
-imagedestroy($dst_img);
-
-$hndFile = fopen('./tmp/grossesbild.jpg', "r");
-$data = addslashes(fread($hndFile, filesize($tmpname)));
-$hndFilesmall = fopen('./tmp/kleinesbild.jpg', "r");
-$datasmall = addslashes(fread($hndFilesmall, filesize($tmpname)));
-
-mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-mysql_query("UPDATE album SET imgdata_small = '$datasmall', imgtype = '$type' WHERE id='$albumID'");
-unlink($newfname);
-unlink('./tmp/grossesbild.jpg');
-unlink('./tmp/kleinesbild.jpg');
-
+coverinmysql($newfname, $albumID);
 
 }
 ?>

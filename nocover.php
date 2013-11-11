@@ -1,7 +1,7 @@
 <html>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
-
+<script src="./js/jquery.jeditable.js"></script> 
 </head>	
 <?php
 require_once('config.inc.php');
@@ -13,7 +13,7 @@ echo "<div id='title'><title>".$artname."</title></div>";
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
-$sql = "SELECT * FROM album WHERE imgdata='' ORDER BY name";
+$sql = "SELECT * FROM album WHERE imgdata_big='' ORDER BY name LIMIT 15";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
@@ -52,7 +52,7 @@ if ($count2==4) {
 		
   ?>
 	<td width="70px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='get.php?picid=<?php echo $zeile['id']; ?>&size=small' width='70' height='70'></a></td>
-	<td width="116px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>'); ?>')">[<?php echo $artname ."]<br>".$zeile['name']; ?></a></td>
+	<td width="300px"><a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">[<?php echo $artname ."]<br>".$zeile['name']; ?></a></td>
   <link id="favicon" rel="icon" type="image/jpeg" href="get.php?picid=<?php echo $zeile['id']; ?>" /> 
   <?php
 if ($count2==3) {

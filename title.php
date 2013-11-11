@@ -15,7 +15,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <head>
 
-	
+	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script>
 $(document).ready(function() {
@@ -176,26 +176,14 @@ if($track<="9") {$track="0$track";}
 );
 		  });
 		</script>
-<?php
-	$query = "select imgdata,imgtype,imgdata_small from album where id=$albumID";
-	$result = @MYSQL_QUERY($query); 
-	$data = @MYSQL_RESULT($result,0,"imgdata"); 
-	$file = './tmp/folder.jpeg';
-	$handle = fopen ($file, 'w+');
-	fwrite($handle, $data);
-	fclose($handle);
-	$thumb = PhpThumbFactory::create('./tmp/folder.jpeg');
-/* Params: $percent, $reflection, $white, $border, $borderColor */
-	$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->save('./tmp/temp.jpg', 'jpg');
-//	$thumb->save('./tmp/temp.jpg', 'jpg');
-?>
+
 <div id="covertitle">
 
 
 <map name="Landkarte">
 	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
 </map>
-<img src='./tmp/temp.jpg' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
+<img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 </div>
 </div>
 <?php

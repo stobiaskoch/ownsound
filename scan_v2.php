@@ -1,3 +1,4 @@
+﻿<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <script src="./js/jquery.ui.progressbar.js"></script>
 <?php
 // requests
@@ -6,6 +7,7 @@
 	
 require_once('./getid3/getid3.php');
 require_once('config.inc.php');
+include('./js/functions.php');
 $getID3 = new getID3;
 
 //starten
@@ -13,6 +15,7 @@ $getID3 = new getID3;
 $dir = opendir($DirectoryToScan);
 mysql_connect(DBHOST, DBUSER,DBPASS) OR DIE ("NICHT Erlaubt");
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+mysql_query("SET NAMES 'utf8'");
 
 //statistik
 mysql_query("UPDATE scanner_log SET folderscanned=folderscanned+1 WHERE id='0'");
@@ -48,17 +51,20 @@ if($dir!=FALSE) {
 
 		$artist = $ThisFileInfo['comments_html']['artist'][0];
 		$artist = addslashes($artist);
+		$artist = html_entity_decode($artist, ENT_QUOTES, 'UTF-8');
 
 		$album = $ThisFileInfo['comments_html']['album'][0];
 		$album = addslashes($album);
 		
 		$title = $ThisFileInfo['comments_html']['title'][0];
 		$title = addslashes($title);
+		$title = html_entity_decode($title, ENT_QUOTES, 'UTF-8');
 		
 		$track = $ThisFileInfo['comments_html']['track'][0];
 				
 		$path = $ThisFileInfo['filenamepath'];
 		$path = addslashes($path);
+		$path = utf8_encode($path);
 		
 		$playtime = $ThisFileInfo['playtime_string'];
 		if(COVERSEARCH!=FALSE) {
@@ -70,6 +76,7 @@ if($dir!=FALSE) {
 		}
 		
 //checke, ob artist vorhanden
+
 
 		$sql    = "SELECT * FROM artist WHERE name = '$artist'";
 		$query = mysql_query($sql); 
@@ -86,6 +93,7 @@ if($dir!=FALSE) {
 			if($checkartist!=$artist) {
 				mysql_query("INSERT INTO artist (name) VALUES ('$artist')");
 				mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
+
 			}
 			//artistID ermitteln
 				$sql    = "SELECT id FROM artist WHERE name = '$artist'";
@@ -119,6 +127,7 @@ if($dir!=FALSE) {
 		$Daten = mysql_fetch_assoc($query); 
 		$albumID = $Daten['id'];
 		//cover vorhanden? schreiben
+		
 		if(COVERSEARCH!=FALSE) {
 			if($coverthere=="yes") {
 				$type = mime_content_type($artworktmp) . "\n";
@@ -126,29 +135,8 @@ if($dir!=FALSE) {
 				$size = getimagesize($artworktmp);
 				if ($size[0]>5 || $size[1]>5) {
 				
-					$src_img = imagecreatefromjpeg($artworktmp);
-					$dst_img = imagecreatetruecolor(70,70);
-					imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 70, 70, $size[0], $size[1]);
-					imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'_small.jpeg');
-					imagedestroy($src_img);
-					imagedestroy($dst_img);
-					
-					$src_img = imagecreatefromjpeg($artworktmp);
-					$dst_img = imagecreatetruecolor(140,140);
-					imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, 140, 140, $size[0], $size[1]);
-					imagejpeg($dst_img, './tmp/front_'.$artist.'_'.$album.'.jpeg');
-					imagedestroy($src_img);
-					imagedestroy($dst_img);
-
-					$hndFile = fopen('./tmp/front_'.$artist.'_'.$album.'.jpeg', "r");
-					$data = addslashes(fread($hndFile, filesize('./tmp/front_'.$artist.'_'.$album.'.jpeg')));
-					$hndFilesmal = fopen('./tmp/front_'.$artist.'_'.$album.'_small.jpeg', "r");
-					$data2 = addslashes(fread($hndFilesmal, filesize('./tmp/front_'.$artist.'_'.$album.'_small.jpeg')));
-
-					mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-					mysql_query("UPDATE album SET imgdata_small = '$data2', imgtype = '$type' WHERE id='$albumID'");
-					unlink('./tmp/front_'.$artist.'_'.$album.'.jpeg');
-					unlink('./tmp/front_'.$artist.'_'.$album.'_small.jpeg');
+				coverinmysql($artworktmp, $albumID);
+				
 				}
 			}
 		}

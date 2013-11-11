@@ -25,7 +25,7 @@ $(document).ready(function() {
 	
 				function googledownload(pic, albumID, artistID){
 		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
-		sleep(2500);
+		sleep(2000);
 		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
             $("#playalbum").html(data);
             stats();
@@ -80,13 +80,6 @@ $(document).ready(function() {
 		createCookie(name,"",-1);
 	}
 
-	function getdatabig(artid, artname, limit){
-		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
-            $("#play").html(data);		
-			}
-		});
-	}
 	
 	function getdataalbum(albumID, artistID){
 		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
@@ -147,12 +140,12 @@ $(document).ready(function() {
 			}
 		  }
 	}
-			function addalbum(order, albumid, artistid){
+			
+			
+	function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-				sleep(500);
-				playlist();
-				
-
+		sleep(500);
+		playlist();
 	}
 	
 	function zipalbum(albumID){
