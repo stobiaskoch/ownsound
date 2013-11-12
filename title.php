@@ -17,6 +17,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.contextMenu.js"></script> 
+	<script src="./js/jquery.loadmask.min.js"></script> 
 	<script>
 $(document).ready(function() {
 
@@ -39,6 +40,8 @@ $(document).ready(function() {
 
 </head>	
 <?php
+
+
 
 $sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY track";
  
@@ -189,5 +192,5 @@ if($track<="9") {$track="0$track";}
 <?php
 ende:
 mysqli_free_result( $db_erg );
-
+mysql_close();
 ?>

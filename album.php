@@ -5,9 +5,11 @@ setcookie('lastartist', $artistID, $yearExpire);
 setcookie ("lastalbum", "", time() - 3600);
 ?>
 <html>
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
 	<script src="./js/jquery.contextMenu.js"></script> 
+	<script src="./js/jquery.loadmask.min.js"></script> 
+
 </head>	
 <?php
 require_once('config.inc.php');
@@ -17,6 +19,18 @@ if($limit=="") {$limit=0;}
 
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistID'"); 
@@ -29,7 +43,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	}
 	else
 	{
-		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name LIMIT ".$limit.", 12";
+		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name LIMIT ".$limit.", 9";
 	}
 ?>
 <div id='title'><title><?php getartist($artistID); ?></title></div>
@@ -51,10 +65,10 @@ echo "<div id='play'>";
   ?>
 <div id="album">
 <div>
-<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo getartist($artistID); echo " [$albumcount]" ?></h1></div><br>
+<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo utf8_encode(getartist($artistID)); echo " [$albumcount]" ?></h1></div><br>
 <?php
-if($albumcount>=16) {
-$trenner = $albumcount / 15;
+if($albumcount>=10) {
+$trenner = $albumcount / 9;
 $trenner = round($trenner, 0);
 $trenner = $trenner +1;
 }
@@ -66,6 +80,34 @@ $titleID = $zeile['id'];
 $count++;
 $count2++;
 
+
+		$sql    = "SELECT cover FROM album WHERE id = '$albumID'";
+		$query = mysql_query($sql); 
+		$Daten = mysql_fetch_assoc($query); 
+		if($Daten['cover']=="no") { goto coverjump; }
+		if($Daten['cover']!="yes") {
+		
+			require_once('./getid3/getid3.php');
+			$getID3 = new getID3;
+			$sql    = "SELECT path FROM title WHERE album = '$albumID'";
+			$query = mysql_query($sql); 
+			$Daten = mysql_fetch_array($query);
+			$ThisFileInfo = $getID3->analyze($Daten[0]);
+			getid3_lib::CopyTagsToComments($ThisFileInfo);
+			if($getID3->info['id3v2']['APIC'][0]['data']!="") {
+			$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
+			file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+			
+				coverinmysql($artworktmp, $albumID);
+
+				mysql_query("UPDATE album SET cover='yes' WHERE id = '$albumID'");
+			}
+			else
+			{
+			mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+			}
+			}
+coverjump:
 
 
 	if($albumcount!=0) {
@@ -147,7 +189,7 @@ $count2++;
 </table><div>
 <div id="pages" style="position: fixed;">
 <?php
-if($albumcount>=15) {
+if($albumcount>=9) {
 $trenner2 = 0;
 for ($i = 1; $i <= $trenner; $i++) {
 
@@ -156,10 +198,13 @@ for ($i = 1; $i <= $trenner; $i++) {
 <a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
-$trenner2 = $i * 15;
+$trenner2 = $i * 9;
 }
 }
 mysqli_free_result( $db_erg );
-
+mysql_close();
 ?>
 </div>
+			<script language="JavaScript">
+			stats();
+			</script>	

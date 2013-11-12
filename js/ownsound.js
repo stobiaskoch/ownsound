@@ -17,23 +17,21 @@ $(document).ready(function() {
 
 
 		function google(artistID, albumID){
+		$("#covertitle").mask("Retrieving...");
 		$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
             $("#content").html(data);
     }
     });
 	}
 	
-				function googledownload(pic, albumID, artistID){
+		function googledownload(pic, albumID, artistID){
+		$("#content").mask("Retrieving...");
 		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
-		sleep(2000);
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
-            $("#playalbum").html(data);
-            stats();
+		sleep(1500);
+		getdataalbum(albumID, artistID);
+        stats();
     }
-    });
-			
-			getdataalbum(albumID, artistID);
-	}
+
 
 
 
@@ -46,6 +44,7 @@ $(document).ready(function() {
 
 
 	function getdatabig(artid, artname, limit){
+		$("#play").mask("Loading...");
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
             $("#play").html(data);		
@@ -82,6 +81,9 @@ $(document).ready(function() {
 
 	
 	function getdataalbum(albumID, artistID){
+
+		$("#album").mask("Loading...");
+
 		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
             $("#play").html(data);
     }
@@ -89,8 +91,12 @@ $(document).ready(function() {
 	}
 	
 	function getdata(artid){
+		$("#play").mask("Fetching data...");
+		$("#album").mask("Fetching data...");
+		$("#content").mask("Fetching data...");
 		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid , success: function(data){
+		$.ajax({ url: "./album.php?artid="+artid , 
+		success: function(data){
             $("#play").html(data);		
 			}
 		});
@@ -99,7 +105,7 @@ $(document).ready(function() {
 	function nocover(){
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./nocover.php" , success: function(data){
-            $("#play").html(data);		
+            $("#content").html(data);		
 			}
 		});
 	}
@@ -144,7 +150,7 @@ $(document).ready(function() {
 			
 	function addalbum(order, albumid, artistid){
 		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-		sleep(500);
+		sleep(1500);
 		playlist();
 	}
 	
@@ -165,7 +171,12 @@ $(document).ready(function() {
 				document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
 			}
 			
-			
+	function searchcoverfromdb(){
+	document.getElementById("album").innerHTML="<center>searching...</center>";
+	}
+
+
+	
 	function deletetitle(titleID, albumID, artistID){
 		$.ajax({ url: "./delete.php?order=deletetitle&titleID="+titleID , success: function(data){
 			getdataalbum(albumID, artistID);

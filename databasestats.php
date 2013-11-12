@@ -1,3 +1,4 @@
+<script src="./js/jquery.loadmask.min.js"></script>
 <?php
 require_once('config.inc.php');
 mysql_connect(DBHOST, DBUSER,DBPASS);

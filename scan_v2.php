@@ -67,6 +67,9 @@ if($dir!=FALSE) {
 		$path = utf8_encode($path);
 		
 		$playtime = $ThisFileInfo['playtime_string'];
+		
+		$genre = $ThisFileInfo['comments_html']['genre'][0];
+/*
 		if(COVERSEARCH!=FALSE) {
 			if($getID3->info['id3v2']['APIC'][0]['data']!="") {
 				$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
@@ -74,7 +77,7 @@ if($dir!=FALSE) {
 				$coverthere = "yes";
 			}
 		}
-		
+*/		
 //checke, ob artist vorhanden
 
 
@@ -115,7 +118,7 @@ if($dir!=FALSE) {
 		
 			if($checkalbum!=$album) {
 			
-				mysql_query("INSERT INTO album (name, artist) VALUES ('$album', '$artistID')");	
+				mysql_query("INSERT INTO album (name, artist, genre) VALUES ('$album', '$artistID', '$genre')");	
 				mysql_query("UPDATE scanner_log SET album=album+1 WHERE id='0'");
 				
 			//albumID ermitteln
@@ -127,7 +130,7 @@ if($dir!=FALSE) {
 		$Daten = mysql_fetch_assoc($query); 
 		$albumID = $Daten['id'];
 		//cover vorhanden? schreiben
-		
+/*		
 		if(COVERSEARCH!=FALSE) {
 			if($coverthere=="yes") {
 				$type = mime_content_type($artworktmp) . "\n";
@@ -140,6 +143,7 @@ if($dir!=FALSE) {
 				}
 			}
 		}
+*/
 //checke, ob titel von diesem artist vorhanden
 
 		$sql    = "SELECT path FROM title WHERE path = '$path' AND artist='$artistID'";

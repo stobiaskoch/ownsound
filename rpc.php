@@ -15,5 +15,5 @@
 		echo '
 ';
 	}
-
+mysql_close();
 ?>

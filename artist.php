@@ -12,6 +12,8 @@
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.form.js"></script> 
 	<script src="./js/jquery.jeditable.js"></script> 
+	<script src="./js/jquery.loadmask.min.js"></script> 
+
 <script>
 createCookie("screenwidth", screen.width , 100);
 createCookie("screenheight", screen.height, 100);
@@ -176,5 +178,6 @@ else
 	</script>
 	<?php
 }
+mysql_close();
 ?>
 <iframe name="zip" style="visibility:hidden;display:none" ></iframe>
