@@ -44,7 +44,7 @@ $(document).ready(function() {
 		$query = mysql_query($sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		if($Daten['coverbig']=="no") { goto coverjump; }
-		if($Daten['cover']!="yes") {
+		if($Daten['coverbig']!="yes") {
 		thumbreflection($albumID);
 		}
 	
