@@ -12,27 +12,28 @@ $(document).ready(function() {
 	function google(artistID, albumID){
 		$("#covertitle").mask("Retrieving...");
 		$("#album").mask("Fetching data...");
-			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
-				$("#content").html(data);
-			}
-		});
+			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID,
+				success: function(data){
+					$("#content").html(data);
+				}
+			});
 	}
 	
 	function googledownload(pic, albumID, artistID){
 		$("#content").mask("Saving...");
 			$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID, 
 				success: function(){
-				getdataalbum(albumID, artistID);
-				stats();
-			}
-		});
+					getdataalbum(albumID, artistID);
+					stats();
+				}
+			});
 	}
 
 	function getdatabig(artid, artname, limit){
 		$("#play").mask("Loading...");
 			$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit ,
 				success: function(data){
-				$("#play").html(data);		
+					$("#play").html(data);		
 				}
 			});
 	}
@@ -69,7 +70,7 @@ $(document).ready(function() {
 		$("#album").mask("Loading...");
 		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , 
 			success: function(data){
-            $("#play").html(data);
+				$("#play").html(data);
 			}	
 		});
 	}
@@ -88,36 +89,41 @@ $(document).ready(function() {
 	
 	function nocover(){
 	$("#content").mask("Fetching data...");
-		$.ajax({ url: "./nocover.php" , success: function(data){
-            $("#content").html(data);		
+		$.ajax({ url: "./nocover.php" ,
+			success: function(data){
+				$("#content").html(data);		
 			}
 		});
 	}
 	
 	function getdatanewcover(artid, artname){
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#gshd" , success: function(data){
-            $("#play").html(data);
+		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"#gshd",
+			success: function(data){
+				$("#play").html(data);
 			}
 		});
 	}
 	
 	function stats(){
-		$.ajax({ url: "./databasestats.php" , success: function(data){
-            $("#stats").html(data);
+		$.ajax({ url: "./databasestats.php",
+			success: function(data){
+				$("#stats").html(data);
 			}
 		});
 	}
 	
 	function player(){
-		$.ajax({ url: "./player.php" , success: function(data){
-			$("#playlist").html(data);
+		$.ajax({ url: "./player.php",
+			success: function(data){
+				$("#playlist").html(data);
 			}
 		});
 	}
 
 	function playlist(){
-		$.ajax({ url: "./player.php" , success: function(data){
-			$("#playlist").html(data);
+		$.ajax({ url: "./player.php" ,
+			success: function(data){
+				$("#playlist").html(data);
 			}
 		});
 	}
