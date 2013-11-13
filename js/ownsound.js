@@ -6,62 +6,46 @@ $(document).ready(function() {
 			});
 		}
 	});
-
-
-
-
-	
 });
 
 
-
-
-		function google(artistID, albumID){
+	function google(artistID, albumID){
 		$("#covertitle").mask("Retrieving...");
-		$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
-            $("#content").html(data);
-    }
-    });
+		$("#album").mask("Fetching data...");
+			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID , success: function(data){
+				$("#content").html(data);
+			}
+		});
 	}
 	
-		function googledownload(pic, albumID, artistID){
-		$("#content").mask("Retrieving...");
-		$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID});
-		sleep(1500);
-		getdataalbum(albumID, artistID);
-        stats();
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-	function getdatabig(artid, artname, limit){
-		$("#play").mask("Loading...");
-		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit , success: function(data){
-            $("#play").html(data);		
+	function googledownload(pic, albumID, artistID){
+		$("#content").mask("Saving...");
+			$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID, 
+				success: function(){
+				getdataalbum(albumID, artistID);
+				stats();
 			}
 		});
 	}
 
+	function getdatabig(artid, artname, limit){
+		$("#play").mask("Loading...");
+			$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit ,
+				success: function(data){
+				$("#play").html(data);		
+				}
+			});
+	}
 
 
 	function createCookie(name,value,days) {
-	if (days) {
-		var date = new Date();
-		date.setTime(date.getTime()+(days*24*60*60*1000));
-		var expires = "; expires="+date.toGMTString();
-	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+"; path=/";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime()+(days*24*60*60*1000));
+			var expires = "; expires="+date.toGMTString();
+		}
+			else var expires = "";
+				document.cookie = name+"="+value+expires+"; path=/";
 	}
 
 	function readCookie(name) {
@@ -83,11 +67,11 @@ $(document).ready(function() {
 	function getdataalbum(albumID, artistID){
 
 		$("#album").mask("Loading...");
-
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , success: function(data){
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , 
+			success: function(data){
             $("#play").html(data);
-    }
-    });
+			}	
+		});
 	}
 	
 	function getdata(artid){
@@ -96,14 +80,14 @@ $(document).ready(function() {
 		$("#content").mask("Fetching data...");
 		document.getElementById("results").innerHTML="";
 		$.ajax({ url: "./album.php?artid="+artid , 
-		success: function(data){
-            $("#play").html(data);		
+			success: function(data){
+				$("#play").html(data);		
 			}
 		});
 	}
 	
 	function nocover(){
-		document.getElementById("results").innerHTML="";
+	$("#content").mask("Fetching data...");
 		$.ajax({ url: "./nocover.php" , success: function(data){
             $("#content").html(data);		
 			}
@@ -149,50 +133,49 @@ $(document).ready(function() {
 			
 			
 	function addalbum(order, albumid, artistid){
-		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid});
-		sleep(1500);
-		playlist();
+		$.ajax({ url: "./addplaylist.php?order="+order+"&albumID="+albumid+"&artistID="+artistid, 
+			success: function(data){
+				playlist();
+			}	
+		});
 	}
 	
 	function zipalbum(albumID){
 		window.open("./zip.php?albumID="+albumID, "zip");   
 	}
 	
-		function settings(){
-		$.ajax({ url: "./settings.php" , success: function(data){
-	            $("#information").html(data);
-
+	function settings(){
+		$.ajax({ url: "./settings.php" , 
+			success: function(data){
+					$("#information").html(data);
 			}
 		});
 	}
 	
 	
-			function settingsclose(){
-				document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
-			}
-			
-	function searchcoverfromdb(){
-	document.getElementById("album").innerHTML="<center>searching...</center>";
+	function settingsclose(){
+		document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
 	}
-
-
-	
+			
 	function deletetitle(titleID, albumID, artistID){
-		$.ajax({ url: "./delete.php?order=deletetitle&titleID="+titleID , success: function(data){
+		$.ajax({ url: "./delete.php?order=deletetitle&titleID="+titleID , 
+			success: function(data){
 			getdataalbum(albumID, artistID);
-    }
-    });
+			}	
+		});
 	}
 	
 	function deletealbum(albumID, artistID){
-		$.ajax({ url: "./delete.php?order=deletealbum&albumID="+albumID , success: function(data){
+		$.ajax({ url: "./delete.php?order=deletealbum&albumID="+albumID,
+			success: function(data){
 			getdata(artistID);
-    }
-    });
+			}
+		});
 	}
 	
 	function deleteartist(artistID){
-		$.ajax({ url: "./delete.php?order=deleteartist&artistID="+artistID , success: function(data){
-    }
-    });
+		$.ajax({ url: "./delete.php?order=deleteartist&artistID="+artistID ,
+			success: function(data){
+			}
+		});
 	}		
