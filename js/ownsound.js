@@ -14,7 +14,10 @@ $(document).ready(function() {
 		$("#album").mask("Fetching data...");
 			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID,
 				success: function(data){
+					$("#covertitle").unmask();
+					$("#album").unmask();
 					$("#content").html(data);
+					$("#album").html(data);
 				}
 			});
 	}
@@ -88,10 +91,12 @@ $(document).ready(function() {
 	}
 	
 	function nocover(){
-	$("#content").mask("Fetching data...");
+		$("#play").mask("Fetching data...");
+		$("#album").mask("Fetching data...");
+		$("#content").mask("Fetching data...");
 		$.ajax({ url: "./nocover.php" ,
 			success: function(data){
-				$("#content").html(data);		
+				$("#play").html(data);		
 			}
 		});
 	}
