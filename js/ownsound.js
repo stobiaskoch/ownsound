@@ -33,7 +33,7 @@ $(document).ready(function() {
 	}
 
 	function getdatabig(artid, artname, limit){
-		$("#play").mask("Loading...");
+		$("#album").mask("Loading...");
 			$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit ,
 				success: function(data){
 					$("#play").html(data);		
