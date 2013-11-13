@@ -40,15 +40,21 @@ $(document).ready(function() {
 
 </head>	
 <?php
-
-
-
+		$sql    = "SELECT coverbig FROM album WHERE id = '$albumID'";
+		$query = mysql_query($sql); 
+		$Daten = mysql_fetch_assoc($query); 
+		if($Daten['coverbig']=="no") { goto coverjump; }
+		if($Daten['cover']!="yes") {
+		thumbreflection($albumID);
+		}
+	
+coverjump:
 $sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY track";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 }
     ?>
  <br>
@@ -102,9 +108,9 @@ if($track<="9") {$track="0$track";}
 					click: function(element){ alert('kommt...'); },
 					klass: "third-menu-item"
 				},
-				'Löschen': {
+				'LÃ¶schen': {
 					click: function(element){ 
-					if (confirm('Willst Du <?php echo addslashes(gettitle($titleID)); ?> wirklich endgültig löschen?'))
+					if (confirm('Willst Du <?php echo addslashes(gettitle($titleID)); ?> wirklich endgÃ¼ltig lÃ¶schen?'))
 					{
 						deletetitle('<?php echo $titleID; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 					}
@@ -161,9 +167,9 @@ if($track<="9") {$track="0$track";}
 					click: function(element){ alert('kommt...'); },
 					klass: "third-menu-item"
 				},
-				'Löschen': {
+				'LÃ¶schen': {
 					click: function(element){ 
-					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgÃ¼ltig lÃ¶schen?'))
 					{
 						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 					}
@@ -180,14 +186,16 @@ if($track<="9") {$track="0$track";}
 		  });
 		</script>
 
-<div id="covertitle">
+<div id="covertitle" style="font-size:0.6em;">
 
 
 <map name="Landkarte">
 	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
 </map>
-<img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
+<img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover Ã¤ndern" usemap="#Landkarte" border=0>
+<?php echo "<br>Genre: " . getgenrefromalbumID($albumID); ?>
 </div>
+
 </div>
 <?php
 ende:
