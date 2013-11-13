@@ -58,7 +58,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
-  die('Ungültige Abfrage: ' . mysqli_error());
+  die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 }
 echo "<div id='play'>";
 
@@ -95,10 +95,10 @@ $count2++;
 			$ThisFileInfo = $getID3->analyze($Daten[0]);
 			getid3_lib::CopyTagsToComments($ThisFileInfo);
 			if($getID3->info['id3v2']['APIC'][0]['data']!="") {
-			$artworktmp = './tmp/front_'.$artist.'_'.$album.'.jpeg';
+			$artworktmp = './tmp/front'.$albumID.'.jpeg';
 			file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
 			
-				coverinmysql($artworktmp, $albumID);
+				thumbnail($artworktmp, $albumID);
 
 				mysql_query("UPDATE album SET cover='yes' WHERE id = '$albumID'");
 			}
@@ -121,7 +121,7 @@ coverjump:
 	
 	<a href='#owncloud' onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/play-icon.png' width='14' height='14'></a>
 	<a href='#owncloud' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/add-icon.png' width='14' height='14'></a>
-	<a href='#owncloud' onclick="if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+	<a href='#owncloud' onclick="if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgÃ¼ltig lÃ¶schen?'))
 								{
 									deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 								} return false;
@@ -165,7 +165,7 @@ coverjump:
 					click: function(element){ alert('kommt...'); },
 					klass: "third-menu-item"
 				},
-				'Löschen': {
+				'LÃ¶schen': {
 					click: function(element){ alert('kommt...'); },
 					klass: "fourth-menu-item"
 }
