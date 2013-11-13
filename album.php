@@ -105,6 +105,7 @@ $count2++;
 			else
 			{
 			mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+			mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 			}
 			}
 coverjump:
