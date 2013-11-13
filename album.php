@@ -69,8 +69,7 @@ echo "<div id='play'>";
 <?php
 if($albumcount>=10) {
 $trenner = $albumcount / 9;
-$trenner = round($trenner, 0);
-$trenner = $trenner +1;
+$trenner = ceil($trenner);
 }
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
