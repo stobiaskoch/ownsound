@@ -20,19 +20,6 @@ if($limit=="") {$limit=0;}
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 $albumcountsql = mysql_query("SELECT * FROM album WHERE artist='$artistID'"); 
 
 $albumcount = mysql_num_rows($albumcountsql);
@@ -68,8 +55,7 @@ echo "<div id='play'>";
 <h1 style="position: absolute; top: -6px; left: 20px;"><?php echo utf8_encode(getartist($artistID)); echo " [$albumcount]" ?></h1></div><br>
 <?php
 if($albumcount>=10) {
-$trenner = $albumcount / 9;
-$trenner = ceil($trenner);
+$trenner = ceil($albumcount/9);
 }
 echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
