@@ -166,7 +166,7 @@ function thumbnail ($file, $albumID) {
 function thumbreflection ($albumID) {
 
 		require_once './js/thumb/ThumbLib.inc.php';
-				if(mime_content_type($file)=="image/jpeg") {  
+				 
 					$options = array('resizeUp' => true, 'jpegQuality' => 60);
 					$optionsbig = array('resizeUp' => true, 'jpegQuality' => 90);
 					
@@ -177,7 +177,9 @@ function thumbreflection ($albumID) {
 					$handle = fopen ($file, 'w+');
 					fwrite($handle, $data);
 					fclose($handle);
-
+					
+				if(mime_content_type($file)=="image/jpeg") { 
+					
 					$thumb = PhpThumbFactory::create($file, $optionsbig);
 					$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->resize(140, 196);
 					$thumb->save('./tmp/'.$albumID.'_reflection.jpg', 'jpg');
