@@ -106,6 +106,11 @@ function coverinmysql ($file, $albumID) {
 				unlink('./tmp/'.$albumID.'_reflection.jpg');
 			//	unlink('./tmp/'.$albumID.'_copy1.jpg');
 					}
+					else
+					{
+				mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+				mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
+					}
 				}
 				
 function thumbnail ($file, $albumID) {
@@ -151,6 +156,10 @@ function thumbnail ($file, $albumID) {
 		//		unlink('./tmp/'.$albumID.'_reflection.jpg');
 			//	unlink('./tmp/'.$albumID.'_copy1.jpg');
 					}
+					else
+					{
+					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+					}
 				}
 				
 				
@@ -194,6 +203,10 @@ function thumbreflection ($albumID) {
 				//	unlink('./tmp/'.$albumID.'_kleinesbild.jpg');
 					unlink('./tmp/'.$albumID.'_reflection.jpg');
 				//	unlink('./tmp/'.$albumID.'_copy1.jpg');
+					}
+					else
+					{
+					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 					}
 				}
 ?>
