@@ -19,7 +19,7 @@
          
         function start_task()
         {
-            source = new EventSource('./test.php');
+            source = new EventSource('./scanner.php');
              
             //a message is received
             source.addEventListener('message' , function(e) 
