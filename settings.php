@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once('config.inc.php');
 $folders = array();
 foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
@@ -10,9 +10,9 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
 <script src="./js/jquery.form.js"></script> 
 <script src="./js/jquery.desknoty.js"></script>	
 <script>
-$(document).ready(function()
-{
-	$('#scansettings').ajaxForm(function() { 
+
+$(function() {
+        $('button#forum2').click(function(){
 			scandir = document.getElementById("scandir").value;
 			document.getElementById('scandir').value="Starte Scan...";
 			document.getElementById('scandir').disabled=true;
@@ -21,15 +21,19 @@ $(document).ready(function()
 			} else {
 				var truncate = 'no';
 			}
-			
-			$.ajax({ url: "./folder_v2.php?scandir="+scandir+"&truncate="+truncate , success: function(data){
-            $("#information").html(data);
-    }
+			document.getElementById("information").innerHTML="<object type='text/html' data='./scan/index.php?scandir="+scandir+"&truncate="+truncate+"' width='500' height='200' etc.></object>";
+
     });
 
     }); 
 
-})
+
+
+
+		
+
+
+
 var notifications = readCookie("notifications");
 $(function() {
         $('button#noti').click(function(){
@@ -82,8 +86,10 @@ echo "<option>$folder</option>";
 <br>
 <div style="font-size:1.5em;">
 <input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
-<input type="submit" value=" Scan starten ">
+
 </form>
+
 </div></div>
 	<br><button id="noti">Dis/Enable notifications</button>
+	<button id="forum2">Scan starten</button>
 </div>
