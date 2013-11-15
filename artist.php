@@ -134,7 +134,7 @@ playlist();
 	</div>
 </div>
 
-<div id="searchartist">Künstlersuche
+<div id="searchartist">K&uuml;nstlersuche
 		<form id="search2" name="search2" action="search.php">
 			<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 		</form>
@@ -142,23 +142,17 @@ playlist();
 	</div>
 </div>
 	
-	
 <div id="playerdiv">
 	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
 	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
 	<div id="playlist" style="font-size:0.6em;"></div>
 </div>
-	
-	
-	
 
 <div id="infooben">
 	<div id="information"><center><img src='./img/os_logo_smaller.JPG'></center></div>
 	<div style="font-size: 12px; top: 260px; left: 868px; position:fixed;"><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>
 
 </div>
-
-
 
 <?php
 
