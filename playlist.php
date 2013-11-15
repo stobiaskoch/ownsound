@@ -15,9 +15,9 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 
 	$artist=$zeile['artist'];
-	$artist=utf8_encode($artist);
+	$artist=$artist;
 	$title=$zeile['title'];
-	$title=utf8_encode($title);
+	$title=$title;
 	$titleid=$zeile['titleid'];
 	$albumID=$zeile['albumID'];
 

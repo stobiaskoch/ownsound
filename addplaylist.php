@@ -35,7 +35,7 @@ if ( ! $db_erg )
 if($_REQUEST['order']=="playalbum" or $_REQUEST['order']=="addalbum") {
 $i = 1;
 
-	$sql = "SELECT * FROM `title` WHERE album='".$_REQUEST['albumID']."' ORDER BY track";
+	$sql = "SELECT * FROM `title` WHERE album='".$_REQUEST['albumID']."' ORDER BY ABS(track)";
 
 				if($_REQUEST['order']=="playalbum") {
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
