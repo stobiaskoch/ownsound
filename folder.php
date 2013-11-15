@@ -92,7 +92,7 @@ mysql_query("TRUNCATE `title`");
 mysql_query("TRUNCATE `scanner`");
 
 		
-map_dirs($_REQUEST['scandir'],1);
+map_dirs($_REQUEST['scandir'],0);
 
 ?>
 
