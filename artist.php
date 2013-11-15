@@ -67,7 +67,7 @@ $zahlen = range('0', '9');
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
 			{
-				die('Ungültige Abfrage: ' . mysqli_error());
+				die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 			}
 
 				while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -75,7 +75,7 @@ $zahlen = range('0', '9');
 					$checkartistid = $zeile['id'];
 					mysql_connect(DBHOST, DBUSER,DBPASS);
 					mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-					$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
+					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
 					$trackcount = mysql_num_rows($tracksql);
 						if($trackcount>=1) {
 
@@ -95,7 +95,7 @@ foreach($alphabet as $alpha) {
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
-		die('Ungültige Abfrage: ' . mysqli_error());
+		die('UngÃ¼ltige Abfrage: ' . mysqli_error());
 	}
 	echo "<div id='artistlist' style='position:relative;'>";
 			echo "<a id='$alpha' style='position:absolute; top:-8px;visibility: hidden;'></a>$alpha :";
@@ -105,7 +105,7 @@ foreach($alphabet as $alpha) {
 					$checkartistid = $zeile['id'];
 					mysql_connect(DBHOST, DBUSER,DBPASS);
 					mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-					$tracksql = mysql_query("SELECT * FROM title WHERE artist='$checkartistid'"); 
+					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
 					$trackcount = mysql_num_rows($tracksql);
 						if($trackcount>=1) {
 						?>
@@ -134,7 +134,7 @@ playlist();
 	</div>
 </div>
 
-<div id="searchartist">Künstlersuche
+<div id="searchartist">KÃ¼nstlersuche
 		<form id="search2" name="search2" action="search.php">
 			<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 		</form>
