@@ -21,7 +21,7 @@ $(function() {
 			} else {
 				var truncate = 'no';
 			}
-			document.getElementById("information").innerHTML="<object type='text/html' data='./scan/index.php?scandir="+scandir+"&truncate="+truncate+"' width='500' height='200' etc.></object>";
+			document.getElementById("information").innerHTML="<object type='text/html' data='./folder.php?scandir="+scandir+"&truncate="+truncate+"' width='500' height='200' etc.></object>";
 
     });
 
