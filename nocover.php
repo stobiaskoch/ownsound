@@ -14,7 +14,7 @@ echo "<div id='title'><title>".$artname."</title></div>";
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 
-$sql = "SELECT * FROM album WHERE imgdata_big='' ORDER BY name LIMIT 12";
+$sql = "SELECT * FROM album WHERE cover='no' ORDER BY name LIMIT 12";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )

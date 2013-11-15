@@ -3,6 +3,8 @@ $artistID = $_REQUEST['artid'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);
 setcookie ("lastalbum", "", time() - 3600);
+$limit = $_REQUEST['limit'];
+//setcookie('artist'.$artistID.'page', $limit, $yearExpire);
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -14,7 +16,8 @@ setcookie ("lastalbum", "", time() - 3600);
 <?php
 require_once('config.inc.php');
 include('./js/functions.php');
-$limit = $_REQUEST['limit'];
+
+$limit = $_COOKIE["artist".$artistID."page"];
 if($limit=="") {$limit=0;}
 
 mysql_connect(DBHOST, DBUSER,DBPASS);
@@ -173,17 +176,21 @@ coverjump:
 
 ?>
 </table><div>
-<div id="pages" style="position: fixed;">
+<div id="pages" style="position: absolute; bottom: 20px;">
 <?php
 if($albumcount>=9) {
 $trenner2 = 0;
 for ($i = 1; $i <= $trenner; $i++) {
-
+			if($_COOKIE["artist".$artistID."page"]==$trenner2) {echo "<a style='font-size: 14px; color: blue;'>$i</a>";
+			}
+				else
+			{
 ?>
 
-<a style="font-size: 12px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
+<a style="font-size: 13px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
+}
 $trenner2 = $i * 9;
 }
 }
