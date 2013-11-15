@@ -13,7 +13,7 @@ $album = mysql_num_rows($albumresult);
 $titleresult = mysql_query("SELECT * FROM title"); 
 $title = mysql_num_rows($titleresult);
 
-$nocoverresult = mysql_query("SELECT * FROM album WHERE imgdata_big=''"); 
+$nocoverresult = mysql_query("SELECT * FROM album WHERE cover='no'"); 
 $nocover = mysql_num_rows($nocoverresult);
 
 echo "$artist Künstler<br>";
