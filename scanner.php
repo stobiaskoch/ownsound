@@ -78,7 +78,7 @@ $progress2 = $progress2 + $progress;
 
 
 		$scannerid = $zeile['id'];
-		mysql_query("DELETE FROM scanner WHERE id = '$scannerid'");	
+		mysql_query("DELETE FROM scanner WHERE path = '$path'");		
 
 		$FullFileName = utf8_decode($zeile['path']);
 		set_time_limit(180);
