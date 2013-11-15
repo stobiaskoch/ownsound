@@ -49,7 +49,7 @@ $(document).ready(function() {
 		}
 	
 coverjump:
-$sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY track";
+$sql = "SELECT * FROM title WHERE album='$albumID' ORDER BY ABS(track)";
  
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
