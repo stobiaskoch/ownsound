@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
     EventSource is documented at 
  
