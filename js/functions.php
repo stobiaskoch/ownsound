@@ -104,7 +104,7 @@ function coverinmysql ($file, $albumID) {
 				unlink('./tmp/'.$albumID.'_grossesbild.jpg');
 				unlink('./tmp/'.$albumID.'_kleinesbild.jpg');
 				unlink('./tmp/'.$albumID.'_reflection.jpg');
-			//	unlink('./tmp/'.$albumID.'_copy1.jpg');
+				unlink('./tmp/'.$albumID.'_copy1.jpg');
 					}
 					else
 					{
@@ -166,7 +166,9 @@ function thumbnail ($file, $albumID) {
 function thumbreflection ($albumID) {
 
 		require_once './js/thumb/ThumbLib.inc.php';
-				 
+		
+				  
+				
 					$options = array('resizeUp' => true, 'jpegQuality' => 60);
 					$optionsbig = array('resizeUp' => true, 'jpegQuality' => 90);
 					
@@ -178,7 +180,7 @@ function thumbreflection ($albumID) {
 					fwrite($handle, $data);
 					fclose($handle);
 					
-				if(mime_content_type($file)=="image/jpeg") { 
+					if(mime_content_type($file)=="image/jpeg") {
 					
 					$thumb = PhpThumbFactory::create($file, $optionsbig);
 					$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->resize(140, 196);
@@ -211,4 +213,20 @@ function thumbreflection ($albumID) {
 					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 					}
 				}
+				
+function map_dirs($path,$level) {
+        if(is_dir($path)) {
+                if($contents = opendir($path)) {
+                        while(($node = readdir($contents)) !== false) {
+                                if($node!="." && $node!="..") {
+										if(substr($node, -3)=="mp3") {
+										$path3 = addslashes($path."/".$node);
+										mysql_query("INSERT INTO scanner (path) VALUES ('$path3')");
+                                        }
+										map_dirs("$path/$node",$level+1);
+                                }
+                        }
+                }
+        }
+}
 ?>
