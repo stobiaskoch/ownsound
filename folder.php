@@ -71,9 +71,9 @@ set_time_limit(3000);
 
 
 
-require_once('./ownsound.config.php');
-require_once './class.progress_bar.php';
-include('./dirscan.php');
+require_once('./config.inc.php');
+
+include('./js/functions.php');
 
 $DirectoryToScan = utf8_encode($_REQUEST['scandir']);
 echo "<p style='font-size: 9px;'>Durchsuche $DirectoryToScan .... Bitte warten</p>";
