@@ -77,8 +77,8 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 $progress2 = $progress2 + $progress;
 
 
-		$scannerid = $zeile['path'];
-		mysql_query("DELETE FROM scanner WHERE path = '$scannerid'");	
+		$scannerid = $zeile['id'];
+		mysql_query("DELETE FROM scanner WHERE id = '$scannerid'");	
 
 		$FullFileName = utf8_decode($zeile['path']);
 		set_time_limit(180);
@@ -157,7 +157,7 @@ $progress2 = $progress2 + $progress;
 
 
 
-				send_message($serverTime, 'album: ' . $album . " - ". $progress2, $progress2 + 1); 
+				send_message($serverTime, 'album: ' . $album , $progress2 + 1); 
 				
 			//albumID ermitteln
 
