@@ -34,6 +34,7 @@ $(document).ready(function() {
 
 	function getdatabig(artid, artname, limit){
 		$("#album").mask("Loading...");
+		createCookie("artist"+artid+"page", limit, 7);
 			$.ajax({ url: "./album.php?artid="+artid+"&artname="+artname+"&limit="+limit ,
 				success: function(data){
 					$("#play").html(data);		
@@ -156,16 +157,18 @@ $(document).ready(function() {
 	}
 	
 	function settings(){
+		$("#infooben").mask("Fetching data...");
 		$.ajax({ url: "./settings.php" , 
 			success: function(data){
-					$("#information").html(data);
+					$("#infooben").html(data);
 			}
 		});
 	}
 	
 	
 	function settingsclose(){
-		document.getElementById("information").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
+		$("#infooben").mask("Fetching data...");
+		document.getElementById("infooben").innerHTML="<center><img src='./img/os_logo_smaller.JPG'></center><div style='font-size: 12px; top: 260px; left: 868px; position:fixed;'><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>";
 	}
 			
 	function deletetitle(titleID, albumID, artistID){
