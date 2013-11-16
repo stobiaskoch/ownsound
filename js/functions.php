@@ -2,6 +2,7 @@
 require_once('./../ownsound.config.php');
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 
+mysql_query("SET NAMES 'utf8'");
 
 function getartist ($id) {
 
@@ -219,7 +220,7 @@ function map_dirs($path,$level) {
                 if($contents = opendir($path)) {
                         while(($node = readdir($contents)) !== false) {
                                 if($node!="." && $node!="..") {
-										if(substr($node, -3)=="mp3") {
+										if(substr($node, -3)=="mp3" or substr($node, -3)=="MP3") {
 										$path3 = addslashes($path."/".$node);
 										mysql_query("INSERT INTO scanner (path) VALUES ('$path3')");
                                         }
