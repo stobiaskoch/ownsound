@@ -217,4 +217,5 @@ $progress2 = $progress2 + $progress;
 
  
 send_message($serverTime, 'TERMINATE'); 
+include('./navname.php');
 ?>
