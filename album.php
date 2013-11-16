@@ -55,7 +55,7 @@ echo "<div id='play'>";
   ?>
 <div id="album">
 <div>
-<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo utf8_encode(getartist($artistID)); echo " [$albumcount]" ?></h1></div><br>
+<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo getartist($artistID); echo " [$albumcount]" ?></h1></div><br>
 <?php
 if($albumcount>=10) {
 $trenner = ceil($albumcount/9);
