@@ -12,7 +12,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 ?>
 <html>
-<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
 
 	<script src="./js/jquery.jeditable.js"></script> 

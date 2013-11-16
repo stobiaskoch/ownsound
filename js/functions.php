@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 require_once('./../ownsound.config.php');
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 

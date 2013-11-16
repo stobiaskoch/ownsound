@@ -3,7 +3,7 @@
 	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 	<title>OwnSound</title>
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.ui.core.js"></script>
