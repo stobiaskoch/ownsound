@@ -193,7 +193,9 @@ if($track<="9") {$track="0$track";}
 	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
 </map>
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
-<?php echo "<br>Genre: " . getgenrefromalbumID($albumID); ?>
+<table><tr><td width='140'>
+<?php echo "Genre: " . getgenrefromalbumID($albumID); ?>
+</td></tr></table>
 </div>
 
 </div>
