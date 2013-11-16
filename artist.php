@@ -90,8 +90,9 @@ $zahlen = range('0', '9');
 echo "</table></div><br>";
 
 foreach($alphabet as $alpha) {
-	$sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
-
+// SELECT `id`, `title` FROM `movies` ORDER BY TRIM(LEADING 'a ' FROM TRIM(LEADING 'an ' FROM TRIM(LEADING 'the ' FROM LOWER(`title`))));
+	$sql = "SELECT * FROM artist  WHERE navname like '".$alpha."%' ORDER BY navname";
+//	echo $sql;
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
