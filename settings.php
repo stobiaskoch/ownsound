@@ -74,7 +74,7 @@ createCookie("progress2", 1, 100);
 echo "<option>".MUSICDIR."</option>";
 foreach($folders as $folder) {
 
-echo "<option>$folder</option>";
+echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option>";
 
 }
 ?>
