@@ -19,7 +19,7 @@ while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 	$titleid=$zeile['titleid'];
 	$albumID=$zeile['albumID'];
 	$artist=utf8_encode($artist);
-
+	
  $playlist[]=array('artistID'=>$albumID, 'artist'=>$artist,'title'=>$title,'mp3'=>'mp3.php?id='.$titleid);
 
 }
