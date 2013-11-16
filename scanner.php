@@ -77,12 +77,18 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 $progress2 = $progress2 + $progress;
 
 
-		$scannerid = $zeile['path'];
-		mysql_query("DELETE FROM scanner WHERE path = '$path'");		
+		
 
-		$FullFileName = utf8_decode($zeile['path']);
+
+		$FullFileName = $zeile['path'];
 		set_time_limit(180);
 
+		
+
+		
+		
+		
+		
 		$ThisFileInfo = $getID3->analyze($FullFileName);
 		getid3_lib::CopyTagsToComments($ThisFileInfo);
 		
@@ -132,6 +138,7 @@ $progress2 = $progress2 + $progress;
 				mysql_query("UPDATE scanner_log SET artist=artist+1 WHERE id='0'");
 
 			}
+
 			//artistID ermitteln
 				$sql    = "SELECT id FROM artist WHERE name = '$artist'";
 				$query = mysql_query($sql); 
@@ -162,6 +169,7 @@ $progress2 = $progress2 + $progress;
 			//albumID ermitteln
 
 			}
+
 		//}
 		$sql    = "SELECT id FROM album WHERE name = '$album'";
 		$query = mysql_query($sql) OR DIE("Konnte Album ID nicht auslesen:<br/>".$sql); 
@@ -184,10 +192,11 @@ $progress2 = $progress2 + $progress;
 			$sql="INSERT INTO title (name, artist, path, album, duration, track) VALUES ('$title', '$artistID', '$path', '$albumID', '$playtime', '$track') ON DUPLICATE KEY UPDATE name='$title', artist='$artistID', path='$path', album='$albumID', duration='$playtime'";
 			mysql_query($sql) OR DIE (mysql_error()."Title konnte nicht eingetragen werden.<br/>".$sql);	
 			$titlecount++;
-			
+			$scannerid = $zeile['path'];
+			mysql_query("DELETE FROM scanner WHERE path = '$scannerid'");
 			mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
 			
-		}
+			}
 
 
 
