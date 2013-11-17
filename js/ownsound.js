@@ -157,7 +157,6 @@ $(document).ready(function() {
 	}
 
 	function dbbackupp(){
-		$("#infooben").mask("Fetching data...");
 		window.open("./dbbackup.php", "dbbackup");   
 	}
 	
