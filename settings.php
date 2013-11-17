@@ -17,6 +17,7 @@ $(function() {
 			document.getElementById('scandir').value="Starte Scan...";
 			document.getElementById('scandir').disabled=true;
 			if (document.getElementsByName("truncate")[0].checked == true) {
+
 				var truncate = 'yes';
 			} else {
 				var truncate = 'no';
@@ -29,7 +30,18 @@ $(function() {
 
 
 
+function cTrig() { 
+      if (document.getElementsByName('truncate')[0].checked == false) {
+        return false;
+      } else {
+       var box= confirm(unescape("Ernsthaft?\nDieser Vorgang kann nicht r%FCckg%E4ngig gemacht werden!"));
+        if (box==true)
+            return true;
+        else
+           document.getElementsByName('truncate')[0].checked = false;
 
+      }
+    }
 		
 
 
@@ -85,7 +97,7 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 
 <br>
 <div style="font-size:1.5em;">
-<input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
+<input type="checkbox" id="truncate" name="truncate" value="yes" onchange="cTrig()">Datenbank neu anlegen
 
 </form>
 
