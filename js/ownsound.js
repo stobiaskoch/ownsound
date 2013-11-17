@@ -156,7 +156,8 @@ $(document).ready(function() {
 		window.open("./zip.php?albumID="+albumID, "zip");   
 	}
 
-	function dbbackup(){
+	function dbbackupp(){
+		$("#infooben").mask("Fetching data...");
 		window.open("./dbbackup.php", "dbbackup");   
 	}
 	
