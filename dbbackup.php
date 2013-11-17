@@ -5,7 +5,7 @@ $dbhost		= DBHOST;
 $dbuser 	= DBUSER;
 $dbpwd		= DBPASS;
 $dbname 	= DBDATABASE;
-$dbbackup	= "./backup.sql";
+$dbbackup	= "./tmp/backup.sql";
 
 error_reporting(0);
 set_time_limit(0);
