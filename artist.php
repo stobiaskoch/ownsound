@@ -178,3 +178,4 @@ else
 mysql_close();
 ?>
 <iframe name="zip" style="visibility:hidden;display:none" ></iframe>
+<iframe name="dbbackup" style="visibility:hidden;display:none" ></iframe>
