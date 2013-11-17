@@ -62,7 +62,7 @@ $zahlen = range('0', '9');
 		$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 		foreach($zahlen as $alphazahlen) {
-			$sql = "SELECT * FROM artist WHERE name LIKE '".$alphazahlen."%'";
+			$sql = "SELECT * FROM artist  WHERE navname like '".$alphazahlen."%' ORDER BY navname";
 
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
