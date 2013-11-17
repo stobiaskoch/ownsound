@@ -47,8 +47,8 @@ $(document).ready(function()
 if($_REQUEST['order']=="search") {
 
 $albumsearch = "$artist - $album";
-//$albumsearch = urlencode($albumsearch);
-echo "Suche nach: ".stripslashes($albumsearch)."<br>";
+//$albumsearch = utf8_decode($albumsearch);
+echo "Suche nach: ".stripslashes(utf8_decode($albumsearch))."<br>";
 
 $albumsearch = str_replace(" ", "+", $albumsearch);
 //$albumsearch = urlencode($albumsearch);
@@ -81,9 +81,9 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 <form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data" >
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
-<input type="submit" value="Ändern">
+<input type="submit" value="Ã„ndern">
 </form><br>
-	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">Zurück</a>
+	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">ZurÃ¼ck</a>
 <?php
 }
 

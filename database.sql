@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Erstellungszeit: 29. Okt 2013 um 09:07
+-- Erstellungszeit: 17. Nov 2013 um 00:25
 -- Server Version: 5.5.31
 -- PHP-Version: 5.4.4-14+deb7u5
 
@@ -29,9 +29,12 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `album` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `artist` varchar(100) DEFAULT NULL,
-  `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
   `imgdata` longblob NOT NULL,
+  `imgdata_big` longblob NOT NULL,
   `imgdata_small` longblob NOT NULL,
+  `cover` varchar(10) NOT NULL,
+  `coverbig` varchar(20) NOT NULL,
   `imgtype` varchar(100) NOT NULL,
   `genre` varchar(100) DEFAULT NULL,
   `label` varchar(100) DEFAULT NULL,
@@ -46,11 +49,47 @@ CREATE TABLE IF NOT EXISTS `album` (
 
 CREATE TABLE IF NOT EXISTS `artist` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `discogsid` varchar(100) DEFAULT NULL,
+  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `navname` varchar(500) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`),
-    UNIQUE KEY `name` (`name`),
-  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=638 ;
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `krause_playlist`
+--
+
+CREATE TABLE IF NOT EXISTS `krause_playlist` (
+  `artist` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `title` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `mike_playlist`
+--
+
+CREATE TABLE IF NOT EXISTS `mike_playlist` (
+  `artist` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `title` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `scanner`
+--
+
+CREATE TABLE IF NOT EXISTS `scanner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `path` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -61,11 +100,27 @@ CREATE TABLE IF NOT EXISTS `artist` (
 CREATE TABLE IF NOT EXISTS `scanner_log` (
   `id` int(11) NOT NULL,
   `starttime` datetime NOT NULL,
+  `endtime` datetime NOT NULL,
   `artist` varchar(500) NOT NULL DEFAULT '0',
   `album` varchar(500) NOT NULL DEFAULT '0',
-  `title` varchar(500) NOT NULL DEFAULT '0',
   `error` varchar(500) NOT NULL,
+  `folderscanned` int(11) NOT NULL,
+  `foldertoscan` int(11) NOT NULL,
   UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `sebkoch_playlist`
+--
+
+CREATE TABLE IF NOT EXISTS `sebkoch_playlist` (
+  `artist` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `title` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `titleid` varchar(500) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `artistID` int(11) NOT NULL,
+  `albumID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -76,28 +131,22 @@ CREATE TABLE IF NOT EXISTS `scanner_log` (
 
 CREATE TABLE IF NOT EXISTS `title` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
   `artist` varchar(100) DEFAULT NULL,
   `album` varchar(100) DEFAULT NULL,
   `duration` varchar(100) NOT NULL,
   `path` varchar(700) NOT NULL,
-  `linktobandpic` varchar(700) NOT NULL,
-  `bandurl` varchar(700) NOT NULL,
-  `imgdata` longblob NOT NULL,
-  `imgtype` varchar(100) NOT NULL,
+  `track` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `path` (`path`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10454 ;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Tabellenstruktur für Tabelle `user`
 --
+
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET latin1 COLLATE latin1_german1_ci NOT NULL,
@@ -107,3 +156,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `group` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

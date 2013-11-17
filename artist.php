@@ -62,7 +62,7 @@ $zahlen = range('0', '9');
 		$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
 		foreach($zahlen as $alphazahlen) {
-			$sql = "SELECT * FROM artist WHERE name LIKE '".$alphazahlen."%'";
+			$sql = "SELECT * FROM artist  WHERE navname like '".$alphazahlen."%' ORDER BY navname";
 
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
@@ -90,8 +90,9 @@ $zahlen = range('0', '9');
 echo "</table></div><br>";
 
 foreach($alphabet as $alpha) {
-	$sql = "SELECT * FROM artist WHERE name like '".$alpha."%'";
-
+// SELECT `id`, `title` FROM `movies` ORDER BY TRIM(LEADING 'a ' FROM TRIM(LEADING 'an ' FROM TRIM(LEADING 'the ' FROM LOWER(`title`))));
+	$sql = "SELECT * FROM artist  WHERE navname like '".$alpha."%' ORDER BY navname";
+//	echo $sql;
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
@@ -175,3 +176,4 @@ else
 mysql_close();
 ?>
 <iframe name="zip" style="visibility:hidden;display:none" ></iframe>
+<iframe name="dbbackup" style="visibility:hidden;display:none" ></iframe>

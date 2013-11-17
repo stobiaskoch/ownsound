@@ -33,7 +33,7 @@ $.desknoty({
     var playlist = []; // Empty playlist
 	var oldvolume = readCookie("volume");
     var options = {
-        swfPath: "./jplayer", 
+        swfPath: "./js", 
         supplied: "mp3",
 		smoothPlayBar: true,
 		preload: 'none',

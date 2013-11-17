@@ -66,7 +66,8 @@ require_once('./config.inc.php');
 include('./js/functions.php');
 
 $DirectoryToScan = utf8_encode($_REQUEST['scandir']);
-echo "<p style='font-size: 9px;'>Durchsuche ".htmlentities($DirectoryToScan)." .... Bitte warten</p>";
+$bla = $_REQUEST['scandir'];
+echo "<p style='font-size: 9px;'>Durchsuche ".$bla." .... Bitte warten</p>";
 //echo $DirectoryToScan;
 //$DirectoryToScan = "/mnt/musik/Metallica";
 //if($_REQUEST['scandir']=="") {die();}
@@ -82,9 +83,7 @@ mysql_query("TRUNCATE `title`");
 mysql_query("TRUNCATE `scanner`");
 
 		
-map_dirs(htmlentities($DirectoryToScan),0);
-
-?>
+map_dirs($bla ,0);
 
 
 
