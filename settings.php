@@ -73,6 +73,14 @@ $(function() {
         });
     });
 	
+	$(function() {
+        $('button#dbbackup').click(function(){
+		
+			dbbackupp();
+			
+        });
+    });
+	
 createCookie("progress2", 1, 100);
 </script>
 <div id="information"><h1>Einstellungen</h1>
@@ -104,4 +112,5 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 </div></div>
 	<br><button id="noti">Dis/Enable notifications</button>
 	<button id="forum2">Scan starten</button>
+	<button id="dbbackup">Datenbank-Backup</button>
 </div>
