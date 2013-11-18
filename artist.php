@@ -67,7 +67,7 @@ $zahlen = range('0', '9');
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
 			{
-				die('Ungültige Abfrage: ' . mysqli_error());
+				die('Ungültige Abfrage: ' . mysqli_error($db_link));
 			}
 
 				while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
