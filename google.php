@@ -28,7 +28,7 @@ $(document).ready(function()
 {
 	$('#upload').ajaxForm(function() { 
 			$.ajax({ url: "./title.php?albumID=<?php echo $albumID; ?>&artistID=<?php echo $artistID; ?>" , success: function(data){
-            $("#playalbum").html(data);
+            $("#album2").html(data);
     }
     });
 			sleep(1);
@@ -47,8 +47,8 @@ $(document).ready(function()
 if($_REQUEST['order']=="search") {
 
 $albumsearch = "$artist - $album";
-//$albumsearch = urlencode($albumsearch);
-echo "Suche nach: ".stripslashes($albumsearch)."<br>";
+//$albumsearch = utf8_decode($albumsearch);
+echo "Suche nach: ".stripslashes(utf8_decode($albumsearch))."<br>";
 
 $albumsearch = str_replace(" ", "+", $albumsearch);
 //$albumsearch = urlencode($albumsearch);

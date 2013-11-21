@@ -24,7 +24,7 @@ if ( ! $db_erg )
 echo "<div id='playalbum'>";
 
   ?>
- <br><div id="album">
+ <br><div id="album356">
 <?php
  echo "<div><h1>$artname</h1></div>";
 echo "<table border='0' valign='top'>";

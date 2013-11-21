@@ -2,7 +2,6 @@
 $artistID = $_REQUEST['artid'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);
-setcookie ("lastalbum", "", time() - 3600);
 $limit = $_REQUEST['limit'];
 //setcookie('artist'.$artistID.'page', $limit, $yearExpire);
 ?>
@@ -11,7 +10,33 @@ $limit = $_REQUEST['limit'];
 <head>
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
+	<script src="./js/jquery.jeditable.js"></script> 
+	<script src="./js/jquery.flipster.js"></script>
+	<link rel="stylesheet" href="./js/jquery.flipster.css">
+	<link rel="stylesheet" href="./js/flowflipsternavtabs.css">
+	<script>
+$(document).ready(function() {
 
+   $('.edit').editable('jeditable.php?order=artist', {
+       indicator : "<img src='img/indicator.gif'>", 
+	event     : "dblclick",
+	cancel    : "Cancel",
+	submit   : 'OK',
+	tooltip   : "Click to edit..."	   
+});  
+ });
+
+ 	$(function(){ 
+	 
+		$(".flipster").flipster({
+			start: 'center',
+			style: 'coverflow',
+		});
+	});
+ 
+</script>	
+	
+	
 </head>	
 <?php
 require_once('config.inc.php');
@@ -33,7 +58,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	}
 	else
 	{
-		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name LIMIT ".$limit.", 9";
+		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name";
 	}
 ?>
 <div id='title'><title><?php getartist($artistID); ?></title></div>
@@ -50,24 +75,31 @@ if ( ! $db_erg )
 {
   die('Ungültige Abfrage: ' . mysqli_error());
 }
-echo "<div id='play'>";
+
 
   ?>
-<div id="album">
+
+<div id="album12">
+
 <div>
-<h1 style="position: absolute; top: -6px; left: 20px;"><?php echo utf8_encode(getartist($artistID)); echo " [$albumcount]" ?></h1></div><br>
+<h1><span style="top: -6px; left: 20px;" class='edit' id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
+<a id="albumtitle2" style="
+    width: 900px;
+    height: 20px;
+	 font-size:12px;
+	 bottom: 150px;
+"><a>
+<!-- Flipster List -->	
+		<div class="flipster" style="width: 90%; overflow:off; font-size:10px; bottom: 50px;">
+		  <ul>
+
+
+
 <?php
-if($albumcount>=10) {
-$trenner = ceil($albumcount/9);
-}
-echo "<table border='0' valign='top'>";
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $albumID = $zeile['id'];
 $titleID = $zeile['id'];
-$count++;
-$count2++;
-
 
 		$sql    = "SELECT cover FROM album WHERE id = '$albumID'";
 		$query = mysql_query($sql); 
@@ -99,105 +131,30 @@ $count2++;
 coverjump:
 
 
-	if($albumcount!=0) {
-	if ($count2==4) {
-  echo "<tr>";
-} else {
 
-}
-	?>
-	<td width="70px"><a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='get.php?picid=<?php echo $albumID; ?>&size=small' width='70' height='70'></a>
-	
-	<a href='#owncloud' onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/play-icon.png' width='14' height='14'></a>
-	<a href='#owncloud' onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"> <img src='./img/add-icon.png' width='14' height='14'></a>
-	<a href='#owncloud' onclick="if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
-								{
-									deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
-								} return false;
-								"> <img src='./img/truncate.png' width='14' height='14'></a></td>
-								<td width="116px"><a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><?php echo getalbum($albumID); ?></a></div></td>
+		  
+	?>		
+		
+		<li id="Coverflow-1" title="Cricket" data-flip-category="<?php echo getalbum($albumID); ?>">
+			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">
+			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140">
+		</li>
+
 
 	<?php
-	if ($count2==3) {
-	$count2 = 0;
-  echo "</tr>";
-} else {
 
-}
 	}
-	else
-	{
 	?>
-	<tr>
-	<!--
-	<td width='300px'><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $albumID; ?>', '<?php getartist($artistID); ?>')"><?php echo $zeile['name']; ?></a></td><td>[<?php echo $zeile['duration'];?>]</a></td> 
--->
-	<td width='300px'><div class="einzelsong"><a href="#"><?php echo $zeile['name']; ?></a></td><td>[<?php echo$zeile['duration'];?>]</div></td> 
+			  </ul>
+		</div>
+<!-- End Flipster List -->
 
-		<script type="text/javascript">
-		  $(document).ready(function(){
-
-			$('.einzelsong').contextMenu('context-menu-1', {
-				'Abspielen': {
-					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						addalbum('playtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
-					},
-					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
-				},
-				'Einreihen': {
-					click: function(element){ 
-					addalbum('addtitle', '<?php echo $titleID; ?>', '<?php echo $artistID; ?>');
-					},
-					klass: "second-menu-item"
-				},
-				'Umbennen': {
-					click: function(element){ alert('kommt...'); },
-					klass: "third-menu-item"
-				},
-				'Löschen': {
-					click: function(element){ alert('kommt...'); },
-					klass: "fourth-menu-item"
-}
-  },
-  {
-
-    leftClick: true // trigger on left click instead of right click
-  }
-);
-		  });
-		</script>
-	</tr>
-	<?php
-	}
-
-
-}
-
-
-?>
-</table><div>
-<div id="pages" style="position: absolute; bottom: 20px;">
-<?php
-if($albumcount>=9) {
-$trenner2 = 0;
-for ($i = 1; $i <= $trenner; $i++) {
-			if($_COOKIE["artist".$artistID."page"]==$trenner2) {echo "<a style='font-size: 14px; color: blue;'>$i</a>";
-			}
-				else
-			{
-?>
-
-<a style="font-size: 13px;" href='#ownsound' onclick="getdatabig('<?php echo $artistID; ?>', '<?php echo urlencode($artname); ?>', '<?php echo $trenner2; ?>')"><?php echo $i; ?></a>
 
 <?php
-}
-$trenner2 = $i * 9;
-}
-}
 mysqli_free_result( $db_erg );
 mysql_close();
 ?>
-</div>
+
 			<script language="JavaScript">
 			stats();
 			</script>	

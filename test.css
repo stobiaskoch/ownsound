@@ -77,14 +77,14 @@ text-indent: -9001px;
 }
 
 #navigation {
-font-size: 15px;
+font-size: 19px;
 padding-top: 2px;
 padding-bottom: 2px;
-top: 8px;
-left: 320px;
+top: 7px;
+left: 50px;
 padding-left: 10px;
 padding-right: 10px;
-width: 600px;
+width: 92%;
 display:inline-block;
 -webkit-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -107,8 +107,8 @@ position:relative;
 }
 
 #statistics {
- right:10px;
- top:8px;
+ right:20px;
+ top: 45px;
  min-height: 74px;
 padding-left: 40px;
 width: 14%;
@@ -122,8 +122,8 @@ position:fixed;
 }
 
 #searchartist {
- right:10px;
- top:158px;
+ right:20px;
+ top:205px;
 padding-left: 40px;
 width: 14%;
  min-height: 72px;
@@ -134,13 +134,13 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
-z-index:2;
+z-index:1000;
 }
 #playerdiv {
-right:10px;
-top:292px;
+right:20px;
+top:50px;
 padding-left: 40px;
-width: 240px;
+width: 19%;
 display:inline-block;
 -webkit-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -148,7 +148,10 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:fixed;
+
+z-index: 1001;
 }
+
 
 #player {
 left:350px;
@@ -161,8 +164,8 @@ position:fixed !important;
 padding-left: 40px;
 padding-top: 2px;
 padding-bottom: 2px;
-width: 580px;
-left: 320px;
+width: 600px;
+left: 10px;
 min-height: 194px;
 top: 45px;
 display:inline-block;
@@ -171,7 +174,7 @@ box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
-position:fixed;
+position:absolute;
 }
 
 #login {
@@ -192,8 +195,8 @@ margin:0 0 20px 12px;
 #album {
 padding-left: 40px;
 width: 580px;
-min-height: 330px;
-left: 320px;
+min-height: 300px;
+right: 500px;
 top: 300px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
@@ -201,7 +204,37 @@ box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
-position:fixed;
+
+}
+#album2 {
+padding-left: 40px;
+width: 65%;
+min-height: 390px;
+left: 10px;
+top: 390px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:absolute;
+
+}
+
+#artist {
+padding-left: 40px;
+width: 65%;
+min-height: 200px;
+left: 10px;
+top: 50px;
+display:inline-block;
+-webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
+box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
+background:#fff;
+padding:20px;
+margin:0 0 20px 12px;
+position:absolute;
 }
 
 #content {
@@ -216,7 +249,7 @@ box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
-position:fixed;
+
  overflow : auto;
 }
 
@@ -231,7 +264,7 @@ padding-left: 40px;
 width: 580px;
 min-height: 250px;
 left: 300px;
-top: 262px;
+top: 220px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -329,3 +362,58 @@ font-size:0.6em;
 .masked-hidden {
     visibility: hidden !important;
 }	  
+
+#hintergrund {
+    display:none;
+    z-index:1001;
+    position: fixed;
+    height:100%;
+    width:100%;
+    top:0px;
+    left:0px;
+    background:#000000;
+}
+ 
+#popup {
+    display: none;
+    z-index: 1002;
+    position: fixed;
+    min-width: 600px;
+	min-height: 300px;
+    top: 20%;
+    left: 40%;
+    margin-left: -250px;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 8px solid #ccc;
+    border-radius: 5px 5px 5px 5px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+ 
+div.schliessen {
+	z-index: 1002;
+    position: relative;
+    height: 30px;
+    width: 30px;
+    left: 27px;
+    bottom: 24px;
+    background: url("./img/close.png") no-repeat scroll 0 0 transparent;
+    float: right;
+    cursor: pointer;
+}
+ 
+#popup_inhalt {
+    margin: 8px 14px;
+}
+
+.boxborder {
+    float:left;
+    width: 329px;
+    /* round Border & Border-Image */
+    border: 8px solid #013d7a;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -moz-border-image: url(meinbild.jpg) 8 8 8 8 stretch;
+    -webkit-border-image: url(meinbild.jpg) 8 8 8 8 stretch;
+    }

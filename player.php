@@ -16,7 +16,7 @@ function notify(strtext, albumID) {
 
 $.desknoty({
       icon: "./get.php?picid="+albumID+"&size=small",
-      title: 'OwnSound',
+      title: 'OwnSound spielt:',
       body: strtext
  
             });
@@ -33,7 +33,7 @@ $.desknoty({
     var playlist = []; // Empty playlist
 	var oldvolume = readCookie("volume");
     var options = {
-        swfPath: "./jplayer", 
+        swfPath: "./js", 
         supplied: "mp3",
 		smoothPlayBar: true,
 		preload: 'none',
@@ -80,7 +80,7 @@ $.desknoty({
 
 <body>
 
-				<div id="jp_container_1" class="jp-audio">
+				<div id="jp_container_1" class="jp-audio" style="width:100%;">
 			<div class="jp-type-playlist">
 				<div class="jp-playlist">
 					<ul>

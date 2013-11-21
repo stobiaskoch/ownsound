@@ -9,6 +9,20 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
 <script type="text/javascript" src="./js/ownsound.js"></script>
 <script src="./js/jquery.form.js"></script> 
 <script src="./js/jquery.desknoty.js"></script>	
+
+
+  <style>
+    /* Example Styles for Demo */
+    .etabs { margin: 0; padding: 0; }
+    .tab { display: inline-block; zoom:1; *display:inline; background: #eee; border: solid 1px #999; border-bottom: none; -moz-border-radius: 4px 4px 0 0; -webkit-border-radius: 4px 4px 0 0; }
+    .tab a { font-size: 14px; line-height: 2em; display: block; padding: 0 10px; outline: none; }
+    .tab a:hover { text-decoration: underline; }
+    .tab.active { background: #fff; padding-top: 6px; position: relative; top: 1px; border-color: #666; }
+    .tab a.active { font-weight: bold; }
+    .tab-container .panel-container { background: #fff; border: solid #666 1px; padding: 10px; -moz-border-radius: 0 4px 4px 4px; -webkit-border-radius: 0 4px 4px 4px; }
+    .panel-container { margin-bottom: 10px; }
+  </style>
+
 <script>
 
 $(function() {
@@ -17,11 +31,12 @@ $(function() {
 			document.getElementById('scandir').value="Starte Scan...";
 			document.getElementById('scandir').disabled=true;
 			if (document.getElementsByName("truncate")[0].checked == true) {
+
 				var truncate = 'yes';
 			} else {
 				var truncate = 'no';
 			}
-			document.getElementById("information").innerHTML="<object type='text/html' data='./folder.php?scandir="+scandir+"&truncate="+truncate+"' width='500' height='200' etc.></object>";
+			document.getElementById("scanner").innerHTML="<object type='text/html' data='./folder.php?scandir="+scandir+"&truncate="+truncate+"' width='500' height='200' etc.></object>";
 
     });
 
@@ -29,14 +44,28 @@ $(function() {
 
 
 
+function cTrig() { 
+      if (document.getElementsByName('truncate')[0].checked == false) {
+        return false;
+      } else {
+       var box= confirm(unescape("Ernsthaft?\nDieser Vorgang kann nicht r%FCckg%E4ngig gemacht werden!"));
+        if (box==true)
+            return true;
+        else
+           document.getElementsByName('truncate')[0].checked = false;
 
+      }
+    }
 		
 
 
 
-var notifications = readCookie("notifications");
+
+
 $(function() {
         $('button#noti').click(function(){
+		
+		var notifications = readCookie("notifications");
 		
 		if (notifications == 'yes') {
             $.desknoty({
@@ -61,13 +90,35 @@ $(function() {
         });
     });
 	
-createCookie("progress2", 1, 100);
-</script>
-<div id="information"><h1>Einstellungen</h1>
+	$(function() {
+        $('button#dbbackup').click(function(){
+		
+			dbbackupp();
+			
+        });
+    });
 	
-	<div style="font-size: 12px; top: 50px; left: 890px; position:fixed;"><a href='#ownsound' onclick="settingsclose()"> schliessen </a></div>
-	<div style="font-size: 12px; top: 260px; left: 868px; position:fixed;"><a href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a></div>
-<form method="post" name="scansettings" id="scansettings" action="./null.php" onsubmit="javascipt:document.scansettings.scandir.readonly='true'">
+    $(document).ready( function() {
+      $('#tab-container').easytabs();
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<div id="tab-container" class='tab-container'>
+ <ul class='etabs'>
+   <li class='tab'><a href="#tabs1-html">Datenbank</a></li>
+   <li class='tab'><a href="#tabs1-js">Benutzerverwaltung</a></li>
+   <li class='tab'><a href="#tabs1-css">Info</a></li>
+ </ul>
+ <div class='panel-container'>
+  <div id="tabs1-html">
 <div id="scansettings" style="border: 1px solid #000000; padding: 10px; width: 250px;">
 <select style="width:250px" id="scandir" name="scandir">
 <?php
@@ -84,12 +135,51 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 
 
 <br>
-<div style="font-size:1.5em;">
-<input type="checkbox" id="truncate" name="truncate" value="yes">Datenbank neu anlegen
+<div style="font-size:1.0em;">
+<input type="checkbox" id="truncate" name="truncate" value="yes" onchange="cTrig()">Datenbank neu anlegen
 
 </form>
 
-</div></div>
-	<br><button id="noti">Dis/Enable notifications</button>
-	<button id="forum2">Scan starten</button>
+</div><button id="forum2">Scan starten</button><button id="dbbackup">Datenbank-Backup</button></div>
+
+  </div>
+   <div id="tabs1-js">
+   <h2>JS for these tabs</h2>
+
+   <pre>
+    <code>
+Später...
+  </pre>
+
+  </div>
+  <div id="tabs1-css">
+  <?php
+require_once('config.inc.php');
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 
+
+$artistresult = mysql_query("SELECT * FROM artist"); 
+$artist = mysql_num_rows($artistresult);
+
+$albumresult = mysql_query("SELECT * FROM album"); 
+$album = mysql_num_rows($albumresult);
+
+$titleresult = mysql_query("SELECT * FROM title"); 
+$title = mysql_num_rows($titleresult);
+
+$nocoverresult = mysql_query("SELECT * FROM album WHERE cover='no'"); 
+$nocover = mysql_num_rows($nocoverresult);
+
+echo "$artist Künstler<br>";
+echo "$album Alben<br>";
+echo "$title Tracks<br>";
+?>
+<a href='#ownsound' onclick="nocover()"><?php echo $nocover; ?> ohne Cover</a><br>
+
+<button id="noti">Dis/Enable notifications</button>
+
+  </div>
+ </div>
 </div>
+
+<div id="scanner"></div>

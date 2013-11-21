@@ -21,7 +21,7 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 	<script>
 $(document).ready(function() {
 
-   $('.edit').editable('jeditable.php', {
+   $('.edit').editable('jeditable.php?order=album', {
        indicator : "<img src='img/indicator.gif'>", 
 	event     : "dblclick",
 	cancel    : "Cancel",
@@ -58,7 +58,7 @@ if ( ! $db_erg )
 }
     ?>
  <br>
-<div id="content">
+<div id="content546">
 
 
 
@@ -187,15 +187,15 @@ if($track<="9") {$track="0$track";}
 		</script>
 
 <div id="covertitle" style="font-size:0.6em;">
-
-
+<table>
+<td>
 <map name="Landkarte">
 	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
 </map>
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
-<table><tr><td width='140'>
+<br></td><td width='140'>
 <?php echo "Genre: " . getgenrefromalbumID($albumID); ?>
-</td></tr></table>
+</td></table>
 </div>
 
 </div>

@@ -12,7 +12,8 @@
 			type: 'normal',
 			url: '',
 			dir: '',
-			onClick: function() {},
+			onClick: function() { window.focus();
+    this.cancel();},
 			onShow: function() {},
 			onClose: function() {},
 			onError: function() {}
