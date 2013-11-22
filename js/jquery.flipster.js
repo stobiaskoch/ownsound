@@ -122,7 +122,7 @@ $.fn.flipster = function(options) {
 		function buildNavButtons() {
 			if ( settings.enableNavButtons && _flipItems.length > 1 ) {
 				_flipster.find(".flipto-prev, .flipto-next").remove();
-				_flipster.append("<a href='#' class='flipto-prev'>Previous</a> <a href='#' class='flipto-next'>Next</a>");
+				_flipster.append("<a href='#' class='flipto-prev'><img src='./img/Arrows-Left-icon.png' width='14px' height='14px'></a> <a href='#' class='flipto-next'><img src='./img/Arrows-Right-icon.png' width='14px' height='14px'></a>");
 				
 				_flipster.children('.flipto-prev').on("click", function(e) {
 					jump("left");
