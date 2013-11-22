@@ -129,9 +129,15 @@
   -o-transition: background-color 300ms ease;
   transition: background-color 300ms ease;
 }
-.flipster .flipto-prev:hover,
+.flipster .flipto-prev:hover{
+background-image: url(../img/Arrows-Left-icon.png);
+background-size: 50px 50px;
+background-repeat:no-repeat;
+}
 .flipster .flipto-next:hover {
-
+background-image: url(../img/Arrows-Right-icon.png);
+background-size: 50px 50px;
+background-repeat:no-repeat;
 }
 .flipster .flipto-prev {
   left: 0;
