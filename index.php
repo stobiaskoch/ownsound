@@ -1,3 +1,4 @@
+<script type="text/javascript" src="./js/ownsound.js"></script>
 <?php
 createCookie("screenwidth", screen.width , 100);
 createCookie("screenheight", screen.height, 100);
