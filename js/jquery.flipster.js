@@ -115,7 +115,7 @@ $.fn.flipster = function(options) {
 				_flipNavItems.filter("[href='#"+currentItem.attr("id")+"']").addClass("flip-nav-current");
 				_flipNavItems.filter("[data-flip-category='"+currentItem.data("flip-category")+"']").parent().addClass("flip-nav-current");
 			var albumtitle = currentItem.data("flip-category");
-			document.getElementById("albumtitle2").innerHTML="<center style='position: relative; width: 830px; bottom: 40px;'>"+albumtitle+"</center>";
+			document.getElementById("albumtitle2").innerHTML="<center style='position: relative; bottom: 40px;'>"+albumtitle+"</center>";
 			}
 		}
 		
