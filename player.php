@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
-	<link href="./skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" /> 
+	<link href="./skin/black/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery.desknoty.js"></script>	
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
@@ -102,7 +102,7 @@ $.desknoty({
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	
-		<div id="jp_container_1" class="jp-audio" style="width:520px;">
+		<div id="jp_container_1" class="jp-audio" style="width:510px;">
 		
 			<div class="jp-type-playlist" style="width:440px;">
 			
@@ -138,7 +138,7 @@ $.desknoty({
 					</ul>
 					
 				</div>
-			<div id="playercover" style="position: absolute; right: 6px; bottom: 6px;"></div>
+			<div id="playercover" style="position: absolute; right: 1px; bottom: 1px; background: #191919 url('./skin/black/jplayer.midnight.black.interface.png') repeat-x;"></div>
 			</div>
 		</div>	
 		
