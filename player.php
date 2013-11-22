@@ -102,7 +102,7 @@ $.desknoty({
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	
-		<div id="jp_container_1" class="jp-audio" style="width:510px;">  
+		<div id="jp_container_1" class="jp-audio" style="width:510px;">
 		
 			<div class="jp-type-playlist" style="width:440px;">
 			
