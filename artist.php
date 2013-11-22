@@ -147,10 +147,10 @@ $zahlen = range('0', '9');
 					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
 					$trackcount = mysql_num_rows($tracksql);
 						if($trackcount>=1) {
-
+						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
 
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?></a></li>
+								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}
@@ -178,9 +178,10 @@ foreach($alphabet as $alpha) {
 					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
 					$trackcount = mysql_num_rows($tracksql);
 						if($trackcount>=1) {
+						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
-
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?></a></li>
+						
+								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}

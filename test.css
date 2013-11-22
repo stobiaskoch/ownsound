@@ -211,7 +211,7 @@ padding-left: 40px;
 width: 65%;
 min-height: 390px;
 left: 10px;
-top: 390px;
+top: 340px;
 display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
@@ -225,7 +225,7 @@ position:absolute;
 #artist {
 padding-left: 40px;
 width: 65%;
-min-height: 200px;
+height: 220px;
 left: 10px;
 top: 50px;
 display:inline-block;
@@ -235,6 +235,7 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:absolute;
+overflow: hidden;
 }
 
 #content {
