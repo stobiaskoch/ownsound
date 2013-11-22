@@ -146,6 +146,7 @@ $sql    = "SELECT name FROM artist WHERE id = '$artistID'";
 $query = mysql_query($sql); 
 $Daten = mysql_fetch_assoc($query); 
 $artist = $Daten['name'];
+$artist = addslashes($artist);
 $artist = utf8_decode($artist);
 
 				

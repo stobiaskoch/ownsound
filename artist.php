@@ -195,7 +195,7 @@ mysqli_free_result( $db_erg );
 			</nav>
 		</div>
 
-<div id="artist" type="background-image: url(../img/chimaira.jpg);"></div>
+<div id="artist"></div>
 <div id="album2"></div>
 <!--
  <div id="statistics">
