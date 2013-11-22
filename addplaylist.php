@@ -2,6 +2,7 @@
 require_once('config.inc.php');
 include('./js/functions.php');
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+mysqli_query("SET NAMES 'utf8'");
 $user = $_COOKIE['loggedIn'];
 //sonst gibts immer ne leere playlist in der datenbank
 if($user=="" or $user==" ") { die(); }
@@ -50,8 +51,9 @@ $i = 1;
 	{
 		
 		$title = str_replace("'", "\'", $zeile['name']);
-		$title = utf8_encode($title);
+	//	$title = utf8_encode($title);
 		$artist = addslashes(getartist($_REQUEST['artistID']));
+		$artist = utf8_decode($artist);
 		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$zeile['id']."', '".$_REQUEST['albumID']."')");
 		$i++;
 	}
@@ -77,7 +79,9 @@ $i = 1;
 		
 		$title = str_replace("'", "\'", $zeile['name']);
 	//	$title = utf8_encode($title);
-		$artist = addslashes(getartist($_REQUEST['artistID']));
+		$artist = getartist($_REQUEST['artistID']);
+	//	$artist = addslashes($artist);
+		$artist = utf8_decode($artist);
 		$albumID = $zeile['album'];
 			if($_REQUEST['order']=="playtitle") {
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
@@ -134,7 +138,7 @@ if ( ! $db_erg )
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $title = str_replace("'", "\'", $zeile['name']);
-$title = utf8_encode($title);
+//$title = utf8_encode($title);
 $albumID = $zeile['album'];
 
 $artistID = $zeile['artist'];
@@ -142,6 +146,7 @@ $sql    = "SELECT name FROM artist WHERE id = '$artistID'";
 $query = mysql_query($sql); 
 $Daten = mysql_fetch_assoc($query); 
 $artist = $Daten['name'];
+$artist = utf8_decode($artist);
 
 				
 	mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$randid."', '$albumID')");

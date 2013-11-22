@@ -38,6 +38,7 @@ $(document).ready(function() {
 	
 	
 </head>	
+
 <?php
 require_once('config.inc.php');
 include('./js/functions.php');
@@ -79,9 +80,7 @@ if ( ! $db_erg )
 
   ?>
 
-<div id="album12">
 
-<div>
 <h1><span style="top: -6px; left: 20px;" class='edit' id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
 <a id="albumtitle2" style="
     width: 900px;
