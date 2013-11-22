@@ -119,10 +119,10 @@
   z-index: 999;
   display: block;
   padding: 10px;
-  margin-top: 58px;
-  background-color: #da0d25;
+  margin-top: 48px;
+
   color: #FFF;
-  border: solid 2px #da0d25;
+	background-color: rgba(218, 13, 37, 0);
   -ms-transition: background-color 300ms ease;
   -webkit-transition: background-color 300ms ease;
   -moz-transition: background-color 300ms ease;
@@ -131,8 +131,7 @@
 }
 .flipster .flipto-prev:hover,
 .flipster .flipto-next:hover {
-  background-color: #FFF;
-  color: #da0d25;
+
 }
 .flipster .flipto-prev {
   left: 0;
