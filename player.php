@@ -142,6 +142,8 @@ $.desknoty({
 			position: absolute;
 			right: 1px;
 			bottom: 1px;
+			width: 70px;
+			height: 70px;
 			background: #191919 url('./skin/black/jplayer.midnight.black.interface.png') repeat-x;
 			"></div>
 			</div>
