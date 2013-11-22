@@ -1,12 +1,6 @@
-<script type="text/javascript" src="./js/ownsound.js"></script>
 <?php
-createCookie("screenwidth", screen.width , 100);
-createCookie("screenheight", screen.height, 100);
-
 if($_REQUEST ['order']=="logout") {
 	$name = $_COOKIE['loggedIn']; 
-	setcookie ("lastartist", "", time() - 3600);
-	setcookie ("lastalbum", "", time() - 3600);
 	setcookie ("loggedIn", $name, time() - 3600);
 }
 
@@ -49,7 +43,10 @@ if($_REQUEST ['order']=="login") {
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="./js/jquery-ui-1.10.3.custom.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
-
+<script>
+createCookie("screenwidth", screen.width , 100);
+createCookie("screenheight", screen.height, 100);
+</script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
 </style>
