@@ -6,18 +6,15 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
-	<script src="./js/jquery.mmenu.js"></script>
+	<script src="./js/jquery.mmenu.min.all.js"></script>
 	<script src="./js/jquery.contextMenu.js"></script> 
-	<script src="./js/jquery.form.js"></script> 
-	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
 	<script src="./js/popup.js"></script> 
 	<link type="text/css" rel="stylesheet" href="./js/jquery.mmenu.all.css" />
 	<link type="text/css" rel="stylesheet" href="./js/demo.css" />
 	<link rel="stylesheet" href="./js/jquery.flipster.css">
 	<script src="./js/jquery.flipster.js"></script>
-	<script src="./js/jquery.hashchange.min.js" type="text/javascript"></script>
-<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
 	<style type="text/css">
 			#page
 			{
@@ -45,13 +42,18 @@
 		</style>
 	
 <script>
-createCookie("screenwidth", screen.width , 100);
-createCookie("screenheight", screen.height, 100);
+
 // Muss bei install gesetzt werden
 //createCookie("notifications", 'yes' , 100);
 			$(function() {
-				$('nav#menu').mmenu();
+				$('nav#menu').mmenu({
+				
+				classes: "mm-zoom-menu"
+				
+				});
 			});
+
+
 </script>
 <style type="text/css" title="currentStyle">
 	@import "./test.css";
@@ -97,7 +99,7 @@ $zahlen = range('0', '9');
 <form id="search2" name="search2" action="search.php">
 	<?php
 
-	 echo "<a name='kapitel1' href='#numbers'># </a>";
+	 echo "<a name='kapitel1' class='#menu' href='#numbers'># </a>";
 	 
 	foreach($alphabet as $alpha) {
 
@@ -122,7 +124,7 @@ $zahlen = range('0', '9');
 
 
 
-
+	<li>Place </li>
 	<li><a id='numbers'># :</a></li>
 		 <?php
 		
@@ -192,12 +194,6 @@ mysqli_free_result( $db_erg );
 			</nav>
 		</div>
 
-
-
-<script language="JavaScript">
-stats();
-playlist();
-</script>
 <div id="artist"></div>
 <div id="album2"></div>
 <!--
@@ -237,6 +233,7 @@ $lastalbum = $_COOKIE['lastalbum'];
 	<script language="JavaScript">
 	getdata('<?php echo $_COOKIE['lastartist']; ?>');
 	getdataalbum('<?php echo $_COOKIE['lastalbum']; ?>', '<?php echo getartistIDfromalbumID($lastalbum); ?>');
+	playlist();
 	</script>
 	<?php
 

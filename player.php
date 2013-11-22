@@ -114,22 +114,22 @@ $.desknoty({
 						<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
 						<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
 						<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
-						<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" style="top: 20px;">mute</a></li>
+						<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute" style="top: 20px;">unmute</a></li>
 						<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
 					</ul>
 					<div class="jp-progress"><br>
 						<div class="jp-seek-bar"><br>
-							<div class="jp-play-bar"></div>
+							<div class="jp-play-bar" style="overflow: visible;"></div>
 
 						</div>
 					</div>
-					<div class="jp-volume-bar">
-						<div class="jp-volume-bar-value"></div>
+					<div class="jp-volume-bar" style="top: 20px;">
+						<div class="jp-volume-bar-value" style="top: 20px;"></div>
 					</div>
 					<div class="jp-current-time"></div>
 					<div class="jp-duration"></div>
-					<div id="playnow" style="position: absolute; left:<?php echo $left - 340; ?>px; top: 8px; font-size: 7.9px;"></div>
+					<div id="playnow" style="position: absolute; left:<?php echo $left - 280; ?>px; top: 3px; font-size: 9px;"></div>
 					<ul class="jp-toggles">
 						<li><a href="javascript:;" class="jp-shuffle" tabindex="1" title="shuffle">shuffle</a></li>
 						<li><a href="javascript:;" class="jp-shuffle-off" tabindex="1" title="shuffle off">shuffle off</a></li>
@@ -138,7 +138,12 @@ $.desknoty({
 					</ul>
 					
 				</div>
-			<div id="playercover" style="position: absolute; right: 1px; bottom: 1px; background: #191919 url('./skin/black/jplayer.midnight.black.interface.png') repeat-x;"></div>
+			<div id="playercover" style="
+			position: absolute;
+			right: 1px;
+			bottom: 1px;
+			background: #191919 url('./skin/black/jplayer.midnight.black.interface.png') repeat-x;
+			"></div>
 			</div>
 		</div>	
 		

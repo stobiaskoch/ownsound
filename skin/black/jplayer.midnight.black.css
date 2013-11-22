@@ -65,7 +65,7 @@ div.jp-video-full div.jp-jplayer {
 	top: 0;
 	left: 0;
 	position: fixed !important; position: relative; /* Rules for IE6 (full-screen) */
-	overflow: hidden;
+	overflow: visible;
 }
 
 div.jp-video-full div.jp-gui {
@@ -111,7 +111,7 @@ div.jp-controls-holder {
 	width: 440px;
 	margin: 0 auto;
 	position: relative;
-	overflow: hidden;
+	overflow: visible;
 	top: -8px; /* This negative value depends on the size of the text in jp-currentTime and jp-duration */
 }
 
@@ -119,7 +119,7 @@ div.jp-interface ul.jp-controls {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
-	overflow: hidden;
+	overflow: visible;
 }
 
 div.jp-audio ul.jp-controls {
@@ -154,7 +154,7 @@ div.jp-interface ul.jp-controls li {
 
 div.jp-interface ul.jp-controls a {
 	display: block;
-	overflow: hidden;
+	overflow: visible;
 	text-indent: -9999px;
 }
 a.jp-play,
@@ -215,7 +215,6 @@ a.jp-next:hover {
 /* @group progress bar */
 
 div.jp-progress {
-	overflow: hidden;
 	position: absolute;
 	background: transparent;
 }
@@ -239,20 +238,26 @@ div.jp-video div.jp-progress {
 	height: 10px;
 }
 div.jp-seek-bar {
+	position: absolute;
+	bottom: 5px;
+	overflow: visible;
 	background-repeat: repeat-x;
-	background-position: 0 -202px;
-	width: 0;
-	height: 100%;
+	background-position: 0 -250px;
+	width: 45px;
+	height: 2px;
 	cursor: pointer;
 	border-radius: 5px;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.25);
-	overflow: hidden;
 }
 div.jp-play-bar {
+	position: absolute;
+	overflow: visible;
+	bottom: 0px;
 	background-repeat: repeat-x;
-	background-position: 0 -218px;
-	width:0;
-	height:100%;
+	background-position: 0 -250px;
+	width: 45px;
+	height: 6px;
+	cursor: pointer;
 	border-radius: 4px;
 	box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.25), 2px 0 5px -2px rgba(0,0,0,0.3);
 }
@@ -282,7 +287,7 @@ a.jp-volume-max {
 
 div.jp-audio div.jp-type-single a.jp-mute,
 div.jp-audio div.jp-type-single a.jp-unmute {
-	top: 12px;
+	top: 8px;
 	right: 66px;
 }
 div.jp-audio div.jp-type-playlist a.jp-mute,
@@ -344,7 +349,7 @@ a.jp-volume-max:hover {
 
 div.jp-volume-bar {
 	position: absolute;
-	overflow: hidden;
+	overflow: visible;
 	background-repeat: repeat-x;
 	background-position: 0 -250px;
 	width: 45px;
@@ -519,7 +524,7 @@ span.jp-artist {
 
 div.jp-video-play {
 	width: 100%;
-	overflow: hidden; /* Important for nested negative margins to work in modern browsers */
+	overflow: visible; /* Important for nested negative margins to work in modern browsers */
 	cursor: pointer;
 	background-color: rgba(0,0,0,0); /* Makes IE9 work with the active area over the whole video area. IE6/7/8 only have the button as active area. */
 }
@@ -578,7 +583,7 @@ ul.jp-toggles {
 	list-style-type: none;
 	padding: 0;
 	margin: 0 auto;
-	overflow: hidden;
+	overflow: visible;
 }
 
 div.jp-audio .jp-type-single ul.jp-toggles {

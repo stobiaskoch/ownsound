@@ -1,4 +1,7 @@
 <?php
+createCookie("screenwidth", screen.width , 100);
+createCookie("screenheight", screen.height, 100);
+
 if($_REQUEST ['order']=="logout") {
 	$name = $_COOKIE['loggedIn']; 
 	setcookie ("lastartist", "", time() - 3600);

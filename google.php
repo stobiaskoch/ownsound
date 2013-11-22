@@ -32,7 +32,7 @@ $(document).ready(function()
     }
     });
 			sleep(1);
-			stats();
+			getdata('<?php echo $artistID; ?>');
 			getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
     }); 
 
@@ -77,7 +77,7 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 }
 
 ?>
-
+<br><br><br><br><br><br><br><br>
 <form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data" >
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
