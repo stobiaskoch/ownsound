@@ -24,7 +24,7 @@ $(document).ready(function() {
 			$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID, 
 				success: function(){
 					getdataalbum(albumID, artistID);
-					stats();
+					getdata(artistID);
 				}
 			});
 	}
