@@ -114,9 +114,9 @@ $.desknoty({
 						<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
 						<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>
 						<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
-						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" style="top: 20px;">mute</a></li>
+						<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" style="top: 20px; right: 146px;">mute</a></li>
 						<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute" style="top: 20px;">unmute</a></li>
-						<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+						<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume" style="top: 20px; right: 120px;">max volume</a></li>
 					</ul>
 					<div class="jp-progress"><br>
 						<div class="jp-seek-bar"><br>
