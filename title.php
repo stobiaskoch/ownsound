@@ -8,8 +8,6 @@ $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastalbum', $albumID, $yearExpire);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
-
-
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -27,15 +25,9 @@ $(document).ready(function() {
 	cancel    : "Cancel",
 	submit   : 'OK',
 	tooltip   : "Click to edit..."	   
-});  
- });
+	});  
+});
  
- 
-
-	
-
-	
-
 	</script>
 
 </head>	
@@ -77,8 +69,8 @@ $artist = getartist($artistID);
 $track = $zeile['track'];
 $count++;
 if($track<="9") {$track="0$track";}
-  echo "<tr>";
-  	echo "<td>". $track . " - </td>";
+
+  	echo "<tr><td>". $track . " - </td>";
 ?> 
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
@@ -110,7 +102,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Löschen': {
 					click: function(element){ 
-					if (confirm('Willst Du <?php echo addslashes(gettitle($titleID)); ?> wirklich endgültig löschen?'))
+						if (confirm('Willst Du <?php echo addslashes(gettitle($titleID)); ?> wirklich endgültig löschen?'))
 					{
 						deletetitle('<?php echo $titleID; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 					}
@@ -169,7 +161,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Löschen': {
 					click: function(element){ 
-					if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+						if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
 					{
 						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 					}

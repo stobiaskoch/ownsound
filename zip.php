@@ -14,7 +14,7 @@ $album = getalbum($albumID);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $sql = "SELECT * FROM `title` WHERE album='".$albumID."' ORDER BY path";
 $zipname = $artist . " - " . $album;
-//die($zipname);
+
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
@@ -30,6 +30,7 @@ $zipname = $artist . " - " . $album;
 
 	while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 	{
+	
 		$path = $zeile['path'];
 		$new_filename = substr($path,strrpos($path,'/') + 1);
 		$zip->addFile($path,$new_filename);

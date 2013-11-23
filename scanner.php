@@ -44,8 +44,7 @@ mysql_query("SET NAMES 'utf8'");
 
 
 
-$result = mysql_query("SELECT * FROM scanner"); 
-$checkscan = mysql_num_rows($result);
+
 
 
 //statistik
@@ -72,7 +71,7 @@ if ( ! $db_erg )
 				$result = mysql_query("SELECT * FROM scanner"); 
 				$checkscan = mysql_num_rows($result);
 				$progress = 100 / $checkscan;
-$progress2 = $progress2 + $progress;			
+		
 while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 $progress2 = $progress2 + $progress;
 
@@ -198,24 +197,9 @@ $progress2 = $progress2 + $progress;
 			
 			}
 
-
-
-
-
-
-
 }
 
 
-
-
-
-
-    
-     
-
-
- 
 send_message($serverTime, 'TERMINATE'); 
 include('./navname.php');
 ?>

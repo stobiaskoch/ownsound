@@ -72,8 +72,6 @@ function coverinmysql ($file, $albumID) {
 				$optionsbig = array('resizeUp' => true, 'jpegQuality' => 90);
 				
 				copy($file, "./tmp/".$albumID."_copy1.jpg");
-			//	copy($file, "./tmp/".$albumID."_copy2.jpg");
-			//	copy($file, "./tmp/".$albumID."_copy3.jpg");
 
 				$thumb = PhpThumbFactory::create($file, $optionsbig);
 				$thumb->resize(140, 140)->save('./tmp/'.$albumID.'_grossesbild.jpg', 'jpg');
@@ -106,13 +104,13 @@ function coverinmysql ($file, $albumID) {
 				unlink('./tmp/'.$albumID.'_kleinesbild.jpg');
 				unlink('./tmp/'.$albumID.'_reflection.jpg');
 				unlink('./tmp/'.$albumID.'_copy1.jpg');
-					}
-					else
-					{
-				mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
-				mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
-					}
 				}
+					else
+				{
+					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
+				}
+}
 				
 function thumbnail ($file, $albumID) {
 
@@ -122,18 +120,11 @@ function thumbnail ($file, $albumID) {
 				$options = array('resizeUp' => true, 'jpegQuality' => 60);
 				$optionsbig = array('resizeUp' => true, 'jpegQuality' => 90);
 				
-			//	copy($file, "./tmp/".$albumID."_copy1.jpg");
-			//	copy($file, "./tmp/".$albumID."_copy2.jpg");
-			//	copy($file, "./tmp/".$albumID."_copy3.jpg");
-
 				$thumb = PhpThumbFactory::create($file, $optionsbig);
 				$thumb->resize(140, 140)->save('./tmp/'.$albumID.'_grossesbild.jpg', 'jpg');
 
 				$thumb = PhpThumbFactory::create($file, $options);
 				$thumb->resize(70, 70)->save('./tmp/'.$albumID.'_kleinesbild.jpg', 'jpg');
-
-		//		$thumb = PhpThumbFactory::create($file, $optionsbig);
-		//		$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->resize(140, 196)->save('./tmp/'.$albumID.'_reflection.jpg', 'jpg');
 
 				$hndFile = fopen('./tmp/'.$albumID.'_grossesbild.jpg', "r");
 				$data = addslashes(fread($hndFile, filesize('./tmp/'.$albumID.'_grossesbild.jpg')));
@@ -141,27 +132,22 @@ function thumbnail ($file, $albumID) {
 				$hndFilesmall = fopen('./tmp/'.$albumID.'_kleinesbild.jpg', "r");
 				$datasmall = addslashes(fread($hndFilesmall, filesize('./tmp/'.$albumID.'_kleinesbild.jpg')));
 
-		//		$hndFilebig = fopen('./tmp/'.$albumID.'_reflection.jpg', "r");
-		//		$databig = addslashes(fread($hndFilebig, filesize('./tmp/'.$albumID.'_reflection.jpg')));
-
 				$type = mime_content_type('./tmp/'.$albumID.'_kleinesbild.jpg');
 
 				mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
 				mysql_query("UPDATE album SET imgdata_small = '$datasmall', imgtype = '$type' WHERE id='$albumID'");
-		//		mysql_query("UPDATE album SET imgdata_big = '$databig', imgtype = '$type' WHERE id='$albumID'");
 				mysql_query("UPDATE album SET cover='yes' WHERE id = '$albumID'");
 				
 				unlink($file);
 				unlink('./tmp/'.$albumID.'_grossesbild.jpg');
 				unlink('./tmp/'.$albumID.'_kleinesbild.jpg');
-		//		unlink('./tmp/'.$albumID.'_reflection.jpg');
-			//	unlink('./tmp/'.$albumID.'_copy1.jpg');
-					}
-					else
-					{
-					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
-					}
+
 				}
+					else
+				{
+					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+				}
+}
 				
 				
 function thumbreflection ($albumID) {
@@ -187,31 +173,21 @@ function thumbreflection ($albumID) {
 					$thumb->createReflection(10, 40, 90, true, '#a4a4a4')->resize(140, 196);
 					$thumb->save('./tmp/'.$albumID.'_reflection.jpg', 'jpg');
 
-			//		$hndFile = fopen('./tmp/'.$albumID.'_grossesbild.jpg', "r");
-			//		$data = addslashes(fread($hndFile, filesize('./tmp/'.$albumID.'_grossesbild.jpg')));
-
-			//		$hndFilesmall = fopen('./tmp/'.$albumID.'_kleinesbild.jpg', "r");
-			//		$datasmall = addslashes(fread($hndFilesmall, filesize('./tmp/'.$albumID.'_kleinesbild.jpg')));
-
 					$hndFilebig = fopen('./tmp/'.$albumID.'_reflection.jpg', "r");
 					$databig = addslashes(fread($hndFilebig, filesize('./tmp/'.$albumID.'_reflection.jpg')));
 
 					$type = mime_content_type('./tmp/'.$albumID.'_reflection.jpg');
 
-			//		mysql_query("UPDATE album SET imgdata = '$data', imgtype = '$type' WHERE id='$albumID'");
-			//		mysql_query("UPDATE album SET imgdata_small = '$datasmall', imgtype = '$type' WHERE id='$albumID'");
 					mysql_query("UPDATE album SET imgdata_big = '$databig', imgtype = '$type' WHERE id='$albumID'");
 					mysql_query("UPDATE album SET coverbig='yes' WHERE id = '$albumID'");
 					
 					unlink($file);
-				//	unlink('./tmp/'.$albumID.'_grossesbild.jpg');
-				//	unlink('./tmp/'.$albumID.'_kleinesbild.jpg');
 					unlink('./tmp/'.$albumID.'_reflection.jpg');
-				//	unlink('./tmp/'.$albumID.'_copy1.jpg');
+
 					}
-					else
+						else
 					{
-					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
+						mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 					}
 				}
 				

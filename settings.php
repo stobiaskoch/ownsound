@@ -57,11 +57,6 @@ function cTrig() {
       }
     }
 		
-
-
-
-
-
 $(function() {
         $('button#noti').click(function(){
 		
@@ -103,14 +98,6 @@ $(function() {
     });
 </script>
 
-
-
-
-
-
-
-
-
 <div id="tab-container" class='tab-container'>
  <ul class='etabs'>
    <li class='tab'><a href="#tabs1-html">Datenbank</a></li>
@@ -144,10 +131,10 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 
   </div>
    <div id="tabs1-js">
-   <h2>JS for these tabs</h2>
+
 
    <pre>
-    <code>
+
 Später...
   </pre>
 
