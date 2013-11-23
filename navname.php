@@ -3,7 +3,7 @@
 require_once('config.inc.php');
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 
-		$sql = "SELECT * FROM artist WHERE navname=''";
+		$sql = "SELECT * FROM artist WHERE (navname='' OR navname IS NULL)";
 
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
@@ -25,19 +25,19 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 							$newname = str_replace("Die ", "", $artist);
 							$newname = $newname.", Die";
 						}
-						else
+							else
 						{
 								if (strtolower(substr($artist, 0,4)) == "das ") {
 								$newname = str_replace("Das ", "", $artist);
 								$newname = $newname.", Das";
 							}
-							else 
+								else 
 							{
 									if (strtolower(substr($artist, 0,4)) == "the ") {
 									$newname = str_replace("The ", "", $artist);
 									$newname = $newname.", The";
 							}
-							else 
+								else 
 							{
 								$newname = $artist;
 							}

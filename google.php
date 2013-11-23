@@ -70,7 +70,7 @@ $picheight = $jset["responseData"]["results"][$i]["height"];
 
 echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>";
 ?>
-<div id="googlecover"><tr><td style="width:135px"><a style="font-size:0.7em;" href='#fdfdf' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='135' height='135' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
+<div id="googlecover"><tr><td style="width:135px"><a style="font-size:0.7em;" href='#OwnSound' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='135' height='135' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
 </td></tr></div>
 </table>
 <?php
