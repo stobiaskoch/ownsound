@@ -46,8 +46,6 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 					
 				}
 				$sql2 = "UPDATE artist SET navname = '$newname' WHERE id='$id'";
-					echo $newname."<br>";
-					echo $sql2."<br>";
 				$db_erg2 = mysqli_query( $db_link, $sql2 );
 
 				}
