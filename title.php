@@ -13,22 +13,8 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
 
-	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	<script>
-$(document).ready(function() {
-
-   $('.edit').editable('jeditable.php?order=album', {
-       indicator : "<img src='img/indicator.gif'>", 
-	event     : "dblclick",
-	cancel    : "Cancel",
-	submit   : 'OK',
-	tooltip   : "Click to edit..."	   
-	});  
-});
- 
-	</script>
 
 </head>	
 <?php
@@ -57,7 +43,7 @@ if ( ! $db_erg )
 	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
   
 
-<a class='edit' id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
+<a id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
 <table border="0">
 
 <?php
@@ -166,7 +152,16 @@ if($track<="9") {$track="0$track";}
 					klass: "third-menu-item"
 				},
 				'Umbennen': {
-					click: function(element){ alert('kommt...'); },
+					click: function(element){
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo getalbum($albumID); ?>");
+					 if (newtitle != undefined) {
+					$.ajax({ url: "./jeditable.php?order=album&id=<?php echo $albumID; ?>&value="+newtitle ,
+						success: function(data){
+						}
+					});
+					getdata(<?php echo $artistID; ?>);
+					getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+					}},
 					klass: "third-menu-item"
 				},
 				'Löschen': {

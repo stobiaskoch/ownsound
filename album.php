@@ -10,21 +10,10 @@ $limit = $_REQUEST['limit'];
 <head>
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.flipster.js"></script>
 	<link rel="stylesheet" href="./js/jquery.flipster.css">
 	<link rel="stylesheet" href="./js/flowflipsternavtabs.css">
 	<script>
-$(document).ready(function() {
-
-   $('.edit').editable('jeditable.php?order=artist', {
-       indicator : "<img src='img/indicator.gif'>", 
-	event     : "dblclick",
-	cancel    : "Cancel",
-	submit   : 'OK',
-	tooltip   : "Click to edit..."	   
-});  
- });
 
  	$(function(){ 
 	 
@@ -81,7 +70,7 @@ if ( ! $db_erg )
   ?>
 
 
-<h1><span style="top: -6px; left: 20px;" class='edit' id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
+<h1><span style="top: -6px; left: 20px;" id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
 <a id="albumtitle2" style="
     width: 900px;
     height: 20px;
