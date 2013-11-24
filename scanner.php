@@ -195,11 +195,11 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 			$scannerid = $zeile['path'];
 			mysql_query("DELETE FROM scanner WHERE path = '$scannerid'");
 			mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
-			$progress2 = $progress * $hurz;
-			send_message($serverTime, 'album: ' . $album , $progress2); 
-			$hurz++;
-			}
 
+			}
+			$progress2 = $progress * $hurz;
+			send_message($serverTime, round($progress2) . "%", $progress2); 
+			$hurz++;
 }
 
 
