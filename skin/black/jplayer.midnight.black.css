@@ -174,8 +174,8 @@ a.jp-play:hover {
 	background-position: -41px 0;
 }
 a.jp-pause {
-	background-position: 0 -42px;
-	display: none;
+	background-position: 0 -41px;
+	display: inline;
 }
 a.jp-pause:hover {
 	background-position: -41px -42px;
@@ -683,7 +683,7 @@ a.jp-shuffle-off:hover {
 	background: #121112 url("jplayer.midnight.black.interface.png") repeat-x;
 	border-top: 1px solid #191919;
 	color: #CCC;
-	display: none;
+	display: block;
 	text-align: center;
 }
 

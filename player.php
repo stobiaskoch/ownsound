@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
-
+	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<link href="./skin/black/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery.desknoty.js"></script>	
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
@@ -102,14 +103,14 @@ $.desknoty({
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	
-		<div id="jp_container_1" class="jp-audio" style="width:510px;">
+		<div id="jp_container_1" class="jp-audio" style="width:511px;">
 		
 			<div class="jp-type-playlist" style="width:440px;">
 			
 				<div class="jp-gui jp-interface" style="width:440px;">
 				
 					<ul class="jp-controls" style="width:440px;">
-						<li><a href="javascript:;" class="jp-previous" tabindex="1">previous</a></li>
+						<li><a href="javascript:;" class="jp-previous" tabindex="1">prev</a></li>
 						<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
 						<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
 						<li><a href="javascript:;" class="jp-next" tabindex="1">next</a></li>

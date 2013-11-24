@@ -97,7 +97,14 @@ if($track<="9") {$track="0$track";}
 					klass: "second-menu-item"
 				},
 				'Umbennen': {
-					click: function(element){ alert('kommt...'); },
+					click: function(element){ 
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "");
+					$.ajax({ url: "./jeditable.php?order=title&id=<?php echo $titleID; ?>&value="+newtitle ,
+						success: function(data){
+						}
+					});
+					getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+					},
 					klass: "third-menu-item"
 				},
 				'Löschen': {

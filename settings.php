@@ -9,7 +9,7 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
 <script type="text/javascript" src="./js/ownsound.js"></script>
 <script src="./js/jquery.form.js"></script> 
 <script src="./js/jquery.desknoty.js"></script>	
-
+	<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
 
   <style>
     /* Example Styles for Demo */
