@@ -95,7 +95,7 @@ $alphabet = range('A', 'Z');
 $zahlen = range('0', '9');
 
 ?>
-<div id="navigation">
+<div id="navigation" style="z-index: 3;">
 <form id="search2" name="search2" action="search.php">
 	<?php
 
@@ -114,7 +114,7 @@ $zahlen = range('0', '9');
 	 
 </div>
 <div id="page">
-			<div id="header">
+			<div id="header" style="z-index: 2;">
 				<a href="#menu"></a>
 			</div>
 
