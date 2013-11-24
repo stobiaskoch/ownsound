@@ -72,8 +72,9 @@ if ( ! $db_erg )
 				$checkscan = mysql_num_rows($result);
 				$progress = 100 / $checkscan;
 		
+$hurz = 1;
 while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
-$progress2 = $progress2 + $progress + $progress;
+
 
 
 		
@@ -163,7 +164,7 @@ $progress2 = $progress2 + $progress + $progress;
 
 
 
-				send_message($serverTime, 'album: ' . $album , $progress2 + 1); 
+				
 				
 			//albumID ermitteln
 
@@ -194,7 +195,9 @@ $progress2 = $progress2 + $progress + $progress;
 			$scannerid = $zeile['path'];
 			mysql_query("DELETE FROM scanner WHERE path = '$scannerid'");
 			mysql_query("UPDATE scanner_log SET title=title+1 WHERE id='0'");
-			
+			$progress2 = $progress * $hurz;
+			send_message($serverTime, 'album: ' . $album , $progress2); 
+			$hurz++;
 			}
 
 }
