@@ -98,7 +98,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Umbennen': {
 					click: function(element){ 
-					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "");
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo gettitle($titleID); ?>");
 					$.ajax({ url: "./jeditable.php?order=title&id=<?php echo $titleID; ?>&value="+newtitle ,
 						success: function(data){
 						}

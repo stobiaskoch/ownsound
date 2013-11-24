@@ -73,7 +73,7 @@ if ( ! $db_erg )
 				$progress = 100 / $checkscan;
 		
 while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
-$progress2 = $progress2 + $progress;
+$progress2 = $progress2 + $progress + $progress;
 
 
 		

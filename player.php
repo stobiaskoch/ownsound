@@ -98,7 +98,7 @@ $.desknoty({
 		<?php
 		$left = $_COOKIE["screenwidth"];
 		$left = $left / 2;
-		$left = $left - 214;
+		$left = $left - 255;
 		?>
 		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; left:<?php echo $left; ?>px;">
 		
