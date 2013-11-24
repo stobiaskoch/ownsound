@@ -99,11 +99,14 @@ if($track<="9") {$track="0$track";}
 				'Umbennen': {
 					click: function(element){ 
 					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo gettitle($titleID); ?>");
+					 if (newtitle != undefined) {
 					$.ajax({ url: "./jeditable.php?order=title&id=<?php echo $titleID; ?>&value="+newtitle ,
 						success: function(data){
 						}
 					});
 					getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+					}
+					
 					},
 					klass: "third-menu-item"
 				},
