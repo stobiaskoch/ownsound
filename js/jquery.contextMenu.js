@@ -80,7 +80,7 @@
       menu.css({
         visibility: 'hidden',
         position: 'absolute',
-        zIndex: 1000
+        zIndex: 2000
       });
 
       // include margin so it can be used to offset from page border.
@@ -95,7 +95,7 @@
         visibility: 'visible',
         top: yPos + 'px',
         left: xPos + 'px',
-        zIndex: 1000
+        zIndex: 2000
       });
 
       return false;

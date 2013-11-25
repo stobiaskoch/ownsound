@@ -12,13 +12,13 @@ mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 				$mp3Path = $Daten['path'];
 		//		$mp3Path = "'".$mp3Path."'";
 				
-		//	echo utf8_encode($Daten['path']);
+
 // Make sure the file exists
 if(!file_exists($mp3Path) || !is_file($mp3Path)) {
     header('HTTP/1.0 404 Not Found');
     die('The file does not exist');
 }
- 
+
 // Set the appropriate content-type
 // and provide the content-length.
 $mime_type = "audio/mpeg"; 
