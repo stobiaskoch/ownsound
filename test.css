@@ -43,38 +43,6 @@ font-family: 'Awesome-Font', Arial;
  font-size: 16px;
 
  }
-.cover {
-padding-left: 40px;
-width: auto;
-display:inline-block;
--webkit-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:20px;
-margin:0 0 20px 12px;
-}
-
-.divGranite{
- font-family: 'Awesome-Font', Arial;
-display:inline-block;
--webkit-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:0;
-padding-left: 40px;
-margin:0 0 20px 0;
-position:relative;
-}
-
-.crest {
-position: absolute;
-top: 30px;
-right: 20px;
-display: block;
-width: 140px;
-height: 140px;
-text-indent: -9001px;
-}
 
 #navigation {
 font-size: 19px;
@@ -136,6 +104,7 @@ margin:0 0 20px 12px;
 position:fixed;
 z-index:1000;
 }
+
 #playerdiv {
 right:20px;
 top:50px;
@@ -160,23 +129,6 @@ z-index:12;
 position:fixed !important;
 }
 
-#infooben {
-padding-left: 40px;
-padding-top: 2px;
-padding-bottom: 2px;
-width: 600px;
-left: 10px;
-min-height: 194px;
-top: 45px;
-display:inline-block;
--webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:20px;
-margin:0 0 20px 12px;
-position:absolute;
-}
-
 #login {
 padding-left: 40px;
 padding-top: 2px;
@@ -192,20 +144,6 @@ padding:20px;
 margin:0 0 20px 12px;
 }
 
-#album {
-padding-left: 40px;
-width: 580px;
-min-height: 300px;
-right: 500px;
-top: 300px;
-display:inline-block;
--webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
-box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
-background:#fff;
-padding:20px;
-margin:0 0 20px 12px;
-
-}
 #album2 {
 -webkit-appearance: none;
 padding-left: 40px;
@@ -250,8 +188,7 @@ box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
-
- overflow : auto;
+overflow : auto;
 }
 
 #covertitle {
@@ -288,7 +225,6 @@ font-size:0.6em;
 */
         background-color: #f2f2f2;
         border: 1px solid #999;
-		 z-index: 1010;
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -299,12 +235,10 @@ font-size:0.6em;
         text-decoration: none;
         color: #333;
 		font-size:0.7em;
-		z-index: 1010;
       }
       .context-menu a:hover {
         background-color: #666;
         color: white;
-		z-index: 1010;
       }
 	  
 .target1, .target2 li, .target3 li {
@@ -312,12 +246,10 @@ font-size:0.6em;
         color: #333;
         border: 1px solid #c6c6c6;
         padding: 5px;
-		z-index: 1010;
       }
 
       .target1 {
         width: 130px;
-		z-index: 1010;
       }
 	  
 .menu-item-oben {
@@ -325,7 +257,6 @@ font-size:0.6em;
         color: #333;
         border: 1px solid #c6c6c6;
         padding: 5px;
-		z-index: 1010;
       }
 	  
 .loadmask {
