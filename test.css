@@ -207,19 +207,18 @@ margin:0 0 20px 12px;
 
 }
 #album2 {
+-webkit-appearance: none;
 padding-left: 40px;
 width: 65%;
-min-height: 390px;
+max-height: 390px;
 left: 10px;
 top: 324px;
-display:inline-block;
 -webkit-box-shadow:0 6px 6px 0 rgba(0,0,0,0.3);
 box-shadow:0 2px 6px 0 rgba(0,0,0,0.3);
 background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 position:absolute;
-
 }
 
 #artist {
@@ -353,6 +352,9 @@ font-size:0.6em;
     color:#222;
     font:normal 11px tahoma, arial, helvetica, sans-serif;
     cursor:wait;
+}
+#album2.masked {
+    overflow: auto !important;
 }
 .masked {
     overflow: hidden !important;

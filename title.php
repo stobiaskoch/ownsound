@@ -35,7 +35,7 @@ if ( ! $db_erg )
 }
     ?>
  <br>
-<div id="content546">
+
 
 
 
@@ -57,10 +57,7 @@ if($track<="9") {$track="0$track";}
 
   	echo "<tr><td>". $track . " - </td>";
 ?> 
-<!--
-	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
--->
-	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</td></div> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
@@ -196,7 +193,7 @@ if($track<="9") {$track="0$track";}
 </td></table>
 </div>
 
-</div>
+
 <?php
 ende:
 mysqli_free_result( $db_erg );
