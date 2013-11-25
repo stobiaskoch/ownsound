@@ -17,7 +17,7 @@ if($_REQUEST ['order']=="login") {
 	mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
 	$name = $_POST["name"]; 
 	$password = md5($_POST["password"]);
-	$ergebnis = mysql_query("SELECT * FROM user WHERE name='$name'"); 
+	$ergebnis = mysql_query("SELECT * FROM user WHERE BINARY name='$name'"); 
 	$row = mysql_fetch_object($ergebnis);
 	if($row->password != $password)
 		{ 
