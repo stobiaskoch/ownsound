@@ -50,16 +50,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	{
 		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name";
 	}
-?>
-<div id='title'><title><?php getartist($artistID); ?></title></div>
-<?php
-
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-
-
-
-
- 
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )
 {
@@ -103,18 +94,18 @@ $titleID = $zeile['id'];
 			$ThisFileInfo = $getID3->analyze($Daten[0]);
 			getid3_lib::CopyTagsToComments($ThisFileInfo);
 			if($getID3->info['id3v2']['APIC'][0]['data']!="") {
-			$artworktmp = './tmp/front'.$albumID.'.jpeg';
-			file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
-			
-				thumbnail($artworktmp, $albumID);
+				$artworktmp = './tmp/front'.$albumID.'.jpeg';
+				file_put_contents($artworktmp, $getID3->info['id3v2']['APIC'][0]['data']);
+				
+					thumbnail($artworktmp, $albumID);
 
-				mysql_query("UPDATE album SET cover='yes' WHERE id = '$albumID'");
-			}
-			else
-			{
-			mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
-			mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
-			}
+					mysql_query("UPDATE album SET cover='yes' WHERE id = '$albumID'");
+				}
+				else
+				{
+					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
+					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
+				}
 			}
 coverjump:
 
@@ -142,7 +133,3 @@ coverjump:
 mysqli_free_result( $db_erg );
 mysql_close();
 ?>
-
-			<script language="JavaScript">
-			stats();
-			</script>	

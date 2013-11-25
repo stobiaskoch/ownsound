@@ -7,7 +7,6 @@ $artistID = $_REQUEST['artistID'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastalbum', $albumID, $yearExpire);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -155,6 +154,7 @@ if($track<="9") {$track="0$track";}
 					click: function(element){
 					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo getalbum($albumID); ?>");
 					 if (newtitle != undefined) {
+					 newtitle = encodeURIComponent(newtitle);
 					$.ajax({ url: "./jeditable.php?order=album&id=<?php echo $albumID; ?>&value="+newtitle ,
 						success: function(data){
 						}
