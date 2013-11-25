@@ -60,7 +60,7 @@ if($track<="9") {$track="0$track";}
 <!--
 	<td width='300px'><div class="target<?php echo $count; ?>"><a href='#dhfig' onclick="addalbum('playtitle', '<?php echo $titleID; ?>', '<?php getartist($artistID); ?>')"><?php gettitle($titleID); ?></a></td><td>[<?php echo$zeile['duration'];?>]</a></div></td> 
 -->
-	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
+	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</div></td> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
@@ -85,6 +85,7 @@ if($track<="9") {$track="0$track";}
 					click: function(element){ 
 					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo gettitle($titleID); ?>");
 					 if (newtitle != undefined) {
+					 newtitle = encodeURIComponent(newtitle);
 					$.ajax({ url: "./jeditable.php?order=title&id=<?php echo $titleID; ?>&value="+newtitle ,
 						success: function(data){
 						}

@@ -38,7 +38,7 @@ if($_REQUEST ['order']=="login") {
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 
-	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 <script>
 createCookie("screenwidth", screen.width , 100);
