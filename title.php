@@ -122,7 +122,7 @@ if($track<="9") {$track="0$track";}
 	
 
 </table>
-<div class="target_album" style="position: absolute;right: 10px; top:10px; z-index: 2000;"><a href='#OwnSound'><img src="./img/settings.png" width="16px"></a></div></td>
+<div class="target_album" style="position: absolute;right: 10px; top:10px;"><a href='#OwnSound'><img src="./img/settings.png" width="16px"></a></div></td>
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
