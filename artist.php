@@ -43,16 +43,11 @@
 	
 <script>
 
-// Muss bei install gesetzt werden
-//createCookie("notifications", 'yes' , 100);
 			$(function() {
 				$('nav#menu').mmenu({
-				
 				classes: "mm-zoom-menu"
-				
 				});
 			});
-
 
 </script>
 <style type="text/css" title="currentStyle">
@@ -61,54 +56,32 @@
 </head>	
 <?php
 
-if(!$_COOKIE['loggedIn']) {
-	echo "<meta http-equiv='refresh' content='0; URL=index.php'>";
-	die();
-}
 require_once('config.inc.php');
-$checkuser = $_COOKIE['loggedIn'];
-$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
-$sql = "SELECT name FROM user WHERE name = '$checkuser'";
-
-$db_erg = mysqli_query( $db_link, $sql );
-
-$zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC);
-
-
-if ( ! $zeile['name'] )
-			{
-				die('Ungültiger User');
-			}
-
-
-
-
-
-
-
-
-
-
 include('./js/functions.php');
+
+logincheck();
+
+$db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+
+
+
 
 $alphabet = range('A', 'Z');
 $zahlen = range('0', '9');
 
 ?>
-<div id="navigation" style="z-index: 3;">
+<div id="navigation" style="z-index: 1005;">
 <form id="search2" name="search2" action="search.php">
+<a name="kapitel1" class="#menu" href="#numbers"># </a>
+
 	<?php
-
-	 echo "<a name='kapitel1' class='#menu' href='#numbers'># </a>";
-	 
 	foreach($alphabet as $alpha) {
-
 		echo "<a name='kapitel1' href='#".$alpha."'> $alpha </a>";
-
-		} 
+	} 
 	?>
-	 | <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout'>Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
-		</form><img src="./img/lupe_icon.gif"><div id="results" style="z-index:1000;"></div></div>
+	
+| <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout'>Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
+</form><img src="./img/lupe_icon.gif"></div><div id="results" style="z-index:1005;"></div>
 	
 
 	 
@@ -119,7 +92,7 @@ $zahlen = range('0', '9');
 			</div>
 
 			<nav style="position:relative;" id="menu">
-<!-- Your content -->
+
 <ul>
 
 
@@ -129,9 +102,8 @@ $zahlen = range('0', '9');
 		 <?php
 		
 
-		foreach($zahlen as $alphazahlen) {
-		//	$sql = "SELECT * FROM artist WHERE name LIKE '".$alphazahlen."%'";
-			$sql = "SELECT * FROM artist  WHERE navname like '".$alphazahlen."%' ORDER BY navname";
+foreach($zahlen as $alphazahlen) {
+		$sql = "SELECT * FROM artist WHERE navname like '".$alphazahlen."%' ORDER BY navname";
 
 			$db_erg = mysqli_query( $db_link, $sql );
 			if ( ! $db_erg )
@@ -141,16 +113,12 @@ $zahlen = range('0', '9');
 
 				while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 				{
-					$checkartistid = $zeile['id'];
-					mysql_connect(DBHOST, DBUSER,DBPASS);
-					mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
-					$trackcount = mysql_num_rows($tracksql);
+					$trackcount = trackcount($zeile['id']);
 						if($trackcount>=1) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
 
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}
@@ -159,9 +127,8 @@ $zahlen = range('0', '9');
 
 
 foreach($alphabet as $alpha) {
-// SELECT `id`, `title` FROM `movies` ORDER BY TRIM(LEADING 'a ' FROM TRIM(LEADING 'an ' FROM TRIM(LEADING 'the ' FROM LOWER(`title`))));
+
 	$sql = "SELECT * FROM artist  WHERE navname like '".$alpha."%' ORDER BY navname";
-//	echo $sql;
 	$db_erg = mysqli_query( $db_link, $sql );
 	if ( ! $db_erg )
 	{
@@ -172,17 +139,11 @@ foreach($alphabet as $alpha) {
 
 				while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 				{
-					$checkartistid = $zeile['id'];
-					mysql_connect(DBHOST, DBUSER,DBPASS);
-					mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
-					$tracksql = mysql_query("SELECT * FROM album WHERE artist='$checkartistid'"); 
-					$trackcount = mysql_num_rows($tracksql);
+						$trackcount = trackcount($zeile['id']);
 						if($trackcount>=1) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
-						
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($checkartistid); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
-
+								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 						<?php
 						}
 				}
@@ -197,35 +158,11 @@ mysqli_free_result( $db_erg );
 
 <div id="artist"></div>
 <div id="album2"></div>
-<!--
- <div id="statistics">
-	Datenbankstatistik
-	<div id="stats" style="font-size:0.6em;">
-	</div>
-</div>
-
-<div id="searchartist">K&uuml;nstlersuche
-		<form id="search2" name="search2" action="search.php">
-			<input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
-		</form>
-	<div id="results" style="z-index:1000;" >
-	</div>
-</div>
-	--->
 <div id="playerdiv">
 	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
 	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
 	<div id="playlist" style="font-size:0.6em;"></div>
 </div>
-<!--
-<div id="infooben">
-	<div id="information"><center><img src='./img/os_logo_smaller.JPG'></center></div><br>
-	<a style="position: relative;" href='https://github.com/stobiaskoch/ownsound'><img src='./img/git.gif'></a>
---->
-</div>
-
-
-
 <?php
 
 $lastartist = $_COOKIE['lastartist'];

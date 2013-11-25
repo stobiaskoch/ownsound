@@ -7,13 +7,25 @@
 	$result = mysql_query("SELECT * FROM artist WHERE name LIKE '%" . $_GET['search'] . "%' LIMIT 5");
 	while($row = mysql_fetch_object($result))
 	{
-		echo '
-';
-		$alpha = $row->name;
-		?> <a href='#dhfig' onclick="getdata('<?php echo $row->id; ?>', '<?php echo $row->name; ?>')"><?php echo $row->name; ?></a><br> <?php
-	//	echo "<a style='font-size:0.7em;' href='artist.php?order=newcover&coverid=".$row->id."&covername=".$row->name."'>".$row->name."</a><br>";
-		echo '
-';
+		echo '';
+		?> 
+		<a style="font-size: 13px;" href='#OwnSound' onclick="getdata('<?php echo $row->id; ?>')"><?php echo $row->name; ?> [Artist]</a><br>
+		<?php
+		echo '';
+	}
+echo '<br>';
+	
+	$result = mysql_query("SELECT * FROM album WHERE name LIKE '%" . $_GET['search'] . "%' LIMIT 5");
+	while($row = mysql_fetch_object($result))
+	{
+		echo '';
+		?>
+		<a style="font-size: 13px;" href='#OwnSound' onclick="
+										getdataalbum('<?php echo $row->id; ?>', '<?php echo $row->artist; ?>');
+										getdata('<?php echo $row->artist; ?>');">
+										<?php echo $row->name; ?> [Album]</a><br>
+		<?php
+		echo '';
 	}
 mysql_close();
 ?>

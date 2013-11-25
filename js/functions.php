@@ -110,6 +110,7 @@ function coverinmysql ($file, $albumID) {
 					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
 					mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 				}
+
 }
 				
 function thumbnail ($file, $albumID) {
@@ -147,6 +148,7 @@ function thumbnail ($file, $albumID) {
 				{
 					mysql_query("UPDATE album SET cover='no' WHERE id = '$albumID'");
 				}
+
 }
 				
 				
@@ -189,7 +191,8 @@ function thumbreflection ($albumID) {
 					{
 						mysql_query("UPDATE album SET coverbig='no' WHERE id = '$albumID'");
 					}
-				}
+
+}
 				
 function map_dirs($path,$level) {
         if(is_dir($path)) {
@@ -205,5 +208,30 @@ function map_dirs($path,$level) {
                         }
                 }
         }
+
 }
+function logincheck() {
+	if(!$_COOKIE['loggedIn']) {
+		echo "<meta http-equiv='refresh' content='0; URL=index.php'>";
+		die();
+	}
+	$checkuser = $_COOKIE['loggedIn'];
+	$db_checkuser = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+	$sql_checkuser = "SELECT name FROM user WHERE name = '$checkuser'";
+	$db_erg_checkuser = mysqli_query( $db_checkuser, $sql_checkuser );
+	$zeile_checkuser = mysqli_fetch_array( $db_erg_checkuser, MYSQL_ASSOC);
+	mysqli_close($db_checkuser);
+	if ( ! $zeile_checkuser['name'] )
+				{
+					die('Ungültiger User');
+				}
+}
+
+function trackcount($artistID) {
+	$tracksql = mysql_query("SELECT * FROM album WHERE artist='$artistID'"); 
+	$check = mysql_num_rows($tracksql);
+	return $check;
+
+}
+
 ?>

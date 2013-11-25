@@ -5,8 +5,6 @@ if($_REQUEST ['order']=="logout") {
 }
 
 if($_COOKIE['loggedIn']) {
-	// nur ein test
-	// 	mail('s.t.koch77@gmail.com', 'Dein OwnSound-Passwort', 'Vergessen, wa?');
 	echo "<meta http-equiv='refresh' content='0; URL=artist.php'>";
 	exit;
 }

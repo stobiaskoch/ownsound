@@ -2,7 +2,7 @@ $(document).ready(function() {
 	$('#search').keyup(function() {
 		if($(this).val().length >= 1) {
 			$.get("rpc.php", {search: $(this).val()}, function(data) {
-				$("#results").html(data);
+				$("#artist").html(data);
 			});
 		}
 	});
