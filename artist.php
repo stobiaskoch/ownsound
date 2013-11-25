@@ -82,9 +82,6 @@ $zahlen = range('0', '9');
 	
 | <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout'>Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value)"/>
 </form><img src="./img/lupe_icon.gif"></div><div id="results" style="z-index:1005;"></div>
-	
-
-	 
 </div>
 <div id="page">
 			<div id="header" style="z-index: 2;">
@@ -118,7 +115,7 @@ foreach($zahlen as $alphazahlen) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
 
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+							<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}
