@@ -34,7 +34,7 @@ if ( ! $db_erg )
   die('Ungültige Abfrage: ' . mysqli_error());
 }
     ?>
- <br>
+
 
 
 
@@ -42,8 +42,13 @@ if ( ! $db_erg )
 	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
   
 
-<a id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1><br>
-<table border="0">
+<a id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1>
+<a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button add">Hinzufügen</a>
+<a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button play">Abspielen</a>
+<div class="target_album">
+<a style="position: relative; top: -14px; float: right;" href='#OwnSound' class="button options">Optionen</a>
+</div>
+<br><table border="0">
 
 <?php
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
@@ -102,6 +107,21 @@ if($track<="9") {$track="0$track";}
 					
 					},
 					klass: "fourth-menu-item"
+				},
+				'Track-Nummer ändern': {
+					click: function(element){ 
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo $track; ?>");
+					 if (newtitle != undefined) {
+					 newtitle = encodeURIComponent(newtitle);
+					$.ajax({ url: "./jeditable.php?order=track&id=<?php echo $titleID; ?>&value="+newtitle ,
+						success: function(data){
+						}
+					});
+					getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+					}
+					
+					},
+					klass: "fifth-menu-item"
 }
   },
   {
@@ -122,29 +142,14 @@ if($track<="9") {$track="0$track";}
 	
 
 </table>
-<div class="target_album" style="position: absolute;right: 10px; top:10px;"><a href='#OwnSound'><img src="./img/settings.png" width="16px"></a></div></td>
+
 		<script type="text/javascript">
 		  $(document).ready(function(){
 
 			$('.target_album').contextMenu('context-menu-1', {
-				'<?php echo addslashes($artist); ?> - <?php echo addslashes(getalbum($albumID)); ?><br>': {
-					klass: "menu-item-oben" 
-				},
-				'Abspielen': {
-					click: function(element) {  // element is the jquery obj clicked on when context menu launched
-						addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
-					},
-					klass: "menu-item-1" // a custom css class for this menu item (usable for styling)
-				},
-				'Einreihen': {
-					click: function(element){ 
-					addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')
-					},
-					klass: "second-menu-item"
-				},
 				'Download': {
 					click: function(element){ 
-					zipalbum('<?php echo $albumID; ?>')
+						zipalbum('<?php echo $albumID; ?>')
 					},
 					klass: "third-menu-item"
 				},
@@ -157,8 +162,8 @@ if($track<="9") {$track="0$track";}
 						success: function(data){
 						}
 					});
-					getdata(<?php echo $artistID; ?>);
-					getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+						getdata(<?php echo $artistID; ?>);
+						getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
 					}},
 					klass: "third-menu-item"
 				},

@@ -8,7 +8,18 @@ $id = $_REQUEST['id'];
 $newvalue = urldecode($_REQUEST['value']);
 $order = $_REQUEST['order'];
 
-		$sql    = "UPDATE `".$order."` SET name='$newvalue' WHERE id='$id'";
+
+		if($_REQUEST['order']=="title" or $_REQUEST['order']=="album") {
+			$sql    = "UPDATE `".$order."` SET name='$newvalue' WHERE id='$id'";
+		}
+		if($_REQUEST['order']=="track" or $_REQUEST['order']=="album") {
+			$sql    = "UPDATE `title` SET track='$newvalue' WHERE id='$id'";
+		}
+		
+		
+		
+		
+		
 		$query = mysql_query($sql);
 
 
