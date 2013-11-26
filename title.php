@@ -39,10 +39,9 @@ if ( ! $db_erg )
 
 
 
-	<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
-  
-
+<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
 <a id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1>
+
 <a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button add">Hinzufügen</a>
 <a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button play">Abspielen</a>
 <div class="target_album">
@@ -85,7 +84,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Umbennen': {
 					click: function(element){ 
-					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo gettitle($titleID); ?>");
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo addslashes(gettitle($titleID)); ?>");
 					 if (newtitle != undefined) {
 					 newtitle = encodeURIComponent(newtitle);
 					$.ajax({ url: "./jeditable.php?order=title&id=<?php echo $titleID; ?>&value="+newtitle ,
@@ -159,7 +158,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Umbennen': {
 					click: function(element){
-					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo getalbum($albumID); ?>");
+					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo addslashes(getalbum($albumID)); ?>");
 					 if (newtitle != undefined) {
 					 newtitle = encodeURIComponent(newtitle);
 					$.ajax({ url: "./jeditable.php?order=album&id=<?php echo $albumID; ?>&value="+newtitle ,
@@ -173,7 +172,7 @@ if($track<="9") {$track="0$track";}
 				},
 				'Löschen': {
 					click: function(element){ 
-						if (confirm('Willst Du <?php echo getalbum($albumID); ?> wirklich endgültig löschen?'))
+						if (confirm('Willst Du <?php echo addslashes(getalbum($albumID)); ?> wirklich endgültig löschen?'))
 					{
 						deletealbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
 					}
