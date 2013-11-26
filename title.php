@@ -40,7 +40,19 @@ if ( ! $db_erg )
 
 
 <h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
-<a id="<?php echo $albumID; ?>"><?php echo getalbum($albumID); ?></a></h1>
+<a id="<?php echo $albumID; ?>"><?php 
+if(strlen(getalbum($albumID))>=40) {
+echo substr(getalbum($albumID), 0, 40) . "..."; 
+}
+else
+{
+echo getalbum($albumID); 
+}
+
+?>
+
+
+</a></h1>
 
 <a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('addalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button add">Hinzufügen</a>
 <a style="position: relative; top: -14px; float: right;" href="#OwnSound" onclick="addalbum('playalbum', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>');" class="button play">Abspielen</a>
