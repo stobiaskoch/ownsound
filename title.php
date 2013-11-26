@@ -147,6 +147,10 @@ if($track<="9") {$track="0$track";}
 		  $(document).ready(function(){
 
 			$('.target_album').contextMenu('context-menu-1', {
+				'<?php echo addslashes($artist); ?> - <?php echo addslashes(getalbum($albumID)); ?><br>': {
+					klass: "menu-item-oben" 
+				},
+
 				'Download': {
 					click: function(element){ 
 						zipalbum('<?php echo $albumID; ?>')
