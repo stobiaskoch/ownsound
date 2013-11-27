@@ -12,7 +12,7 @@ $order = $_REQUEST['order'];
 		if($_REQUEST['order']=="title" or $_REQUEST['order']=="album") {
 			$sql    = "UPDATE `".$order."` SET name='$newvalue' WHERE id='$id'";
 		}
-		if($_REQUEST['order']=="track") {
+		if($_REQUEST['order']=="track" or $_REQUEST['order']=="album") {
 			$sql    = "UPDATE `title` SET track='$newvalue' WHERE id='$id'";
 		}
 		

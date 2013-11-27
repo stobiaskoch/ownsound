@@ -145,6 +145,7 @@ margin:0 0 20px 12px;
 }
 
 #album2 {
+-webkit-appearance: none;
 padding-left: 40px;
 width: 65%;
 min-height: 390px;
@@ -386,7 +387,7 @@ div.schliessen {
 
 .add:before
 {
-	content: "\002B";
+	content: "\21B7";
 }
 
 .edit:before
@@ -436,7 +437,7 @@ div.schliessen {
 
 .options:before
 {
-	content: "\00A6";
+	content: "\2638";
 } 
 
 .button:hover

@@ -199,7 +199,7 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 			$scannerid = $zeile['path'];
 			mysql_query("DELETE FROM scanner WHERE path = '$scannerid'");
 			$progress2 = $progress * $hurz;
-			send_message($serverTime, str_replace(MUSICDIR.'/', "", $scannerid), $progress2); 
+			send_message($serverTime, round($progress2) . "%", $progress2); 
 			$hurz++;
 }
 
