@@ -143,9 +143,6 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 }
-::-webkit-scrollbar {
-width: 16px;
-height: 16px; }
 
 #album2 {
 padding-left: 40px;

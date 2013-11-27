@@ -3,17 +3,15 @@
 	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 	<title>OwnSound</title>
 <head>
+
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.mmenu.min.all.js"></script>
-	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
 	<script src="./js/popup.js"></script> 
 	<link type="text/css" rel="stylesheet" href="./js/jquery.mmenu.all.css" />
 	<link type="text/css" rel="stylesheet" href="./js/demo.css" />
-	<link rel="stylesheet" href="./js/jquery.flipster.css">
-	<script src="./js/jquery.flipster.js"></script>
 	<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
 	<style type="text/css">
 			#page
