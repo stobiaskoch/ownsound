@@ -112,14 +112,6 @@ $(document).ready(function() {
 		});
 	}
 	
-	function player(){
-		$.ajax({ url: "./player.php",
-			success: function(data){
-				$("#playlist").html(data);
-			}
-		});
-	}
-
 	function playlist(){
 		$.ajax({ url: "./player.php" ,
 			success: function(data){

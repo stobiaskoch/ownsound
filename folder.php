@@ -1,7 +1,7 @@
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
-	<link rel="stylesheet" href="./test.css">
+	<link rel="stylesheet" href="./css/ownsound.css">
 	<script>
 
 		

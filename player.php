@@ -11,11 +11,8 @@
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
 </head>
 <script type="text/javascript">
-$(document).ready(function() {
 
 function notify(strtext, albumID) {
-
-
 $.desknoty({
       icon: "./get.php?picid="+albumID+"&size=small",
       title: 'OwnSound spielt:',
@@ -23,6 +20,10 @@ $.desknoty({
  
             });
   }  
+
+$(document).ready(function() {
+
+
 
 
 //<![CDATA[
