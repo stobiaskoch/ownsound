@@ -5,17 +5,29 @@ setcookie('lastartist', $artistID, $yearExpire);
 $limit = $_REQUEST['limit'];
 //setcookie('artist'.$artistID.'page', $limit, $yearExpire);
 ?>
-<!doctype html>
-<html lang="en">
-<meta name="viewport" content="width=65%">
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	<meta name="viewport" content="width=device-width">
-	<link rel="stylesheet" href="./css/horizontal.css">
-	<script src="./js/modernizr.js"></script>
-</head>
-<body>
+	<script src="./js/jquery.flipster.js"></script>
+	<link rel="stylesheet" href="./js/jquery.flipster.css">
+	<link rel="stylesheet" href="./js/flowflipsternavtabs.css">
+	<script>
+
+ 	$(function(){ 
+	 
+		$(".flipster").flipster({
+			start: 'center',
+			style: 'coverflow',
+		});
+	});
+ 
+</script>	
+	
+	
+</head>	
+
 <?php
 require_once('config.inc.php');
 include('./js/functions.php');
@@ -48,12 +60,20 @@ if ( ! $db_erg )
 
   ?>
 
+
 <h1><span style="top: -6px; left: 20px;" id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
+<a id="albumtitle2" style="
+    width: 900px;
+    height: 20px;
+	 font-size:12px;
+	 bottom: 150px;
+"><a>
+<!-- Flipster List -->	
+		<div class="flipster" style="width: 90%; overflow:off; font-size:10px; bottom: 50px;">
+		  <ul>
 
 
 
-			<div class="frame effects" id="effects">
-				<ul class="clearfix">
 <?php
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
@@ -94,8 +114,9 @@ coverjump:
 		  
 	?>		
 		
-		<li>
-			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140" onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">
+		<li id="Coverflow-1" title="<?php echo getartist($artistID); ?>" data-flip-category="<?php echo getalbum($albumID); ?>">
+			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">
+			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140">
 		</li>
 
 
@@ -103,13 +124,12 @@ coverjump:
 
 	}
 	?>
-				</ul>
-			</div>
-					<div class="scrollbar">
-				<div class="handle">
-					<div class="mousearea"></div>
-				</div>
-			</div>
-			<!-- Scripts -->
-	<script src="./js/sly.min.js"></script>
-	<script src="./js/horizontal.js"></script>
+			  </ul>
+		</div>
+<!-- End Flipster List -->
+
+
+<?php
+mysqli_free_result( $db_erg );
+mysql_close();
+?>

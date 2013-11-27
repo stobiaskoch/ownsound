@@ -7,7 +7,6 @@ $limit = $_REQUEST['limit'];
 ?>
 <!doctype html>
 <html lang="en">
-<meta name="viewport" content="width=65%">
 <head>
 	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
@@ -49,11 +48,16 @@ if ( ! $db_erg )
   ?>
 
 <h1><span style="top: -6px; left: 20px;" id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
+<a id="albumtitle2" style="
+    width: 900px;
+    height: 20px;
+	 font-size:12px;
+	 bottom: 150px;
+"><a>
 
 
 
-			<div class="frame effects" id="effects">
-				<ul class="clearfix">
+
 <?php
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
@@ -103,13 +107,8 @@ coverjump:
 
 	}
 	?>
-				</ul>
-			</div>
-					<div class="scrollbar">
-				<div class="handle">
-					<div class="mousearea"></div>
-				</div>
-			</div>
+
+		
 			<!-- Scripts -->
 	<script src="./js/sly.min.js"></script>
 	<script src="./js/horizontal.js"></script>

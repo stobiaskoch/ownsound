@@ -143,9 +143,11 @@ background:#fff;
 padding:20px;
 margin:0 0 20px 12px;
 }
+::-webkit-scrollbar {
+width: 16px;
+height: 16px; }
 
 #album2 {
--webkit-appearance: none;
 padding-left: 40px;
 width: 65%;
 min-height: 390px;
@@ -387,7 +389,7 @@ div.schliessen {
 
 .add:before
 {
-	content: "\21B7";
+	content: "\002B";
 }
 
 .edit:before
@@ -437,7 +439,7 @@ div.schliessen {
 
 .options:before
 {
-	content: "\2638";
+	content: "\00A6";
 } 
 
 .button:hover
