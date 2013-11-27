@@ -75,7 +75,7 @@ $zahlen = range('0', '9');
 	} 
 	?>
 	
-| <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout'>Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
+| <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout' onclick="return confirm('Wirklich ausloggen?');">Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
 </form><img src="./img/lupe_icon.gif"></div><div id="results" style="z-index:1005;"></div>
 </div>
 <div id="page">
