@@ -8,7 +8,7 @@ a:active { color:black; text-decoration:none; }
   font-family: 'Awesome-Font';
   font-style: normal;
   font-weight: 800;
-  src: local('Awesome-Font'), local('Awesome-Font-Regular'), url(./js/OpenSans-Regular-webfont.woff) format('woff');
+  src: local('Awesome-Font'), local('Awesome-Font-Regular'), url(./fonts/OpenSans-Regular-webfont.woff) format('woff');
 }
 
 a img {
@@ -34,7 +34,7 @@ font-family: 'Awesome-Font', Arial;
  font-family: 'Awesome-Font', Arial;
  background-color:#e7e7e7;
  font-size: 20px;
- background: url(./img/bg.jpg);
+ background: url(../img/bg.jpg);
  }
  
   body.navi { 
@@ -283,7 +283,7 @@ font-size:0.6em;
 }
 .loadmask-msg div {
     padding:5px 10px 5px 25px;
-    background: #fbfbfb url('./img/spinner.gif') no-repeat 5px 5px;
+    background: #fbfbfb url('../img/spinner.gif') no-repeat 5px 5px;
     line-height: 16px;
 	border:1px solid #a3bad9;
     color:#222;
@@ -338,7 +338,7 @@ div.schliessen {
     width: 30px;
     left: 27px;
     bottom: 24px;
-    background: url("./img/close.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/close.png") no-repeat scroll 0 0 transparent;
     float: right;
     cursor: pointer;
 }
@@ -387,7 +387,7 @@ div.schliessen {
 
 .add:before
 {
-	content: "\21B7";
+	content: "\002B";
 }
 
 .edit:before
@@ -437,7 +437,7 @@ div.schliessen {
 
 .options:before
 {
-	content: "\2638";
+	content: "\00A6";
 } 
 
 .button:hover
