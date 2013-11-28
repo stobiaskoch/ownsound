@@ -110,7 +110,7 @@ foreach($zahlen as $alphazahlen) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
 
-							<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+							<li><a href='#OwnSound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}
@@ -135,7 +135,7 @@ foreach($alphabet as $alpha) {
 						if($trackcount>=1) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+								<li><a href='#OwnSound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 						<?php
 						}
 				}
@@ -151,8 +151,8 @@ mysqli_free_result( $db_erg );
 <div id="artist"></div>
 <div id="album2"></div>
 <div id="playerdiv">
-	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
-	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
+	<a href='#OwnCloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
+	<a href='#OwnCloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
 	<div id="playlist" style="font-size:0.6em;"></div>
 </div>
 <?php
