@@ -5,7 +5,7 @@
 	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	<link href="./skin/black/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
+	<link href="./css/jplayer/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery.desknoty.js"></script>	
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
