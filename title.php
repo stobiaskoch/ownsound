@@ -39,7 +39,7 @@ if ( ! $db_erg )
 
 
 
-<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#OwnSound' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
+<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
 <a id="<?php echo $albumID; ?>"><?php 
 if(strlen(getalbum($albumID))>=30) {
 echo substr(getalbum($albumID), 0, 30) . "..."; 
@@ -62,16 +62,25 @@ echo getalbum($albumID);
 <br><table border="0">
 
 <?php
+$gsecs=0;
+function zeitformat($sec) 
+  { 
+  $sec = abs($sec);     // Ganzzahlwert bilden 
+  return sprintf("%02d:%02d:%02d", ($sec/60/60)%24,($sec/60)%60,$sec%60);
+  } 
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
 $path=$zeile['path'];
 $titleID = $zeile['id'];
 $artist = getartist($artistID);
 $track = $zeile['track'];
-$duration=$zeile['duration'];
+
+$duration=explode(":",$zeile['duration']);
+$sekunden+=$duration[0]*60+$duration[1];
+
 $count++;
 if($track<="9") {$track="0$track";}
-$gesamtdauer+=strtotime($duration);
+
   	echo "<tr><td>". $track . " - </td>";
 ?> 
 	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</td></div> 
@@ -149,7 +158,7 @@ $gesamtdauer+=strtotime($duration);
 
 }
 
-$gesamtdauer=date("i:s",$gesamtdauer);
+$gesamtdauer=zeitformat($sekunden);
 ?>
 		</tr>
 	<td></td><tr>
