@@ -68,9 +68,10 @@ $path=$zeile['path'];
 $titleID = $zeile['id'];
 $artist = getartist($artistID);
 $track = $zeile['track'];
+$duration=$zeile['duration'];
 $count++;
 if($track<="9") {$track="0$track";}
-
+$gesamtdauer+=strtotime($duration);
   	echo "<tr><td>". $track . " - </td>";
 ?> 
 	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</td></div> 
@@ -147,6 +148,8 @@ if($track<="9") {$track="0$track";}
 <?php
 
 }
+
+$gesamtdauer=date("i:s",$gesamtdauer);
 ?>
 		</tr>
 	<td></td><tr>
@@ -209,7 +212,7 @@ if($track<="9") {$track="0$track";}
 </map>
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 <br></td><td width='140'>
-<?php echo "Genre: " . getgenrefromalbumID($albumID); ?>
+<?php echo "Genre: " . getgenrefromalbumID($albumID).'<br/>Gesamtdauer: '.$gesamtdauer; ?>
 </td></table>
 </div>
 
