@@ -45,7 +45,7 @@ createCookie("screenwidth", screen.width , 100);
 createCookie("screenheight", screen.height, 100);
 </script>
 <style type="text/css" title="currentStyle">
-	@import "./test.css";
+	@import "./css/ownsound.css";
 </style>
 </head>		
 <center>

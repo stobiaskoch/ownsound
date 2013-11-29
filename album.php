@@ -8,11 +8,10 @@ $limit = $_REQUEST['limit'];
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <head>
-	<script src="./js/jquery.contextMenu.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
 	<script src="./js/jquery.flipster.js"></script>
-	<link rel="stylesheet" href="./js/jquery.flipster.css">
-	<link rel="stylesheet" href="./js/flowflipsternavtabs.css">
+	<link rel="stylesheet" href="./css/jquery.flipster.css">
+	<link rel="stylesheet" href="./css/flowflipsternavtabs.css">
 	<script>
 
  	$(function(){ 

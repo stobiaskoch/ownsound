@@ -3,15 +3,15 @@
 	<link id="favicon" rel="icon" type="image/png" href="./img/os_icon2.png"> 
 	<title>OwnSound</title>
 <head>
-
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="./js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.mmenu.min.all.js"></script>
 	<script src="./js/jquery.loadmask.min.js"></script> 
 	<script src="./js/popup.js"></script> 
-	<link type="text/css" rel="stylesheet" href="./js/jquery.mmenu.all.css" />
-	<link type="text/css" rel="stylesheet" href="./js/demo.css" />
+	<link type="text/css" rel="stylesheet" href="./css/jquery.mmenu.all.css" />
+	<link type="text/css" rel="stylesheet" href="./css/demo.css" />
+	<link type="text/css" rel="stylesheet" href="./css/ownsound.css" />
 	<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
 	<style type="text/css">
 			#page
@@ -48,9 +48,6 @@
 			});
 
 </script>
-<style type="text/css" title="currentStyle">
-	@import "./test.css";
-</style>
 </head>	
 <?php
 
@@ -78,7 +75,7 @@ $zahlen = range('0', '9');
 	} 
 	?>
 	
-| <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout'>Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
+| <a href="#" class="popup_oeffnen">Settings</a> | <a href='index.php?order=logout' onclick="return confirm('Wirklich ausloggen?');">Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
 </form><img src="./img/lupe_icon.gif"></div><div id="results" style="z-index:1005;"></div>
 </div>
 <div id="page">
@@ -113,7 +110,7 @@ foreach($zahlen as $alphazahlen) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
 
-							<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+							<li><a href='#OwnSound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 
 						<?php
 						}
@@ -138,7 +135,7 @@ foreach($alphabet as $alpha) {
 						if($trackcount>=1) {
 						if($zeile['fav']=="1") {$icon = "./img/favyes.png";} else {$icon = "";}
 						?>
-								<li><a href='#ownsound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
+								<li><a href='#OwnSound' onclick="getdata('<?php echo $zeile['id']; ?>')"><?php echo getartist($zeile['id']); ?> <img type="float: right;" src="<?php echo $icon; ?>" width="3%"></a></li>
 						<?php
 						}
 				}
@@ -154,8 +151,8 @@ mysqli_free_result( $db_erg );
 <div id="artist"></div>
 <div id="album2"></div>
 <div id="playerdiv">
-	<a href='#owncloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
-	<a href='#owncloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
+	<a href='#OwnCloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
+	<a href='#OwnCloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
 	<div id="playlist" style="font-size:0.6em;"></div>
 </div>
 <?php
