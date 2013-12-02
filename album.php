@@ -49,6 +49,11 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	{
 		$sql = "SELECT * FROM album WHERE artist='$artistID' ORDER BY name";
 	}
+	if($artistID=="lastten") {
+		$albumcount = "Zuletzt hinzugefügt:";
+		$sql = "SELECT * FROM album ORDER BY id DESC LIMIT 10";
+	}
+	
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 $db_erg = mysqli_query( $db_link, $sql );
 if ( ! $db_erg )

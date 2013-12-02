@@ -11,13 +11,8 @@ $album = addslashes(getalbum($_REQUEST['albumID']));
 ?>
 <html>
 <head>
-
-	<script src="./js/jquery.jeditable.js"></script> 
-	<script src="./js/jquery.jeditable.js"></script> 
 	<script src="./js/jquery.form.js"></script> 
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	
-	
 <script>
 	
 
@@ -31,7 +26,6 @@ $(document).ready(function()
             $("#album2").html(data);
     }
     });
-			sleep(1);
 			getdata('<?php echo $artistID; ?>');
 			getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
     }); 
@@ -50,10 +44,11 @@ $albumsearch = "$artist - $album";
 //$albumsearch = utf8_decode($albumsearch);
 echo "Suche nach: ".stripslashes(utf8_decode($albumsearch))."<br>";
 
-$albumsearch = str_replace(" ", "+", $albumsearch);
-//$albumsearch = urlencode($albumsearch);
+//$albumsearch = str_replace(" ", "+", $albumsearch);
+$albumsearch = urlencode($albumsearch);
 //$jsrc = "http://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$album."&tbs=iar:t,ift:jpg";
 $jsrc = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=".$albumsearch."&tbs=iar:t,ift:jpg";
+
 
 $json = file_get_contents($jsrc);
 sleep(1);

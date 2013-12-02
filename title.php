@@ -39,7 +39,7 @@ if ( ! $db_erg )
 
 
 
-<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#dhfig' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
+<h1 style="position: absolute; top: -6px; left: 20px;"><a style="color:blue;" href='#OwnSound' onclick="getdata('<?php echo $artistID; ?>')">[<?php echo getartist($artistID); ?>] - </a>
 <a id="<?php echo $albumID; ?>"><?php 
 if(strlen(getalbum($albumID))>=30) {
 echo substr(getalbum($albumID), 0, 30) . "..."; 
@@ -161,7 +161,7 @@ if($track<="9") {$track="0$track";}
 $gesamtdauer=zeitformat($sekunden);
 ?>
 		</tr>
-	<td></td><tr>
+	<tr>
 	
 
 </table>
@@ -214,7 +214,7 @@ $gesamtdauer=zeitformat($sekunden);
 		</script>
 
 <div id="covertitle" style="font-size:0.6em;">
-<table>
+<table><tr>
 <td>
 <map name="Landkarte">
 	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
@@ -222,7 +222,7 @@ $gesamtdauer=zeitformat($sekunden);
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 <br></td><td width='140'>
 <?php echo "Genre: " . getgenrefromalbumID($albumID).'<br/>Gesamtdauer: '.$gesamtdauer; ?>
-</td></table>
+</td></tr></table>
 </div>
 
 

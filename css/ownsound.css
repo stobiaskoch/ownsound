@@ -11,6 +11,12 @@ a:active { color:black; text-decoration:none; }
   src: local('Awesome-Font'), local('Awesome-Font-Regular'), url(./fonts/OpenSans-Regular-webfont.woff) format('woff');
 }
 
+ @font-face {
+  font-family: 'icon-Font';
+  font-style: normal;
+  font-weight: 800;
+  src: local('icon-Font'), local('icon-Font'), url(./fonts/fontawesome-webfont.woff) format('woff');
+}
 a img {
 border: 0px;
 }
@@ -44,6 +50,11 @@ font-family: 'Awesome-Font', Arial;
 
  }
 
+
+
+ tr.covert {
+  background-color:#ccc;
+}
 #navigation {
 font-size: 19px;
 padding-top: 2px;
@@ -387,58 +398,25 @@ div.schliessen {
 
 .add:before
 {
-	content: "\002B";
-}
-
-.edit:before
-{
-	content: "\270E";        
-}
-
-.delete:before
-{
-	content: "\266B";        
-}
-
-.save:before
-{
-	content: "\2714";        
-}
-
-.email:before
-{
-	content: "\2709";        
-}
-
-.like:before
-{
-	content: "\2764";        
-}
-
-.next:before
-{
-	content: "\279C";
-}
-
-.star:before
-{
-	content: "\2605";
-}
-
-.spark:before
-{
-	content: "\2737";
+	font-family: icon-Font;
+	content: "\f0fe";
 }
 
 .play:before
 {
-	content: "\25B6";
+	font-family: icon-Font;
+	content: "\f144";
 } 
 
 .options:before
 {
-	content: "\00A6";
+	font-family: icon-Font;
+	content: "\f044";
 } 
+
+
+
+
 
 .button:hover
 {
