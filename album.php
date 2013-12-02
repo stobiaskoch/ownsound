@@ -119,7 +119,7 @@ coverjump:
 	?>		
 		
 		<li id="Coverflow-1" title="<?php echo getartist($artistID); ?>" data-flip-category="<?php echo getalbum($albumID); ?>">
-			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">
+			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo getartistIDfromalbumID($albumID); ?>')">
 			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140">
 		</li>
 
