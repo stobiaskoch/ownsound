@@ -24,7 +24,7 @@ $(document).ready(function() {
 			$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID, 
 				success: function(){
 					getdataalbum(albumID, artistID);
-					getdata(artistID);
+					getdata(artistID, albumID);
 				}
 			});
 	}
@@ -76,10 +76,10 @@ $(document).ready(function() {
 		});
 	}
 	
-	function getdata(artid){
+	function getdata(artid, albumID){
 		$("#artist").mask("Loading...");
 		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid , 
+		$.ajax({ url: "./album.php?artid="+artid+"&albumID="+albumID , 
 			success: function(data){
 				$("#artist").html(data);		
 			}

@@ -1,5 +1,7 @@
 <?php
 $artistID = $_REQUEST['artid'];
+$albumID = $_REQUEST['albumID'];
+if($albumID=="") {$albumID = "center";}
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);
 $limit = $_REQUEST['limit'];
@@ -15,7 +17,7 @@ $limit = $_REQUEST['limit'];
 	<script>
 
  	$(function(){ 
-	 
+	 var albid = '<?php echo $albumID; ?>';
 		$(".flipster").flipster({
 			start: 'center',
 			style: 'coverflow',
@@ -118,7 +120,7 @@ coverjump:
 		  
 	?>		
 		
-		<li id="Coverflow-1" title="<?php echo getartist($artistID); ?>" data-flip-category="<?php echo getalbum($albumID); ?>">
+		<li id="<?php echo $albumID; ?>" title="<?php echo getartist($artistID); ?>" data-flip-category="<?php echo getalbum($albumID); ?>">
 			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo getartistIDfromalbumID($albumID); ?>')">
 			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140">
 		</li>

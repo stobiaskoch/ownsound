@@ -12,6 +12,7 @@
 	<link type="text/css" rel="stylesheet" href="./css/jquery.mmenu.all.css" />
 	<link type="text/css" rel="stylesheet" href="./css/demo.css" />
 	<link type="text/css" rel="stylesheet" href="./css/ownsound.css" />
+	<link href="./css/jplayer/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
 	<script src="./js/jquery.easytabs.min.js" type="text/javascript"></script>
 	<style type="text/css">
 			#page
@@ -66,7 +67,7 @@ $zahlen = range('0', '9');
 
 ?>
 <div id="navigation" style="z-index: 1005; font-size: 14px;">
-<form id="search2" name="search2" action="search.php">
+<form id="search2" name="search2" action="rpc.php">
 <a name="kapitel1" class="#menu" href="#numbers"># </a>
 
 	<?php
