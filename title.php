@@ -4,6 +4,7 @@ include('./js/functions.php');
 require_once './js/thumb/ThumbLib.inc.php';
 $albumID = $_REQUEST['albumID'];
 $artistID = $_REQUEST['artistID'];
+$listID = $_REQUEST['listID'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastalbum', $albumID, $yearExpire);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
@@ -217,7 +218,7 @@ $gesamtdauer=zeitformat($sekunden);
 <table><tr>
 <td>
 <map name="Landkarte">
-	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>')"></a>
+	 <area shape="rect" coords="1,1,249,139" href='#OwnSound' onclick="google('<?php echo $artistID; ?>', '<?php echo $albumID; ?>', '<?php echo $listID; ?>')"></a>
 </map>
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 <br></td><td width='140'>

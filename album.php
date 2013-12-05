@@ -1,7 +1,7 @@
 <?php
 $artistID = $_REQUEST['artid'];
-$albumID = $_REQUEST['albumID'];
-if($albumID=="") {$albumID = "center";}
+$listID = $_REQUEST['listID'];
+if($listID=="") {$listID = "center";}
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);
 $limit = $_REQUEST['limit'];
@@ -17,9 +17,8 @@ $limit = $_REQUEST['limit'];
 	<script>
 
  	$(function(){ 
-	 var albid = '<?php echo $albumID; ?>';
 		$(".flipster").flipster({
-			start: 'center',
+			start: <?php echo $listID; ?>,
 			style: 'coverflow',
 		});
 	});
@@ -81,8 +80,10 @@ if ( ! $db_erg )
 
 
 <?php
+$listID = 0;
 while ($zeile = mysqli_fetch_array( $db_erg, MYSQL_ASSOC))
 {
+
 $albumID = $zeile['id'];
 $titleID = $zeile['id'];
 
@@ -121,19 +122,21 @@ coverjump:
 	?>		
 		
 		<li id="<?php echo $albumID; ?>" title="<?php echo getartist($artistID); ?>" data-flip-category="<?php echo getalbum($albumID); ?>">
-			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo getartistIDfromalbumID($albumID); ?>')">
+			<a href='#OwnSound' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo getartistIDfromalbumID($albumID); ?>', '<?php echo $listID; ?>')">
 			<img src='get.php?picid=<?php echo $albumID; ?>' title="<?php echo getalbum($albumID); ?>" width="140" height="140">
 		</li>
 
 
 	<?php
-
+		$listID++;
 	}
 	?>
 			  </ul>
 		</div>
 <!-- End Flipster List -->
-
+	<script language="JavaScript">
+		flipfirst('<?php echo getalbum($albumID); ?>');
+	</script>
 
 <?php
 mysqli_free_result( $db_erg );

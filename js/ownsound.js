@@ -9,9 +9,9 @@ $(document).ready(function() {
 });
 
 
-	function google(artistID, albumID){
+	function google(artistID, albumID, listID){
 		$("#album2").mask("Fetching data...");
-			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID,
+			$.ajax({ url: "./google.php?order=search&artistID="+artistID+"&albumID="+albumID+"&listID="+listID,
 				success: function(data){
 					$("#album2").unmask();
 					$("#album2").html(data);
@@ -19,12 +19,12 @@ $(document).ready(function() {
 			});
 	}
 	
-	function googledownload(pic, albumID, artistID){
+	function googledownload(pic, albumID, artistID, listID){
 		$("#album2").mask("Saving...");
 			$.ajax({ url: "./google.php?order=save&url="+pic+"&albumID="+albumID+"&artistID="+artistID, 
 				success: function(){
 					getdataalbum(albumID, artistID);
-					getdata(artistID, albumID);
+					getdata(artistID, listID);
 				}
 			});
 	}
@@ -66,20 +66,20 @@ $(document).ready(function() {
 	}
 
 	
-	function getdataalbum(albumID, artistID){
+	function getdataalbum(albumID, artistID, listID){
 
 		$("#album2").mask("Loading...");
-		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID , 
+		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID+"&listID="+listID , 
 			success: function(data){
 				$("#album2").html(data);
 			}	
 		});
 	}
 	
-	function getdata(artid, albumID){
+	function getdata(artid, listID){
 		$("#artist").mask("Loading...");
 		document.getElementById("results").innerHTML="";
-		$.ajax({ url: "./album.php?artid="+artid+"&albumID="+albumID , 
+		$.ajax({ url: "./album.php?artid="+artid+"&listID="+listID, 
 			success: function(data){
 				$("#artist").html(data);		
 			}
@@ -184,5 +184,7 @@ $(document).ready(function() {
 		});
 	}		
 	
-	
+		function flipfirst(albumtitle){	
+		document.getElementById("albumtitle2").innerHTML="<center style='position: relative; bottom: 40px;'>"+albumtitle+"</center>";
+	}
 	

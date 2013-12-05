@@ -8,6 +8,7 @@ $artistID = $_REQUEST['artistID'];
 $artist = addslashes(getartist($_REQUEST['artistID']));
 $albumID = $_REQUEST['albumID'];
 $album = addslashes(getalbum($_REQUEST['albumID']));
+$listID = $_REQUEST['listID'];
 ?>
 <html>
 <head>
@@ -26,7 +27,7 @@ $(document).ready(function()
             $("#album2").html(data);
     }
     });
-			getdata('<?php echo $artistID; ?>');
+			getdata('<?php echo $artistID; ?>', '<?php echo $listID; ?>');
 			getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>');
     }); 
 
@@ -65,7 +66,7 @@ $picheight = $jset["responseData"]["results"][$i]["height"];
 
 echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>";
 ?>
-<div id="googlecover"><tr><td style="width:135px"><a style="font-size:0.7em;" href='#OwnSound' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>')"><img src='<?php echo $pic; ?>' width='135' height='135' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
+<div id="googlecover"><tr><td style="width:135px"><a style="font-size:0.7em;" href='#OwnSound' onclick="googledownload('<?php echo $pic; ?>', '<?php echo $albumID; ?>', '<?php echo $artistID; ?>', '<?php echo $listID; ?>')"><img src='<?php echo $pic; ?>' width='135' height='135' title='<?php echo "$picwidth x $picheight\n$pictitle"; ?>'></a>
 </td></tr></div>
 </table>
 <?php
@@ -76,6 +77,7 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 <form method="post" name="upload" id="upload" action="./coverup.php" enctype="multipart/form-data" >
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
+<input type="hidden" id ="listID" name="listID" value="<?php echo $listID; ?>">
 <input type="submit" value="Ändern">
 </form><br>
 	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">Zurück</a>

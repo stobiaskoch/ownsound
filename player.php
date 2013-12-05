@@ -5,7 +5,7 @@
 
 	<script type="text/javascript" src="./js/ownsound.js"></script>
 	<script src="./js/jquery.loadmask.min.js"></script> 
-	<link href="./css/jplayer/jplayer.midnight.black.css" rel="stylesheet" type="text/css" /> 
+	
 	<script src="./js/jquery.desknoty.js"></script>	
 	<script type="text/javascript" src="./js/jquery.jplayer.min.js"></script>
 	<script type="text/javascript" src="./js/add-on/jplayer.playlist.min.js"></script>
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		$left = $left / 2;
 		$left = $left - 255;
 		?>
-		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; left:<?php echo $left; ?>px;">
+		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; right: 1px;">
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	
