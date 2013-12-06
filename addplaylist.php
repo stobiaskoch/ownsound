@@ -80,7 +80,7 @@ $i = 1;
 		$title = str_replace("'", "\'", $zeile['name']);
 	//	$title = utf8_encode($title);
 		$artist = getartist($_REQUEST['artistID']);
-	//	$artist = addslashes($artist);
+		$artist = addslashes($artist);
 		$artist = utf8_decode($artist);
 		$albumID = $zeile['album'];
 			if($_REQUEST['order']=="playtitle") {
