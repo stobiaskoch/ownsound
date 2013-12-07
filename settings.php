@@ -96,9 +96,9 @@ $(function() {
     $(document).ready( function() {
       $('#tab-container').easytabs();
 	  
-	              $('#dbsetting').ajaxForm(function() { 
-                alert("Thank you for your comment!"); 
-            }); 
+	$('#dbsetting').ajaxForm(function() { 
+		alert("Saved!"); 
+    }); 
 	  
 	  
 	  
@@ -147,9 +147,9 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 <input type="hidden" size="25" id="search" name="musicdir" value="<?php echo MUSICDIR; ?>">
 <input type="hidden" size="25" id="search" name="ownurl" value="<?php echo OWNURL; ?>">
 </table>
-    <input type="submit" value="Submit Comment" /> 
+    <input type="submit" value="Speichern" /> 
 </form>
-<button id="dbbackup">Datenbank-Backup</button>
+<br><button id="dbbackup">Datenbank-Backup</button>
   </div>
   
   
