@@ -1,3 +1,4 @@
+<?php include('./js/functions.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,7 +63,7 @@ $(document).ready(function() {
 						var artist = (object.artist);
 						str = songtitle.replace(/\'/g,'\\\'');
 						document.getElementById("playnow").innerHTML="Now playing: "+artist+" - "+str+"";
-						document.getElementById("playercover").innerHTML="<img src='./get.php?picid="+albumID+"&size=small' width='69' height='70'>";
+						document.getElementById("playercover").innerHTML="<a href='#OwnSound' onclick=\"getdataalbum("+albumID+", '0', '0');\"><img src='./get.php?picid="+albumID+"&size=small' width='70' height='70'></a>";
 						strtext = artist+' - '+str;
 						var notifications = readCookie("notifications");
 						if (notifications == 'yes') {

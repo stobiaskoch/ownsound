@@ -24,7 +24,23 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
   </style>
 
 <script>
-
+			
+			        function getLocation() {
+ 
+            if (navigator.geolocation) {     
+                // Funktion showPosition aufrufen, wenn Geolocation verfügbar
+             navigator.geolocation.getCurrentPosition(showPosition);
+ 
+            } else {
+               document.getElementById('result').innerHTML = "Ihr Browser unterstützt leider die Geolocation-Funktion nicht!";
+            } 
+        }         
+       
+        function showPosition(position) { 
+            currentPos = position.coords.latitude+","+position.coords.longitude;
+            document.getElementById('result').innerHTML = "<a href='http://maps.google.com/?hl=en&q=loc:" + currentPos + "'>Auf Google Maps anzeigen</a>";
+     }
+	 
 $(function() {
         $('button#forum2').click(function(){
 			scandir = document.getElementById("scandir").value;
@@ -140,10 +156,10 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
    <div id="tabs1-js">
    <form id="dbsetting" action="settingsave.php" method="post"> 
  <table>
-<tr><td width="150">Datenbankhost: </td><td width="200"><input type="text" size="25" id="search" name="dbhost" value="<?php echo DBHOST; ?>"></td></tr>
-<tr><td width="150">Benutzer: </td><td width="200"><input type="text" size="25" id="search" name="dbuser" value="<?php echo DBUSER; ?>"></td></tr>
-<tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" id="search" name="dbpass" value="<?php echo DBPASS; ?>"></td></tr>
-<tr><td width="150">Datenbankname: </td><td width="200"><input type="text" size="25" id="search" name="dbname" value="<?php echo DBDATABASE; ?>"></td></tr>
+<tr><td width="150">Datenbankhost: </td><td width="200"><input type="text" size="25" name="dbhost" value="<?php echo DBHOST; ?>"></td></tr>
+<tr><td width="150">Benutzer: </td><td width="200"><input type="text" size="25" name="dbuser" value="<?php echo DBUSER; ?>"></td></tr>
+<tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" name="dbpass" value="<?php echo DBPASS; ?>"></td></tr>
+<tr><td width="150">Datenbankname: </td><td width="200"><input type="text" size="25" name="dbname" value="<?php echo DBDATABASE; ?>"></td></tr>
 <input type="hidden" size="25" id="search" name="musicdir" value="<?php echo MUSICDIR; ?>">
 <input type="hidden" size="25" id="search" name="ownurl" value="<?php echo OWNURL; ?>">
 </table>
@@ -192,7 +208,7 @@ echo "$album Alben<br>";
 echo "$title Tracks<br>";
 ?>
 <a href='#ownsound' onclick="nocover()"><?php echo $nocover; ?> ohne Cover</a><br>
-
+<div id="result">Geo</div>
 <button id="noti">Dis/Enable notifications</button>
 
   </div>
@@ -200,3 +216,7 @@ echo "$title Tracks<br>";
 </div>
 
 <div id="scanner"></div>
+
+	<script language="JavaScript">
+	getLocation();
+	</script>

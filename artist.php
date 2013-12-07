@@ -66,6 +66,7 @@ $alphabet = range('A', 'Z');
 $zahlen = range('0', '9');
 
 ?>
+
 <div id="navigation" style="z-index: 1005; font-size: 14px;">
 <form id="search2" name="search2" action="rpc.php">
 <a name="kapitel1" class="#menu" href="#numbers"># </a>
@@ -76,7 +77,7 @@ $zahlen = range('0', '9');
 	} 
 	?>
 	
-| <a href="#" class="popup_oeffnen">Settings</a> | <a href='#OwnSound' onclick="getdata('lastten');">Neue Alben</a> | <a href='index.php?order=logout' onclick="return confirm('Wirklich ausloggen?');">Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
+| <a href="#" class="popup_oeffnen">Einstellungen</a> | <a href='#OwnSound' onclick="getdata('lastten');">Neue Alben</a> | <a href='index.php?order=logout' onclick="return confirm('Wirklich ausloggen?');">Logout</a><div id="searchbar" style="float: right;"><input type="text" size="25" id="search" name="search" autocomplete="off"  onblur="reset(search.value);"/>
 </form><img src="./img/lupe_icon.gif"></div><div id="results" style="z-index:1005;"></div>
 </div>
 <div id="page">
@@ -151,6 +152,7 @@ mysqli_free_result( $db_erg );
 
 <div id="artist"></div>
 <div id="album2"></div>
+
 <div id="playerdiv">
 	<a href='#OwnCloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
 	<a href='#OwnCloud' onclick="addalbum('truncate', '0', '0')"><img src='./img/truncate.png' title="Playlist leeren"></a>
@@ -165,6 +167,7 @@ $lastalbum = $_COOKIE['lastalbum'];
 	getdata('<?php echo $_COOKIE['lastartist']; ?>');
 	getdataalbum('<?php echo $_COOKIE['lastalbum']; ?>', '<?php echo getartistIDfromalbumID($lastalbum); ?>');
 	playlist();
+	getLocation();
 	</script>
 	<?php
 
@@ -182,3 +185,4 @@ mysql_close();
  
     </div>
 	<div id="hintergrund"></div>
+	

@@ -3,7 +3,7 @@ require_once('config.inc.php');
 include('./js/functions.php');
 require_once './js/thumb/ThumbLib.inc.php';
 $albumID = $_REQUEST['albumID'];
-$artistID = $_REQUEST['artistID'];
+$artistID = getartistIDfromalbumID($albumID);
 $listID = $_REQUEST['listID'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastalbum', $albumID, $yearExpire);
