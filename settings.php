@@ -24,23 +24,7 @@ foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
   </style>
 
 <script>
-			
-			        function getLocation() {
- 
-            if (navigator.geolocation) {     
-                // Funktion showPosition aufrufen, wenn Geolocation verfügbar
-             navigator.geolocation.getCurrentPosition(showPosition);
- 
-            } else {
-               document.getElementById('result').innerHTML = "Ihr Browser unterstützt leider die Geolocation-Funktion nicht!";
-            } 
-        }         
-       
-        function showPosition(position) { 
-            currentPos = position.coords.latitude+","+position.coords.longitude;
-            document.getElementById('result').innerHTML = "<a href='http://maps.google.com/?hl=en&q=loc:" + currentPos + "'>Auf Google Maps anzeigen</a>";
-     }
-	 
+
 $(function() {
         $('button#forum2').click(function(){
 			scandir = document.getElementById("scandir").value;
@@ -208,7 +192,7 @@ echo "$album Alben<br>";
 echo "$title Tracks<br>";
 ?>
 <a href='#ownsound' onclick="nocover()"><?php echo $nocover; ?> ohne Cover</a><br>
-<div id="result">Geo</div>
+
 <button id="noti">Dis/Enable notifications</button>
 
   </div>
@@ -216,7 +200,3 @@ echo "$title Tracks<br>";
 </div>
 
 <div id="scanner"></div>
-
-	<script language="JavaScript">
-	getLocation();
-	</script>

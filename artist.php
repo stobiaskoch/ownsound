@@ -167,7 +167,6 @@ $lastalbum = $_COOKIE['lastalbum'];
 	getdata('<?php echo $_COOKIE['lastartist']; ?>');
 	getdataalbum('<?php echo $_COOKIE['lastalbum']; ?>', '<?php echo getartistIDfromalbumID($lastalbum); ?>');
 	playlist();
-	getLocation();
 	</script>
 	<?php
 
