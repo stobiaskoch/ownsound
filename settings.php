@@ -96,7 +96,9 @@ $(function() {
     $(document).ready( function() {
       $('#tab-container').easytabs();
 	  
-	  
+	              $('#dbsetting').ajaxForm(function() { 
+                alert("Thank you for your comment!"); 
+            }); 
 	  
 	  
 	  
@@ -136,13 +138,16 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 
   </div>
    <div id="tabs1-js">
-<form method="post" name="dbsetting" id="dbsetting" action="./settingsave.php">
+   <form id="dbsetting" action="settingsave.php" method="post"> 
  <table>
 <tr><td width="150">Datenbankhost: </td><td width="200"><input type="text" size="25" id="search" name="dbhost" value="<?php echo DBHOST; ?>"></td></tr>
 <tr><td width="150">Benutzer: </td><td width="200"><input type="text" size="25" id="search" name="dbuser" value="<?php echo DBUSER; ?>"></td></tr>
 <tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" id="search" name="dbpass" value="<?php echo DBPASS; ?>"></td></tr>
 <tr><td width="150">Datenbankname: </td><td width="200"><input type="text" size="25" id="search" name="dbname" value="<?php echo DBDATABASE; ?>"></td></tr>
+<input type="hidden" size="25" id="search" name="musicdir" value="<?php echo MUSICDIR; ?>">
+<input type="hidden" size="25" id="search" name="ownurl" value="<?php echo OWNURL; ?>">
 </table>
+    <input type="submit" value="Submit Comment" /> 
 </form>
 <button id="dbbackup">Datenbank-Backup</button>
   </div>
