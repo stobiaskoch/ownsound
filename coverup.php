@@ -1,27 +1,21 @@
 <?php
-$dbhost = $_REQUEST['dbhost'];
-$dbuser = $_REQUEST['dbuser'];
-$dbpass = $_REQUEST['dbpass'];
-$dbname = $_REQUEST['dbname'];
-$musicdir = $_REQUEST['musicdir'];
-$ownurl = $_REQUEST['ownurl'];
 
-mysql_connect($dbhost, $dbuser, $dbpass);
-mysql_select_db($dbname) or die ("Die Datenbank existiert nicht.");
+// img_up.php: Ein Bild hochladen
+require_once('config.inc.php');
+include('./js/functions.php');
+mysql_connect(DBHOST, DBUSER,DBPASS);
+mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht.");
+$albumID = $_REQUEST['albumID'];
 
-    $handle = fopen ( "config.inc.php", "w" );
- 
-    // schreiben des Inhaltes von email
-    fwrite ( $handle, 'define("DBHOST", "'.$dbhost.'");');
-    fwrite ( $handle, 'define("DBUSER", "'.$dbuser.'");');
-	fwrite ( $handle, 'define("DBPASS", "'.$dbpass.'");');
-	fwrite ( $handle, 'define("DBDATABASE", "'.$dbname.'");');
-	fwrite ( $handle, 'define("MUSICDIR", "'.$musicdir.'");');
-	fwrite ( $handle, 'define("OWNURL", "'.$ownurl.'");');
- 
-    // Datei schließen
-    fclose ( $handle );
+//if($albumID=="") {die('Keine ID');}
+
+if (array_key_exists('img',$_FILES)) {
+
+$tmpname = $_FILES['img']['tmp_name'];
 
 
+coverinmysql($tmpname, $albumID);
+
+}
 
 ?>
