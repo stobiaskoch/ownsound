@@ -101,7 +101,7 @@ $(document).ready(function() {
 		$left = $left / 2;
 		$left = $left - 255;
 		?>
-		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; right: 1px;">
+		<div id="malsehenobdraggable" style="position: fixed; bottom:1px; right: 5px;">
 		
  <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
 	

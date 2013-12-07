@@ -95,13 +95,18 @@ $(function() {
 	
     $(document).ready( function() {
       $('#tab-container').easytabs();
+	  
+	  
+	  
+	  
+	  
     });
 </script>
 
 <div id="tab-container" class='tab-container'>
  <ul class='etabs'>
-   <li class='tab'><a href="#tabs1-html">Datenbank</a></li>
-   <li class='tab'><a href="#tabs1-js">Benutzerverwaltung</a></li>
+   <li class='tab'><a href="#tabs1-html">Scanner</a></li>
+   <li class='tab'><a href="#tabs1-js">Datenbankeinstellungen</a></li>
    <li class='tab'><a href="#tabs1-css">Info</a></li>
  </ul>
  <div class='panel-container'>
@@ -127,18 +132,38 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
 
 </form>
 
-</div><button id="forum2">Scan starten</button><button id="dbbackup">Datenbank-Backup</button></div>
+</div><button id="forum2">Scan starten</button></div>
 
   </div>
    <div id="tabs1-js">
-
-
-   <pre>
-
-Später...
-  </pre>
-
+<form method="post" name="dbsetting" id="dbsetting" action="./settingsave.php">
+ <table>
+<tr><td width="150">Datenbankhost: </td><td width="200"><input type="text" size="25" id="search" name="dbhost" value="<?php echo DBHOST; ?>"></td></tr>
+<tr><td width="150">Benutzer: </td><td width="200"><input type="text" size="25" id="search" name="dbuser" value="<?php echo DBUSER; ?>"></td></tr>
+<tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" id="search" name="dbpass" value="<?php echo DBPASS; ?>"></td></tr>
+<tr><td width="150">Datenbankname: </td><td width="200"><input type="text" size="25" id="search" name="dbname" value="<?php echo DBDATABASE; ?>"></td></tr>
+</table>
+</form>
+<button id="dbbackup">Datenbank-Backup</button>
   </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <div id="tabs1-css">
   <?php
 require_once('config.inc.php');

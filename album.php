@@ -1,7 +1,8 @@
 <?php
 $artistID = $_REQUEST['artid'];
 $listID = $_REQUEST['listID'];
-if($listID=="") {$listID = "center";}
+if($_REQUEST['listID']=="") {$listID = "center";}
+if($artistID=="lastten") {$listID = 0;}
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);
 $limit = $_REQUEST['limit'];
@@ -52,7 +53,7 @@ if($albumcount<=1) {$albumcount = "$albumcount Album"; } else {$albumcount = "$a
 	}
 	if($artistID=="lastten") {
 		$albumcount = "Zuletzt hinzugefügt:";
-		$sql = "SELECT * FROM album ORDER BY id DESC LIMIT 10";
+		$sql = "SELECT * FROM album ORDER BY id DESC LIMIT 20";
 	}
 	
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
