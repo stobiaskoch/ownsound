@@ -16,7 +16,21 @@ $listID = $_REQUEST['listID'];
 	<script src="./js/jquery.loadmask.min.js"></script> 
 <script>
 	
-
+ function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#img").change(function(){
+        readURL(this);
+    });
 
 
 
@@ -78,8 +92,11 @@ echo "<td style='width:135px'><center>$picwidth x $picheight</center></td></tr>"
 <input type="file" id="img" name="img" size="40" accept="image/jpeg">
 <input type="hidden" id ="albumID" name="albumID" value="<?php echo $albumID; ?>">
 <input type="hidden" id ="listID" name="listID" value="<?php echo $listID; ?>">
+
 <input type="submit" value="Ändern">
-</form><br>
+</form>
+<img id="blah" src="./img/placeholder.jpg"  width="140px" height="140px" alt="your image" />
+<br>
 	<a href='#dhfig' onclick="getdataalbum('<?php echo $albumID; ?>', '<?php echo $artistID; ?>')">Zurück</a>
 <?php
 }
