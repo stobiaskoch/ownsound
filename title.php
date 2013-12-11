@@ -195,6 +195,20 @@ $gesamtdauer=zeitformat($sekunden);
 					}},
 					klass: "third-menu-item"
 				},
+				'Interpret umbennen': {
+					click: function(element){
+					var newtitle = window.prompt("Bitte neuen Interpreten eingeben", "<?php echo addslashes($artist); ?>");
+					 if (newtitle != undefined) {
+					 newtitle = encodeURIComponent(newtitle);
+					$.ajax({ url: "./jeditable.php?order=artist&id=<?php echo $artistID; ?>&value="+newtitle ,
+						success: function(data){
+						}
+					});
+						getdata(<?php echo $artistID; ?>);
+						getdataalbum(<?php echo $albumID; ?>, <?php echo $artistID; ?>);
+					}},
+					klass: "third-menu-item"
+				},
 				'Löschen': {
 					click: function(element){ 
 						if (confirm('Willst Du <?php echo addslashes(getalbum($albumID)); ?> wirklich endgültig löschen?'))

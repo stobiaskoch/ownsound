@@ -16,7 +16,9 @@ $order = $_REQUEST['order'];
 			$sql    = "UPDATE `title` SET track='$newvalue' WHERE id='$id'";
 		}
 		
-		
+		if($_REQUEST['order']=="artist") {
+			$sql    = "UPDATE `".$order."` SET name='$newvalue' WHERE id='$id'";
+		}	
 		
 		
 		
