@@ -147,7 +147,7 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 
 //checke, ob album  von diesem artist vorhanden
 
-		$sql    = "SELECT * FROM album WHERE name = '$album'";
+		$sql    = "SELECT * FROM album WHERE name = '$album' AND artist = '$artistID'";
 		$query = mysql_query($sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		$checkalbum = $Daten['name'];
@@ -159,7 +159,7 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 		
 			if($checkalbum!=$album) {
 			
-				mysql_query("INSERT INTO album (name, artist, genre) VALUES ('$album', '$artistID', '$genre')");
+				mysql_query("INSERT INTO album (name, artist, genre) VALUES ('$album', '$artistID', '$genre') ON DUPLICATE KEY UPDATE name='$album', artist='$artistID'");
 				mysql_query("UPDATE scanner_log SET album=album+1 WHERE id='0'");
 
 
@@ -171,7 +171,7 @@ while ($zeile = mysql_fetch_array( $db_erg, MYSQL_ASSOC)) {
 			}
 
 		//}
-		$sql    = "SELECT id FROM album WHERE name = '$album'";
+		$sql    = "SELECT id FROM album WHERE name = '$album' AND artist = '$artistID'";
 		$query = mysql_query($sql) OR DIE("Konnte Album ID nicht auslesen:<br/>".$sql); 
 		$Daten = mysql_fetch_assoc($query); 
 		$albumID = $Daten['id'];

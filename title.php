@@ -181,7 +181,7 @@ $gesamtdauer=zeitformat($sekunden);
 					},
 					klass: "third-menu-item"
 				},
-				'Umbennen': {
+				'Album umbennen': {
 					click: function(element){
 					var newtitle = window.prompt("Bitte neuen Titelnamen eingeben", "<?php echo addslashes(getalbum($albumID)); ?>");
 					 if (newtitle != undefined) {
