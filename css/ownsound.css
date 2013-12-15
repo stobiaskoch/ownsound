@@ -362,7 +362,7 @@ div.schliessen {
     float:left;
     width: 329px;
     /* round Border & Border-Image */
-    border: 8px solid #013d7a;
+    border: 3px solid #013d7a;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     -moz-border-image: url(meinbild.jpg) 8 8 8 8 stretch;

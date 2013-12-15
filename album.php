@@ -1,7 +1,7 @@
 <?php
 $artistID = $_REQUEST['artid'];
 $listID = $_REQUEST['listID'];
-if($_REQUEST['listID']=="") {$listID = "center";}
+if($_REQUEST['listID']==""or $_REQUEST['listID']=="undefined") {$listID = "'center'";}
 if($artistID=="lastten") {$listID = 0;}
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastartist', $artistID, $yearExpire);

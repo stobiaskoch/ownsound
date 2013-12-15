@@ -148,7 +148,7 @@ echo "<option value='$folder'>".str_replace(MUSICDIR.'/', "", $folder)."</option
  <table>
 <tr><td width="150">Datenbankhost: </td><td width="200"><input type="text" size="25" name="dbhost" autocomplete="off" value="<?php echo DBHOST; ?>"></td></tr>
 <tr><td width="150">Benutzer: </td><td width="200"><input type="text" size="25" name="dbuser" autocomplete="off" value="<?php echo DBUSER; ?>"></td></tr>
-<tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" name="dbpass" autocomplete="off"></td></tr>
+<tr><td width="150">Passwort: </td><td width="200"><input type="password" size="25" name="dbpass" ></td></tr>
 <tr><td width="150">Datenbankname: </td><td width="200"><input type="text" size="25" name="dbname" autocomplete="off" value="<?php echo DBDATABASE; ?>"></td></tr>
 <input type="hidden" size="25" id="search" name="musicdir" value="<?php echo MUSICDIR; ?>">
 <input type="hidden" size="25" id="search" name="ownurl" value="<?php echo OWNURL; ?>">
