@@ -12,7 +12,7 @@ html.mm-opened .mm-menu.mm-horizontal > .mm-panel {
   -moz-transition-property: top, right, bottom, left, border, -moz-transform;
   -ms-transition-property: top, right, bottom, left, border, -ms-transform;
   -o-transition-property: top, right, bottom, left, border, -o-transform;
-  transition-property: top, right, bottom, left, border, transform; }
+  -webkit-transition-property: top, right, bottom, left, border, transform; }
 html.mm-opened .mm-page,
 html.mm-opened #mm-blocker {
   left: 0%;

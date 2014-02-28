@@ -4,6 +4,13 @@ require_once('config.inc.php');
 mysql_connect(DBHOST, DBUSER,DBPASS);
 mysql_select_db(DBDATABASE) or die ("Die Datenbank existiert nicht."); 
 
+if($_REQUEST['order']=="savetitleplay")
+{
+	$savetitlename = $_REQUEST['savetitlename'];
+	mysql_query("UPDATE title SET plays=plays+1 WHERE name = '$savetitlename'");
+	die();
+}
+
 $artistresult = mysql_query("SELECT * FROM artist"); 
 $artist = mysql_num_rows($artistresult);
 

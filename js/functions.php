@@ -24,6 +24,16 @@ function getalbum ($id) {
 
 }
 
+function getalbumplays ($id) {
+
+				$sql    = "SELECT plays FROM album WHERE id = '$id'";
+				$query = mysql_query($sql); 
+				$Daten = mysql_fetch_assoc($query); 
+				
+				return $Daten['plays'];
+
+}
+
 function gettitle ($id) {
 
 				$sql    = "SELECT name FROM title WHERE id = '$id'";
@@ -231,6 +241,12 @@ function trackcount($artistID) {
 	$tracksql = mysql_query("SELECT * FROM album WHERE artist='$artistID'"); 
 	$check = mysql_num_rows($tracksql);
 	return $check;
+
+}
+
+function savetitleplay ($id) {
+
+					mysql_query("UPDATE title SET plays=plays+1 WHERE name = '$id'");
 
 }
 

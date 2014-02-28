@@ -1,5 +1,6 @@
 <?php
 require_once('config.inc.php');
+
 $folders = array();
 foreach (glob(MUSICDIR."/*", GLOB_ONLYDIR) as $filename) {
     $folders[] = $filename;
@@ -192,8 +193,21 @@ $title = mysql_num_rows($titleresult);
 
 $nocoverresult = mysql_query("SELECT * FROM album WHERE cover='no'"); 
 $nocover = mysql_num_rows($nocoverresult);
-
-echo "$artist Künstler<br>";
+echo "OwnSound Version: ".VERSION;
+$content = "";
+$fp = fopen(UPDATESERVER."version.txt", "rb");
+if (!$fp)
+die("Error opening file.");
+while (!feof($fp))
+$content .= fread($fp, 2048);
+fclose($fp);
+$fp=fopen("versiononline.php", "w");
+fwrite($fp, $content);
+fclose($fp);
+require_once('versiononline.php');
+echo "<br>Aktuelle Version: ".VERSIONONLINE;
+echo "<font size='-3'><a href='".UPDATESERVER."changelog.txt'> Changelog</a></font>";
+echo "<br>$artist Künstler<br>";
 echo "$album Alben<br>";
 echo "$title Tracks<br>";
 ?>

@@ -8,6 +8,8 @@ $listID = $_REQUEST['listID'];
 $yearExpire = time() + 60*60*24*365; // 1 Year
 setcookie('lastalbum', $albumID, $yearExpire);
 $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
+$backroundheight = $_COOKIE['screenheight'];
+$backroundwidth = $_COOKIE['screenwidth'];
 ?>
 <html>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -17,6 +19,18 @@ $db_link = mysqli_connect (DBHOST, DBUSER, DBPASS, DBDATABASE );
 	<script src="./js/jquery.loadmask.min.js"></script> 
 
 </head>	
+<!--
+<div id="background" style="
+    width:250%; 
+    height: 500px; 
+	top: 30px;
+    left: 0px; 
+	position: fixed;
+    z-index: -2;
+	">
+    <img src="./get.php?picid=<?php echo $albumID; ?>&size=big" width="<?php echo $backroundwidth; ?>" alt="" style="-webkit-filter: grayscale(0.8) blur(5px);"/>
+</div>
+-->
 <?php
 		$sql    = "SELECT coverbig FROM album WHERE id = '$albumID'";
 		$query = mysql_query($sql); 
@@ -35,6 +49,7 @@ if ( ! $db_erg )
   die('Ungültige Abfrage: ' . mysqli_error());
 }
     ?>
+
 
 
 
@@ -84,7 +99,7 @@ if($track<="9") {$track="0$track";}
 
   	echo "<tr><td>". $track . " - </td>";
 ?> 
-	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]</td></div> 
+	<td width='300px'><div class="targettrack<?php echo $count; ?>"><a style="font-size: 12px;" href="#"><?php echo gettitle($titleID); ?></a></td><td>[<?php echo $zeile['duration'];?>]<font size='0.2em'>    <?php echo $zeile['plays'];?> plays</font></td></div> 
 
 		<script type="text/javascript">
 		  $(document).ready(function(){
@@ -236,7 +251,7 @@ $gesamtdauer=zeitformat($sekunden);
 </map>
 <img src='./get.php?picid=<?php echo $albumID; ?>&size=big' width="140" title="Cover ändern" usemap="#Landkarte" border=0>
 <br></td><td width='140'>
-<?php echo "Genre: " . getgenrefromalbumID($albumID).'<br/>Gesamtdauer: '.$gesamtdauer; ?>
+<?php echo "Genre: " . getgenrefromalbumID($albumID).'<br/>Gesamtdauer: '.$gesamtdauer.'<br/>'.getalbumplays($albumID).' mal abgespielt'; ?>
 </td></tr></table>
 </div>
 

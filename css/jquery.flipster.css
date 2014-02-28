@@ -25,10 +25,10 @@
   -moz-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden;
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -72,10 +72,10 @@
   -moz-transform-origin: 50% 50%;
   -o-transform-origin: 50% 50%;
   -ms-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
-  perspective: 800px;
+  -webkit-perspective: 800px;
   position: absolute;
   width: 15%;
 }
@@ -128,7 +128,7 @@
 .flipster-carousel .flip-items {
   -webkit-perspective: 2000px;
   -moz-perspective: 2000px;
-  perspective: 2000px;
+  -webkit-perspective: 2000px;
 }
 .flipster-carousel .flip-item {
   -webkit-transform: translate3d(0, 0, 0);

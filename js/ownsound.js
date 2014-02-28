@@ -69,9 +69,15 @@ $(document).ready(function() {
 	function getdataalbum(albumID, artistID, listID){
 
 		$("#album2").mask("Loading...");
+
 		$.ajax({ url: "./title.php?albumID="+albumID+"&artistID="+artistID+"&listID="+listID , 
 			success: function(data){
 				$("#album2").html(data);
+				var backroundwidt = readCookie('screenwidth');
+				$('#hintergrund2').fadeOut('fast', function() {
+				document.getElementById('hintergrund2').innerHTML = "<img src='./get.php?picid="+albumID+"&size=big' width="+backroundwidt+" alt='' style='-webkit-filter: grayscale(0.8) blur(5px);'/>";
+				$('#hintergrund2').fadeIn('fast');
+				});
 			}	
 		});
 	}
@@ -137,6 +143,7 @@ $(document).ready(function() {
 			}	
 		});
 	}
+
 	
 	function zipalbum(albumID){
 		window.open("./zip.php?albumID="+albumID, "zip");   

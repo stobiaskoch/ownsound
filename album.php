@@ -15,6 +15,7 @@ $limit = $_REQUEST['limit'];
 	<script src="./js/jquery.flipster.js"></script>
 	<link rel="stylesheet" href="./css/jquery.flipster.css">
 	<link rel="stylesheet" href="./css/flowflipsternavtabs.css">
+	
 	<script>
 
  	$(function(){ 
@@ -68,12 +69,14 @@ if ( ! $db_erg )
 
 
 <h1><span style="top: -6px; left: 20px;" id="<?php echo $artistID; ?>"><?php echo getartist($artistID); ?></span><span><?php echo " [$albumcount]" ?></span></h1></div><br>
+<!--
 <a id="albumtitle2" style="
     width: 900px;
     height: 20px;
 	 font-size:12px;
 	 bottom: 150px;
 "><a>
+ -->	
 <!-- Flipster List -->	
 		<div class="flipster" style="width: 90%; overflow:off; font-size:10px; bottom: 50px;">
 		  <ul>

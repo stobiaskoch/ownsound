@@ -22,6 +22,13 @@ $.desknoty({
             });
   }  
 
+	function savetitleplay(titlename){
+		$.ajax({ url: "./databasestats.php?order=savetitleplay&savetitlename="+titlename ,
+			success: function(data){
+			}
+		});
+	}	  
+  
 $(document).ready(function() {
 
 
@@ -66,6 +73,7 @@ $(document).ready(function() {
 						document.getElementById("playercover").innerHTML="<a href='#OwnSound' onclick=\"getdataalbum("+albumID+", '0', '0');\"><img src='./get.php?picid="+albumID+"&size=small' width='70' height='70'></a>";
 						strtext = artist+' - '+str;
 						var notifications = readCookie("notifications");
+						savetitleplay(str);
 						if (notifications == 'yes') {
 							notify(strtext, albumID);
 						}

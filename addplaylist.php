@@ -57,7 +57,8 @@ $i = 1;
 		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$zeile['id']."', '".$_REQUEST['albumID']."')");
 		$i++;
 	}
-	
+	$savealbumplay = $_REQUEST['albumID'];
+mysqli_query($db_link, "UPDATE album SET plays=plays+1 WHERE id = '$savealbumplay'");
 }
 
 
@@ -65,6 +66,7 @@ $i = 1;
 
 
 if($_REQUEST['order']=="playtitle" or $_REQUEST['order']=="addtitle") {
+
 $i = 1;
 	$sql = "SELECT * FROM `title` WHERE id='".$_REQUEST['albumID']."'";
 
@@ -87,9 +89,11 @@ $i = 1;
 				mysqli_query($db_link, "TRUNCATE ".$user."_playlist");
 			}
 		mysqli_query($db_link, "INSERT INTO ".$user."_playlist (artist, title, titleid, albumID) VALUES ('".$artist."', '$title', '".$_REQUEST['albumID']."', '$albumID')");
+
 		$i++;
 	}
-
+		
+		
 }
 
 

@@ -43,9 +43,7 @@
 <script>
 
 			$(function() {
-				$('nav#menu').mmenu({
-				classes: "mm-zoom-menu"
-				});
+				$('nav#menu').mmenu();
 			});
 
 </script>
@@ -150,8 +148,8 @@ mysqli_free_result( $db_erg );
 			</nav>
 		</div>
 
-<div id="artist"></div>
-<div id="album2"></div>
+<div id="artist" style="opacity:0.8;"></div>
+<div id="album2" style="opacity:0.8;"></div>
 
 <div id="playerdiv">
 	<a href='#OwnCloud' onclick="addalbum('random', '0', '0')"><img src='./img/shuffle.png' width="7%" title="Shuffle"></a>
@@ -184,4 +182,12 @@ mysql_close();
  
     </div>
 	<div id="hintergrund"></div>
+		<div id="hintergrund2" style="
+    width:250%; 
+    height: 500px; 
+	top: 30px;
+    left: 0px; 
+	position: fixed;
+    z-index: -2;
+	"></div>
 	
